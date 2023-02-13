@@ -8,10 +8,10 @@ import java.util.Set;
 
 public class AudienceEntity {
     @Id
-    private String id;
+    private Long id;
     private Long building;
     private Long floor;
-    private Long room;
+    private String room;
     private String title;
     @OneToMany
     private Set<PairEntity> pairEntities;
@@ -19,11 +19,11 @@ public class AudienceEntity {
     public AudienceEntity() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,11 +43,11 @@ public class AudienceEntity {
         this.floor = floor;
     }
 
-    public Long getRoom() {
+    public String getRoom() {
         return room;
     }
 
-    public void setRoom(Long room) {
+    public void setRoom(String room) {
         this.room = room;
     }
 

@@ -3,29 +3,30 @@ package ru.hits.hitsback.timetable.template.model.entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import ru.hits.hitsback.timetable.template.model.enums.TypeOfСlass;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class PairEntity {
     @Id
-    private Long id;
+    private UUID id;
     @ManyToMany
     private Set<StudentEntity> studentEntity;
     @ManyToOne
     private EducatorEntity educatorEntity;
     @ManyToOne
     private AudienceEntity audienceEntity;
-    private TypeOfСlass typeOfСlass;
+    @ManyToOne
+    private TypeOfСlassEntity typeOfСlass;
 
     public PairEntity() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -53,11 +54,11 @@ public class PairEntity {
         this.audienceEntity = audienceEntity;
     }
 
-    public TypeOfСlass getTypeOfСlass() {
+    public TypeOfСlassEntity getTypeOfСlass() {
         return typeOfСlass;
     }
 
-    public void setTypeOfСlass(TypeOfСlass typeOfСlass) {
+    public void setTypeOfСlass(TypeOfСlassEntity typeOfСlass) {
         this.typeOfСlass = typeOfСlass;
     }
 }

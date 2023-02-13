@@ -1,12 +1,10 @@
 package ru.hits.hitsback.timetable.template.model.entity;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
-import java.util.Set;
 import java.util.UUID;
 
-public class EducatorEntity {
+public class UserEntity {
     @Id
     private UUID id;
     private String name;
@@ -14,11 +12,10 @@ public class EducatorEntity {
     private String patronymic;
     private String email;
     private String password;
-    @OneToMany
-    private Set<PairEntity> pairEntities;
 
-    public EducatorEntity() {
+    public UserEntity() {
     }
+
     public UUID getId() {
         return id;
     }
@@ -30,8 +27,6 @@ public class EducatorEntity {
     public String getName() {
         return name;
     }
-
-
 
     public void setName(String name) {
         this.name = name;
@@ -68,6 +63,4 @@ public class EducatorEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 }

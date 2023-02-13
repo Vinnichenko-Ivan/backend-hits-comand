@@ -3,10 +3,12 @@ package ru.hits.hitsback.timetable.template.model.entity;
 import jakarta.persistence.Id;
 import jdk.jfr.Enabled;
 
+import java.util.UUID;
+
 @Enabled
 public class StudentEntity {
     @Id
-    private String id;
+    private UUID id;
     private String name;
     private String lastName;
     private String patronymic;
@@ -16,11 +18,11 @@ public class StudentEntity {
 
     public StudentEntity() {
     }
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

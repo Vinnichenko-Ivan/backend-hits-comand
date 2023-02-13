@@ -3,18 +3,18 @@ package ru.hits.hitsback.timetable.template.model.entity;
 import javax.xml.crypto.Data;
 
 public class PairNumber {
-    private String id;
+    private Integer id;
     private Data startTime;
     private Data endTime;
 
     public PairNumber() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

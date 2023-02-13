@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class TimeslotEntity {
     @Id
-    private String id;
+    private Long id;
     private Data data;
     @ManyToMany
     private Set<PairNumber> pairNumber;
@@ -20,11 +20,11 @@ public class TimeslotEntity {
     public TimeslotEntity() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

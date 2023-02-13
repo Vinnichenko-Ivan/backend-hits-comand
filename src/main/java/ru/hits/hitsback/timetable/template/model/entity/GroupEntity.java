@@ -4,17 +4,17 @@ import jakarta.persistence.Id;
 
 public class GroupEntity {
     @Id
-    private String id;
+    private Long id;
     private String name;
 
     public GroupEntity() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
