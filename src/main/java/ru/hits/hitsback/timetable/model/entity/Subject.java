@@ -1,13 +1,13 @@
-package ru.hits.hitsback.timetable.model;
+package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Id;
 
-public class SubjectEntity {
+public class Subject {
     @Id
     private Long id;
     private String title;
 
-    public SubjectEntity() {
+    public Subject() {
     }
 
     public Long getId() {

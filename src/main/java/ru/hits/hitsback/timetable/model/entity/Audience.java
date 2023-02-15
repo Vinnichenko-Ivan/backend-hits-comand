@@ -1,21 +1,21 @@
-package ru.hits.hitsback.timetable.model;
+package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.Set;
 
-public class AudienceEntity {
+public class Audience {
     @Id
     private Long id;
     private Long building;
     private Long floor;
-    private String room;
+    private String number;
     private String title;
     @OneToMany
-    private Set<PairEntity> pairEntities;
+    private Set<Pair> pair;
 
-    public AudienceEntity() {
+    public Audience() {
     }
 
     public Long getId() {
@@ -24,6 +24,22 @@ public class AudienceEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Set<Pair> getPair() {
+        return pair;
+    }
+
+    public void setPair(Set<Pair> pair) {
+        this.pair = pair;
     }
 
     public Long getBuilding() {
@@ -42,13 +58,6 @@ public class AudienceEntity {
         this.floor = floor;
     }
 
-    public String getRoom() {
-        return room;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
-    }
 
     public String getTitle() {
         return title;

@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.model;
+package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -6,7 +6,7 @@ import jakarta.persistence.ManyToMany;
 import javax.xml.crypto.Data;
 import java.util.Set;
 
-public class TimeslotEntity {
+public class Timeslot {
     @Id
     private Long id;
     private Data data;
@@ -16,7 +16,7 @@ public class TimeslotEntity {
         this.pairNumber = pairNumber;
     }
 
-    public TimeslotEntity() {
+    public Timeslot() {
     }
 
     public Long getId() {

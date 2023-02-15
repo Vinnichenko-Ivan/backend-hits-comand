@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.model;
+package ru.hits.hitsback.timetable.model.entity;
 
 import javax.xml.crypto.Data;
 
@@ -9,6 +9,7 @@ public class PairNumber {
 
     public PairNumber() {
     }
+
 
     public Integer getId() {
         return id;

@@ -1,19 +1,24 @@
-package ru.hits.hitsback.timetable.model;
+package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import ru.hits.hitsback.timetable.model.enums.Roles;
 
 import java.util.UUID;
 
-public class UserEntity {
+public class User {
     @Id
     private UUID id;
     private String name;
     private String lastName;
     private String patronymic;
+    private Roles roles;
     private String email;
     private String password;
+    @ManyToOne
+    private Group group;
 
-    public UserEntity() {
+    public User() {
     }
 
     public UUID getId() {
@@ -22,6 +27,22 @@ public class UserEntity {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public String getName() {

@@ -1,18 +1,18 @@
-package ru.hits.hitsback.timetable.model;
+package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.Set;
 
-public class TypeOfСlassEntity {
+public class TypeOfСlass {
     @Id
     private Integer id;
     private String title;
 
     @OneToMany
-    private Set<PairEntity> pairEntities;
-    public TypeOfСlassEntity() {
+    private Set<Pair> pairEntities;
+    public TypeOfСlass() {
     }
 
     public Integer getId() {
