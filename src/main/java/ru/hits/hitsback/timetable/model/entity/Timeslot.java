@@ -1,15 +1,18 @@
 package ru.hits.hitsback.timetable.model.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
-import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.Set;
-
+@Entity
+@Table(name = "timeslot")
 public class Timeslot {
     @Id
     private Long id;
-    private Data data;
+    private Date date;
     @ManyToMany
     private Set<PairNumber> pairNumber;
     public void setPairNumber(Set<PairNumber> pairNumber) {
@@ -27,12 +30,12 @@ public class Timeslot {
         this.id = id;
     }
 
-    public Data getData() {
-        return data;
+    public Date getDate() {
+        return date;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }

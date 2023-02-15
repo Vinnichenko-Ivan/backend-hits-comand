@@ -1,10 +1,13 @@
 package ru.hits.hitsback.timetable.model.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.Set;
-
+@Entity
+@Table(name = "typeOfClass")
 public class TypeOfСlass {
     @Id
     private Integer id;
@@ -30,4 +33,5 @@ public class TypeOfСlass {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }

@@ -1,12 +1,11 @@
 package ru.hits.hitsback.timetable.model.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.Set;
 import java.util.UUID;
-
+@Entity
+@Table(name = "pair")
 public class Pair {
     @Id
     private UUID id;

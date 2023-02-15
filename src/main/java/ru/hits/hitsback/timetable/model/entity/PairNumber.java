@@ -1,11 +1,18 @@
 package ru.hits.hitsback.timetable.model.entity;
 
-import javax.xml.crypto.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+import java.util.Date;
+
+@Entity
+@Table(name = "pairNumber")
 public class PairNumber {
+    @Id
     private Integer id;
-    private Data startTime;
-    private Data endTime;
+    private Date startTime;
+    private Date endTime;
 
     public PairNumber() {
     }
@@ -19,19 +26,19 @@ public class PairNumber {
         this.id = id;
     }
 
-    public Data getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Data startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public Data getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Data endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 }

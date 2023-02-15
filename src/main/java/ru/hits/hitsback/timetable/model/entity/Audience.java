@@ -1,10 +1,14 @@
 package ru.hits.hitsback.timetable.model.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jdk.jfr.Enabled;
 
 import java.util.Set;
-
+@Entity
+@Table(name = "audience")
 public class Audience {
     @Id
     private Long id;

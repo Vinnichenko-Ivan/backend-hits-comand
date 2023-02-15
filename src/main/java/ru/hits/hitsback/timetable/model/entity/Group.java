@@ -1,10 +1,13 @@
 package ru.hits.hitsback.timetable.model.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.Set;
-
+@Entity
+@Table(name = "group")
 public class Group {
     @Id
     private Long id;
