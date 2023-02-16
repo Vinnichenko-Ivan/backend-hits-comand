@@ -8,11 +8,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "subject")
+@Getter @Setter
+
 public class Subject {
     @Id
-    @Getter @Setter
     private Long id;
-    @Getter @Setter
     private String title;
 
     public Subject() {

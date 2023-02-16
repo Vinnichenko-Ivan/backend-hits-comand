@@ -11,15 +11,12 @@ import java.util.Date;
 import java.util.Set;
 @Entity
 @Table(name = "timeSlot")
+@Getter @Setter
 public class Timeslot {
     @Id
-    @Getter @Setter
     private Long id;
-    @Getter @Setter
     private Date date;
-    @Getter @Setter
     private Short dayOfWeek;
-    @Getter @Setter
     @ManyToMany
     private Set<LessonNumber> lessonNumber;
     public Timeslot() {

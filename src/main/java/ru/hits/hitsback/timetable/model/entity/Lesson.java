@@ -8,18 +8,15 @@ import java.util.Set;
 import java.util.UUID;
 @Entity
 @Table(name = "lesson")
+@Getter @Setter
 public class Lesson {
     @Id
-    @Getter @Setter
     private UUID id;
-    @Getter @Setter
     @ManyToMany
     private Set<Group> groups;
 
-    @Getter @Setter
     @ManyToOne
     private StudyRoom studyRoom;
-    @Getter @Setter
     @ManyToOne
     private ClassType classType;
 

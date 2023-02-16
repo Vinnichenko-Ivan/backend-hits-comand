@@ -10,13 +10,12 @@ import lombok.Setter;
 import java.util.Set;
 @Entity
 @Table(name = "group")
+@Getter @Setter
+
 public class Group {
     @Id
-    @Getter @Setter
     private Long id;
-    @Getter @Setter
     private String number;
-    @Getter @Setter
     @OneToMany
     private Set<User> user;
 

@@ -8,11 +8,10 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "classType")
+@Getter @Setter
 public class ClassType {
     @Id
-    @Getter @Setter
     private Integer id;
-    @Getter @Setter
     private String title;
 
 //    @OneToMany

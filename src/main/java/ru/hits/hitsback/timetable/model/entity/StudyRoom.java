@@ -8,15 +8,13 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "studyRoom")
+@Getter @Setter
+
 public class StudyRoom {
     @Id
-    @Getter @Setter
     private Long id;
-    @Getter @Setter
     private Long buildingNumber;
-    @Getter @Setter
     private Short floor;
-    @Getter @Setter
     private String name;
 //    @OneToMany
 //    private Set<Lesson> lesson;
