@@ -19,6 +19,10 @@ public class Lesson {
     private StudyRoom studyRoom;
     @ManyToOne
     private ClassType classType;
+    @ManyToOne
+    private Teacher teacher;
+    @ManyToOne
+    private TimeSlot timeSlot;
 
     public Lesson() {
     }

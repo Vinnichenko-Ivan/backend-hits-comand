@@ -2,9 +2,12 @@ package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "studyRoom")
@@ -13,11 +16,12 @@ import lombok.Setter;
 public class StudyRoom {
     @Id
     private Long id;
-    private Long buildingNumber;
+    private Integer buildingNumber;
     private Short floor;
     private String name;
-//    @OneToMany
-//    private Set<Lesson> lesson;
+    private Integer number;
+    @OneToMany
+    private Set<Lesson> lesson;
 
     public StudyRoom() {
     }

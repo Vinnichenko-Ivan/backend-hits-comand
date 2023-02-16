@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Subject {
     @Id
     private Long id;
-    private String title;
+    private String name;
 
     public Subject() {
     }
