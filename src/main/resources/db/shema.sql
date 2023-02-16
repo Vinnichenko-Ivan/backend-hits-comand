@@ -1,22 +1,19 @@
 
-CREATE TABLE audience
+CREATE TABLE class_type
 (
-    id       BIGINT NOT NULL,
-    building BIGINT,
-    floor    BIGINT,
-    number   VARCHAR(255),
-    title    VARCHAR(255),
-    CONSTRAINT pk_audience PRIMARY KEY (id)
+    id    INTEGER NOT NULL,
+    title VARCHAR(255),
+    CONSTRAINT pk_classtype PRIMARY KEY (id)
 );
 
-CREATE TABLE audience_pair
+CREATE TABLE class_type_pair
 (
-    audience_id BIGINT NOT NULL,
-    pair_id     UUID   NOT NULL,
-    CONSTRAINT pk_audience_pair PRIMARY KEY (audience_id, pair_id)
+    "type_of_сlass_id" INTEGER NOT NULL,
+    pair_id            UUID    NOT NULL,
+    CONSTRAINT pk_classtype_pair PRIMARY KEY ("type_of_сlass_id", pair_id)
 );
 
-CREATE TABLE "group"
+CREATE TABLE group
 (
     id     BIGINT NOT NULL,
     number VARCHAR(255),
@@ -30,12 +27,19 @@ CREATE TABLE group_user
     CONSTRAINT pk_group_user PRIMARY KEY (group_id, user_id)
 );
 
-CREATE TABLE pair
+CREATE TABLE lesson
 (
-    id                 UUID NOT NULL,
-    audience_entity_id BIGINT,
-    "type_of_сlass_id" INTEGER,
-    CONSTRAINT pk_pair PRIMARY KEY (id)
+    id            UUID NOT NULL,
+    studyroom_id  BIGINT,
+    class_type_id INTEGER,
+    CONSTRAINT pk_lesson PRIMARY KEY (id)
+);
+
+CREATE TABLE lesson_groups
+(
+    pair_id   UUID   NOT NULL,
+    groups_id BIGINT NOT NULL,
+    CONSTRAINT pk_lesson_groups PRIMARY KEY (pair_id, groups_id)
 );
 
 CREATE TABLE pair_number
@@ -46,11 +50,21 @@ CREATE TABLE pair_number
     CONSTRAINT pk_pairnumber PRIMARY KEY (id)
 );
 
-CREATE TABLE pair_users
+CREATE TABLE study_room
 (
-    pair_id  UUID NOT NULL,
-    users_id UUID NOT NULL,
-    CONSTRAINT pk_pair_users PRIMARY KEY (pair_id, users_id)
+    id              BIGINT NOT NULL,
+    building_number BIGINT,
+    floor           SMALLINT,
+    name            VARCHAR(255),
+    title           VARCHAR(255),
+    CONSTRAINT pk_studyroom PRIMARY KEY (id)
+);
+
+CREATE TABLE study_room_pair
+(
+    studyroom_id BIGINT NOT NULL,
+    pair_id      UUID   NOT NULL,
+    CONSTRAINT pk_studyroom_pair PRIMARY KEY (studyroom_id, pair_id)
 );
 
 CREATE TABLE subject
@@ -60,32 +74,19 @@ CREATE TABLE subject
     CONSTRAINT pk_subject PRIMARY KEY (id)
 );
 
-CREATE TABLE timeslot
+CREATE TABLE time_slot
 (
-    id   BIGINT NOT NULL,
-    date TIMESTAMP WITHOUT TIME ZONE,
+    id          BIGINT NOT NULL,
+    date        TIMESTAMP WITHOUT TIME ZONE,
+    day_of_week SMALLINT,
     CONSTRAINT pk_timeslot PRIMARY KEY (id)
 );
 
-CREATE TABLE timeslot_pair_number
+CREATE TABLE time_slot_pair_number
 (
     timeslot_id    BIGINT  NOT NULL,
     pair_number_id INTEGER NOT NULL,
     CONSTRAINT pk_timeslot_pairnumber PRIMARY KEY (timeslot_id, pair_number_id)
-);
-
-CREATE TABLE type_of_class
-(
-    id    INTEGER NOT NULL,
-    title VARCHAR(255),
-    CONSTRAINT pk_typeofclass PRIMARY KEY (id)
-);
-
-CREATE TABLE type_of_class_pair_entities
-(
-    "type_of_сlass_id" INTEGER NOT NULL,
-    pair_entities_id   UUID    NOT NULL,
-    CONSTRAINT pk_typeofclass_pairentities PRIMARY KEY ("type_of_сlass_id", pair_entities_id)
 );
 
 CREATE TABLE "user"
@@ -101,29 +102,29 @@ CREATE TABLE "user"
     CONSTRAINT pk_user PRIMARY KEY (id)
 );
 
-ALTER TABLE audience_pair
-    ADD CONSTRAINT uc_audience_pair_pair UNIQUE (pair_id);
+ALTER TABLE class_type_pair
+    ADD CONSTRAINT uc_class_type_pair_pair UNIQUE (pair_id);
 
 ALTER TABLE group_user
     ADD CONSTRAINT uc_group_user_user UNIQUE (user_id);
 
-ALTER TABLE type_of_class_pair_entities
-    ADD CONSTRAINT uc_type_of_class_pair_entities_pairentities UNIQUE (pair_entities_id);
+ALTER TABLE study_room_pair
+    ADD CONSTRAINT uc_study_room_pair_pair UNIQUE (pair_id);
 
-ALTER TABLE pair
-    ADD CONSTRAINT FK_PAIR_ON_AUDIENCEENTITY FOREIGN KEY (audience_entity_id) REFERENCES audience (id);
+ALTER TABLE lesson
+    ADD CONSTRAINT FK_LESSON_ON_CLASSTYPE FOREIGN KEY (class_type_id) REFERENCES class_type (id);
 
-ALTER TABLE pair
-    ADD CONSTRAINT "FK_PAIR_ON_TYPEOFСLASS" FOREIGN KEY ("type_of_сlass_id") REFERENCES type_of_class (id);
+ALTER TABLE lesson
+    ADD CONSTRAINT FK_LESSON_ON_STUDYROOM FOREIGN KEY (studyroom_id) REFERENCES study_room (id);
 
 ALTER TABLE "user"
     ADD CONSTRAINT FK_USER_ON_GROUP FOREIGN KEY (group_id) REFERENCES "group" (id);
 
-ALTER TABLE audience_pair
-    ADD CONSTRAINT fk_audpai_on_audience FOREIGN KEY (audience_id) REFERENCES audience (id);
+ALTER TABLE class_type_pair
+    ADD CONSTRAINT fk_clatyppai_on_pair FOREIGN KEY (pair_id) REFERENCES lesson (id);
 
-ALTER TABLE audience_pair
-    ADD CONSTRAINT fk_audpai_on_pair FOREIGN KEY (pair_id) REFERENCES pair (id);
+ALTER TABLE class_type_pair
+    ADD CONSTRAINT "fk_clatyppai_on_type_ofсlass" FOREIGN KEY ("type_of_сlass_id") REFERENCES class_type (id);
 
 ALTER TABLE group_user
     ADD CONSTRAINT fk_grouse_on_group FOREIGN KEY (group_id) REFERENCES "group" (id);
@@ -131,20 +132,20 @@ ALTER TABLE group_user
 ALTER TABLE group_user
     ADD CONSTRAINT fk_grouse_on_user FOREIGN KEY (user_id) REFERENCES "user" (id);
 
-ALTER TABLE pair_users
-    ADD CONSTRAINT fk_paiuse_on_pair FOREIGN KEY (pair_id) REFERENCES pair (id);
+ALTER TABLE lesson_groups
+    ADD CONSTRAINT fk_lesgro_on_group FOREIGN KEY (groups_id) REFERENCES "group" (id);
 
-ALTER TABLE pair_users
-    ADD CONSTRAINT fk_paiuse_on_user FOREIGN KEY (users_id) REFERENCES "user" (id);
+ALTER TABLE lesson_groups
+    ADD CONSTRAINT fk_lesgro_on_pair FOREIGN KEY (pair_id) REFERENCES lesson (id);
 
-ALTER TABLE timeslot_pair_number
-    ADD CONSTRAINT fk_timpainum_on_pair_number FOREIGN KEY (pair_number_id) REFERENCES pair_number (id);
+ALTER TABLE study_room_pair
+    ADD CONSTRAINT fk_sturoopai_on_pair FOREIGN KEY (pair_id) REFERENCES lesson (id);
 
-ALTER TABLE timeslot_pair_number
-    ADD CONSTRAINT fk_timpainum_on_timeslot FOREIGN KEY (timeslot_id) REFERENCES timeslot (id);
+ALTER TABLE study_room_pair
+    ADD CONSTRAINT fk_sturoopai_on_studyroom FOREIGN KEY (studyroom_id) REFERENCES study_room (id);
 
-ALTER TABLE type_of_class_pair_entities
-    ADD CONSTRAINT fk_typofclapaient_on_pair FOREIGN KEY (pair_entities_id) REFERENCES pair (id);
+ALTER TABLE time_slot_pair_number
+    ADD CONSTRAINT fk_timslopainum_on_pair_number FOREIGN KEY (pair_number_id) REFERENCES pair_number (id);
 
-ALTER TABLE type_of_class_pair_entities
-    ADD CONSTRAINT "fk_typofclapaient_on_type_ofсlass" FOREIGN KEY ("type_of_сlass_id") REFERENCES type_of_class (id);
+ALTER TABLE time_slot_pair_number
+    ADD CONSTRAINT fk_timslopainum_on_timeslot FOREIGN KEY (timeslot_id) REFERENCES time_slot (id);

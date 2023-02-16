@@ -8,11 +8,12 @@ import jakarta.persistence.Table;
 import java.util.Date;
 import java.util.Set;
 @Entity
-@Table(name = "timeslot")
+@Table(name = "timeSlot")
 public class Timeslot {
     @Id
     private Long id;
     private Date date;
+    private Short dayOfWeek;
     @ManyToMany
     private Set<PairNumber> pairNumber;
     public void setPairNumber(Set<PairNumber> pairNumber) {
@@ -20,6 +21,18 @@ public class Timeslot {
     }
 
     public Timeslot() {
+    }
+
+    public Short getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(Short dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public Set<PairNumber> getPairNumber() {
+        return pairNumber;
     }
 
     public Long getId() {

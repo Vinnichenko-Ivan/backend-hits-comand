@@ -7,14 +7,14 @@ import jakarta.persistence.Table;
 
 import java.util.Set;
 @Entity
-@Table(name = "typeOfClass")
+@Table(name = "classType")
 public class TypeOfСlass {
     @Id
     private Integer id;
     private String title;
 
     @OneToMany
-    private Set<Pair> pairEntities;
+    private Set<Pair> pair;
     public TypeOfСlass() {
     }
 

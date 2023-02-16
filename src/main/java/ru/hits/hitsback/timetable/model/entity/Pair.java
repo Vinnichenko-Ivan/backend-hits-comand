@@ -5,17 +5,17 @@ import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 @Entity
-@Table(name = "pair")
+@Table(name = "lesson")
 public class Pair {
     @Id
     private UUID id;
     @ManyToMany
-    private Set<User> users;
+    private Set<Group> groups;
 
     @ManyToOne
-    private Audience audienceEntity;
+    private Studyroom studyroom;
     @ManyToOne
-    private TypeOfСlass typeOfСlass;
+    private TypeOfСlass classType;
 
     public Pair() {
     }
@@ -28,27 +28,27 @@ public class Pair {
         this.id = id;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<Group> getGroups() {
+        return groups;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
-    public Audience getAudienceEntity() {
-        return audienceEntity;
+    public Studyroom getStudyroom() {
+        return studyroom;
     }
 
-    public void setAudienceEntity(Audience audienceEntity) {
-        this.audienceEntity = audienceEntity;
+    public void setStudyroom(Studyroom studyroom) {
+        this.studyroom = studyroom;
     }
 
-    public TypeOfСlass getTypeOfСlass() {
-        return typeOfСlass;
+    public TypeOfСlass getClassType() {
+        return classType;
     }
 
-    public void setTypeOfСlass(TypeOfСlass typeOfСlass) {
-        this.typeOfСlass = typeOfСlass;
+    public void setClassType(TypeOfСlass classType) {
+        this.classType = classType;
     }
 }

@@ -4,22 +4,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jdk.jfr.Enabled;
 
 import java.util.Set;
 @Entity
-@Table(name = "audience")
-public class Audience {
+@Table(name = "studyRoom")
+public class Studyroom {
     @Id
     private Long id;
-    private Long building;
-    private Long floor;
-    private String number;
+    private Long buildingNumber;
+    private Short floor;
+    private String name;
     private String title;
     @OneToMany
     private Set<Pair> pair;
 
-    public Audience() {
+    public Studyroom() {
     }
 
     public Long getId() {
@@ -30,12 +29,12 @@ public class Audience {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getName() {
+        return name;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Pair> getPair() {
@@ -46,22 +45,21 @@ public class Audience {
         this.pair = pair;
     }
 
-    public Long getBuilding() {
-        return building;
+    public Long getBuildingNumber() {
+        return buildingNumber;
     }
 
-    public void setBuilding(Long building) {
-        this.building = building;
+    public void setBuildingNumber(Long buildingNumber) {
+        this.buildingNumber = buildingNumber;
     }
 
-    public Long getFloor() {
+    public Short getFloor() {
         return floor;
     }
 
-    public void setFloor(Long floor) {
+    public void setFloor(Short floor) {
         this.floor = floor;
     }
-
 
     public String getTitle() {
         return title;
