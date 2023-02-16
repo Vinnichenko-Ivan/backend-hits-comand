@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
@@ -11,44 +13,16 @@ import java.util.Set;
 @Table(name = "timeSlot")
 public class Timeslot {
     @Id
+    @Getter @Setter
     private Long id;
+    @Getter @Setter
     private Date date;
+    @Getter @Setter
     private Short dayOfWeek;
+    @Getter @Setter
     @ManyToMany
-    private Set<PairNumber> pairNumber;
-    public void setPairNumber(Set<PairNumber> pairNumber) {
-        this.pairNumber = pairNumber;
-    }
-
+    private Set<LessonNumber> lessonNumber;
     public Timeslot() {
-    }
-
-    public Short getDayOfWeek() {
-        return dayOfWeek;
-    }
-
-    public void setDayOfWeek(Short dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
-
-    public Set<PairNumber> getPairNumber() {
-        return pairNumber;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
 }

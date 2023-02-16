@@ -2,24 +2,23 @@ package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.Date;
+
 @Entity
-@Table(name = "group")
-public class Group {
+@Table(name = "lessonNumber")
+public class LessonNumber {
     @Id
     @Getter @Setter
-    private Long id;
+    private Integer id;
     @Getter @Setter
-    private String number;
+    private Date startTime;
     @Getter @Setter
-    @OneToMany
-    private Set<User> user;
+    private Date endTime;
 
-    public Group() {
+    public LessonNumber() {
     }
 }

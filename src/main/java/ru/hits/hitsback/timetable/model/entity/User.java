@@ -1,7 +1,8 @@
 package ru.hits.hitsback.timetable.model.entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
+import lombok.Getter;
+import lombok.Setter;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
 import java.util.UUID;
@@ -10,81 +11,26 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter
     private UUID id;
+    @Getter @Setter
     private String name;
+    @Getter @Setter
     private String lastName;
+    @Getter @Setter
     private String patronymic;
     @Enumerated(EnumType.STRING)
+    @Getter @Setter
     private Roles roles;
+    @Getter @Setter
     private String email;
+    @Getter @Setter
     private String password;
     @ManyToOne
+    @Getter @Setter
     private Group group;
 
+
     public User() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
