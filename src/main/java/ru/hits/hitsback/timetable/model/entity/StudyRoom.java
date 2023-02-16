@@ -13,9 +13,10 @@ import lombok.Setter;
 public class StudyRoom {
     @Id
     private Long id;
-    private Long buildingNumber;
+    private Integer buildingNumber;
     private Short floor;
     private String name;
+    private Integer number;
 //    @OneToMany
 //    private Set<Lesson> lesson;
 

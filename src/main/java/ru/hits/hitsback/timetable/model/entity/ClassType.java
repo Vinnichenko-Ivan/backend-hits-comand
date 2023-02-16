@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ClassType {
     @Id
     private Integer id;
-    private String title;
+    private String name;
 
 //    @OneToMany
 //    @Getter @Setter
