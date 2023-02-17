@@ -18,4 +18,7 @@ public class Teacher {
     private String patronymic;
     @OneToMany
     private Set<Lesson> lessons;
+
+    public Teacher() {
+    }
 }
