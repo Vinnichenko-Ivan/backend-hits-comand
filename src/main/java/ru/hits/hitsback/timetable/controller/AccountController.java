@@ -10,11 +10,18 @@ import ru.hits.hitsback.timetable.dto.acoount.AccountDto;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.dto.acoount.PasswordModifyDto;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "profile", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
     @GetMapping
     public ResponseEntity<AccountDto> fetchAccountInfo(Authentication authentication){
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AccountDto>> fetchAccountsInfo(){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 

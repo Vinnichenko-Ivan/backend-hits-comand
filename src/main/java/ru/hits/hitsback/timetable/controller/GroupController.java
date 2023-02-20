@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.group.GroupCreateDto;
 import ru.hits.hitsback.timetable.dto.group.GroupDto;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
-import ru.hits.hitsback.timetable.dto.group.GroupModifyDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,7 +25,7 @@ public class GroupController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupModifyDto groupModifyDto){
+    public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupDto groupDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 

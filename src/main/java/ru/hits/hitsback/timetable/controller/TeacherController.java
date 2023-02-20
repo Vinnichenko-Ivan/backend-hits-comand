@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.teacher.TeacherCreateDto;
 import ru.hits.hitsback.timetable.dto.teacher.TeacherDto;
 import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
-import ru.hits.hitsback.timetable.dto.teacher.TeacherModifyDto;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class TeacherController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifyTeacher(@Valid @RequestBody TeacherModifyDto teacherModifyDto){
+    public ResponseEntity<Void> modifyTeacher(@Valid @RequestBody TeacherDto teacherDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 

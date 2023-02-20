@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomCreateDto;
 import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomDto;
 import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomIdDto;
-import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomModifyDto;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class StudyRoomController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifyStudyRoom(@Valid @RequestBody StudyRoomModifyDto studyRoomModifyDto){
+    public ResponseEntity<Void> modifyStudyRoom(@Valid @RequestBody StudyRoomDto studyRoomDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 

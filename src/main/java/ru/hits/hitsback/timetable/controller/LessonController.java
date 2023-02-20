@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.lesson.LessonCreateDto;
 import ru.hits.hitsback.timetable.dto.lesson.LessonDto;
 import ru.hits.hitsback.timetable.dto.lesson.LessonIdDto;
-import ru.hits.hitsback.timetable.dto.lesson.LessonModifyDto;
 
 @RestController
 @RequestMapping(value = "schedule/lesson", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,7 +24,7 @@ public class LessonController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifyLesson(@Valid @RequestBody LessonModifyDto lessonModifyDto){
+    public ResponseEntity<Void> modifyLesson(@Valid @RequestBody LessonDto lessonDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 

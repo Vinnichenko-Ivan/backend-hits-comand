@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.subject.SubjectCreateDto;
 import ru.hits.hitsback.timetable.dto.subject.SubjectDto;
 import ru.hits.hitsback.timetable.dto.subject.SubjectIdDto;
-import ru.hits.hitsback.timetable.dto.subject.SubjectModifyDto;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class SubjectController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifySubject(@Valid @RequestBody SubjectModifyDto subjectModifyDto){
+    public ResponseEntity<Void> modifySubject(@Valid @RequestBody SubjectDto subjectDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
