@@ -7,12 +7,14 @@ import lombok.Setter;
 import java.time.DayOfWeek;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
+
 @Entity
 @Table(name = "timeSlot")
 @Getter @Setter
 public class TimeSlot {
     @Id
-    private Long id;
+    private UUID id;
     private Date date;
     private DayOfWeek dayOfWeek;
     @OneToMany
