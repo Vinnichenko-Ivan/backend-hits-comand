@@ -1,15 +1,15 @@
 
 CREATE TABLE class_type
 (
-    id   INTEGER NOT NULL,
+    id   UUID NOT NULL,
     name VARCHAR(255),
     CONSTRAINT pk_classtype PRIMARY KEY (id)
 );
 
 CREATE TABLE class_type_lesson
 (
-    lesson_type_id INTEGER NOT NULL,
-    lesson_id      UUID    NOT NULL,
+    lesson_type_id UUID NOT NULL,
+    lesson_id      UUID NOT NULL,
     CONSTRAINT pk_classtype_lesson PRIMARY KEY (lesson_type_id, lesson_id)
 );
 
@@ -20,18 +20,18 @@ CREATE TABLE "group"
     CONSTRAINT pk_group PRIMARY KEY (id)
 );
 
-CREATE TABLE group_users
+CREATE TABLE group_accounts
 (
-    group_id UUID NOT NULL,
-    users_id UUID NOT NULL,
-    CONSTRAINT pk_group_users PRIMARY KEY (group_id, users_id)
+    group_id    UUID NOT NULL,
+    accounts_id UUID NOT NULL,
+    CONSTRAINT pk_group_accounts PRIMARY KEY (group_id, accounts_id)
 );
 
 CREATE TABLE lesson
 (
     id             UUID NOT NULL,
     study_room_id  UUID,
-    lesson_type_id INTEGER,
+    lesson_type_id UUID,
     teacher_id     UUID,
     time_slot_id   UUID,
     CONSTRAINT pk_lesson PRIMARY KEY (id)
@@ -46,17 +46,18 @@ CREATE TABLE lesson_groups
 
 CREATE TABLE lesson_number
 (
-    id         INTEGER NOT NULL,
-    start_time TIMESTAMP WITHOUT TIME ZONE,
-    end_time   TIMESTAMP WITHOUT TIME ZONE,
+    id            UUID NOT NULL,
+    start_time    TIME WITHOUT TIME ZONE,
+    end_time      TIME WITHOUT TIME ZONE,
+    lesson_number INTEGER,
     CONSTRAINT pk_lessonnumber PRIMARY KEY (id)
 );
 
 CREATE TABLE lesson_number_time_slot
 (
-    lesson_number_id INTEGER NOT NULL,
-    time_slot_id     UUID    NOT NULL,
-    CONSTRAINT pk_lessonnumber_timeslot PRIMARY KEY (lesson_number_id, time_slot_id)
+    lesson_time_id UUID NOT NULL,
+    time_slot_id   UUID NOT NULL,
+    CONSTRAINT pk_lessonnumber_timeslot PRIMARY KEY (lesson_time_id, time_slot_id)
 );
 
 CREATE TABLE study_room
@@ -89,6 +90,7 @@ CREATE TABLE teacher
     first_name      VARCHAR(255),
     last_name       VARCHAR(255),
     patronymic_name VARCHAR(255),
+    account_id      UUID,
     CONSTRAINT pk_teacher PRIMARY KEY (id)
 );
 
@@ -101,10 +103,10 @@ CREATE TABLE teacher_lessons
 
 CREATE TABLE time_slot
 (
-    id               UUID NOT NULL,
-    date             TIMESTAMP WITHOUT TIME ZONE,
-    day_of_week      INTEGER,
-    lesson_number_id INTEGER,
+    id             UUID NOT NULL,
+    date           TIME WITHOUT TIME ZONE,
+    day_of_week    INTEGER,
+    lesson_time_id UUID,
     CONSTRAINT pk_timeslot PRIMARY KEY (id)
 );
 
@@ -125,14 +127,15 @@ CREATE TABLE "user"
     email           VARCHAR(255),
     password        VARCHAR(255),
     group_id        UUID,
+    teacher_id      UUID,
     CONSTRAINT pk_user PRIMARY KEY (id)
 );
 
 ALTER TABLE class_type_lesson
     ADD CONSTRAINT uc_class_type_lesson_lesson UNIQUE (lesson_id);
 
-ALTER TABLE group_users
-    ADD CONSTRAINT uc_group_users_users UNIQUE (users_id);
+ALTER TABLE group_accounts
+    ADD CONSTRAINT uc_group_accounts_accounts UNIQUE (accounts_id);
 
 ALTER TABLE lesson_number_time_slot
     ADD CONSTRAINT uc_lesson_number_time_slot_timeslot UNIQUE (time_slot_id);
@@ -158,11 +161,17 @@ ALTER TABLE lesson
 ALTER TABLE lesson
     ADD CONSTRAINT FK_LESSON_ON_TIMESLOT FOREIGN KEY (time_slot_id) REFERENCES time_slot (id);
 
+ALTER TABLE teacher
+    ADD CONSTRAINT FK_TEACHER_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES "user" (id);
+
 ALTER TABLE time_slot
-    ADD CONSTRAINT FK_TIMESLOT_ON_LESSONNUMBER FOREIGN KEY (lesson_number_id) REFERENCES lesson_number (id);
+    ADD CONSTRAINT FK_TIMESLOT_ON_LESSONTIME FOREIGN KEY (lesson_time_id) REFERENCES lesson_number (id);
 
 ALTER TABLE "user"
     ADD CONSTRAINT FK_USER_ON_GROUP FOREIGN KEY (group_id) REFERENCES "group" (id);
+
+ALTER TABLE "user"
+    ADD CONSTRAINT FK_USER_ON_TEACHER FOREIGN KEY (teacher_id) REFERENCES teacher (id);
 
 ALTER TABLE class_type_lesson
     ADD CONSTRAINT fk_clatyples_on_lesson FOREIGN KEY (lesson_id) REFERENCES lesson (id);
@@ -170,11 +179,11 @@ ALTER TABLE class_type_lesson
 ALTER TABLE class_type_lesson
     ADD CONSTRAINT fk_clatyples_on_lesson_type FOREIGN KEY (lesson_type_id) REFERENCES class_type (id);
 
-ALTER TABLE group_users
-    ADD CONSTRAINT fk_grouse_on_group FOREIGN KEY (group_id) REFERENCES "group" (id);
+ALTER TABLE group_accounts
+    ADD CONSTRAINT fk_groacc_on_account FOREIGN KEY (accounts_id) REFERENCES "user" (id);
 
-ALTER TABLE group_users
-    ADD CONSTRAINT fk_grouse_on_user FOREIGN KEY (users_id) REFERENCES "user" (id);
+ALTER TABLE group_accounts
+    ADD CONSTRAINT fk_groacc_on_group FOREIGN KEY (group_id) REFERENCES "group" (id);
 
 ALTER TABLE lesson_groups
     ADD CONSTRAINT fk_lesgro_on_group FOREIGN KEY (groups_id) REFERENCES "group" (id);
@@ -183,7 +192,7 @@ ALTER TABLE lesson_groups
     ADD CONSTRAINT fk_lesgro_on_lesson FOREIGN KEY (lesson_id) REFERENCES lesson (id);
 
 ALTER TABLE lesson_number_time_slot
-    ADD CONSTRAINT fk_lesnumtimslo_on_lesson_number FOREIGN KEY (lesson_number_id) REFERENCES lesson_number (id);
+    ADD CONSTRAINT fk_lesnumtimslo_on_lesson_time FOREIGN KEY (lesson_time_id) REFERENCES lesson_number (id);
 
 ALTER TABLE lesson_number_time_slot
     ADD CONSTRAINT fk_lesnumtimslo_on_time_slot FOREIGN KEY (time_slot_id) REFERENCES time_slot (id);
