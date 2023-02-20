@@ -8,18 +8,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "classType")
 @Getter @Setter
-public class ClassType {
+public class LessonType {
     @Id
-    private Integer id;
+    private UUID id;
     private String name;
 
     @OneToMany
     private Set<Lesson> lesson;
-    public ClassType() {
+    public LessonType() {
     }
 
 }
