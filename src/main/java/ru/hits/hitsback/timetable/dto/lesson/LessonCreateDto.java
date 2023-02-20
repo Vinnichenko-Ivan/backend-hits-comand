@@ -1,20 +1,26 @@
 package ru.hits.hitsback.timetable.dto.lesson;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
-import ru.hits.hitsback.timetable.dto.group.GroupDto;
-import ru.hits.hitsback.timetable.dto.schedule.TimeSlotDto;
-import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomDto;
-import ru.hits.hitsback.timetable.dto.teacher.TeacherDto;
+import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
+import ru.hits.hitsback.timetable.dto.schedule.TimeSlotIdDto;
+import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomIdDto;
+import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
 
 import java.util.Set;
 
 @Getter
 @Setter
 public class LessonCreateDto {
-    private Set<GroupDto> groups;
-    private StudyRoomDto studyRoom;
-    private LessonTypeDto lessonType;
-    private TeacherDto teacher;
-    private TimeSlotDto timeSlot;
+    @NotEmpty
+    private Set<GroupIdDto> groupIds;
+    @NotEmpty
+    private StudyRoomIdDto studyRoomIdDto;
+    @NotEmpty
+    private LessonTypeIdDto lessonTypeId;
+    @NotEmpty
+    private TeacherIdDto teacherId;
+    @NotEmpty
+    private TimeSlotIdDto timeSlotId;
 }

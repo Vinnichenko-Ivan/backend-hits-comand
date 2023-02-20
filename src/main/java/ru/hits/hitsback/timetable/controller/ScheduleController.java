@@ -5,10 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.dto.schedule.LessonTimeDto;
-import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.dto.schedule.DayScheduleDto;
+import ru.hits.hitsback.timetable.dto.schedule.TimeSlotDto;
+import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
 
 import java.util.Date;
 import java.util.List;
@@ -55,8 +55,8 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
-    @GetMapping(value = "lesson-time")
-    public ResponseEntity<List<LessonTimeDto>> fetchLessonTimes() {
+    @GetMapping(value = "time-slot")
+    public ResponseEntity<List<TimeSlotDto>> fetchTimeSlots() {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }
