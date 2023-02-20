@@ -9,7 +9,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "user")
 @Getter @Setter
-public class User {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
@@ -22,7 +22,8 @@ public class User {
     private String password;
     @ManyToOne
     private Group group;
-
-    public User() {
+    @OneToOne
+    private Teacher teacher;
+    public Account() {
     }
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.DayOfWeek;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -15,12 +15,12 @@ import java.util.UUID;
 public class TimeSlot {
     @Id
     private UUID id;
-    private Date date;
+    private LocalTime date;
     private DayOfWeek dayOfWeek;
     @OneToMany
     private Set<Lesson> lessons;
     @ManyToOne
-    private LessonNumber lessonNumber;
+    private LessonTime lessonTime;
     public TimeSlot() {
     }
 

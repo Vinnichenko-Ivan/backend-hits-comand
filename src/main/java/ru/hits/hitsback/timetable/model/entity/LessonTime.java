@@ -7,20 +7,22 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "lessonNumber")
 @Getter @Setter
-public class LessonNumber {
+public class LessonTime {
     @Id
     private UUID id;
-    private Date startTime;
-    private Date endTime;
+
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private Integer lessonNumber;
     @OneToMany
     private Set<TimeSlot> timeSlot;
-    public LessonNumber() {
+    public LessonTime() {
     }
 }
