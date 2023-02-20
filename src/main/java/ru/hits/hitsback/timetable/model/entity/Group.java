@@ -19,7 +19,7 @@ public class Group {
     private UUID id;
     private String number;
     @OneToMany
-    private Set<User> users;
+    private Set<Account> accounts;
 
     public Group() {
     }
