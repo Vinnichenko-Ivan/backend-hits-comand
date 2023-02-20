@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "studyRoom")
@@ -15,9 +16,9 @@ import java.util.Set;
 
 public class StudyRoom {
     @Id
-    private Long id;
+    private UUID id;
     private Integer buildingNumber;
-    private Short floor;
+    private Integer floor;
     private String name;
     private Integer number;
     @OneToMany

@@ -13,9 +13,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-    private String name;
+    private String firstName;
     private String lastName;
-    private String patronymic;
+    private String patronymicName;
     @Enumerated(EnumType.STRING)
     private Roles roles;
     private String email;

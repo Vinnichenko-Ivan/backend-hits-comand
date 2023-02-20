@@ -8,16 +8,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.UUID;
+
 @Entity
 @Table(name = "group")
 @Getter @Setter
 
 public class Group {
     @Id
-    private Long id;
+    private UUID id;
     private String number;
     @OneToMany
-    private Set<User> user;
+    private Set<User> users;
 
     public Group() {
     }

@@ -13,9 +13,9 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-    private String name;
+    private String firstName;
     private String lastName;
-    private String patronymic;
+    private String patronymicName;
     @OneToMany
     private Set<Lesson> lessons;
 

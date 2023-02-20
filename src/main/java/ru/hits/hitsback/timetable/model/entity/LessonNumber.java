@@ -9,13 +9,14 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "lessonNumber")
 @Getter @Setter
 public class LessonNumber {
     @Id
-    private Integer id;
+    private UUID id;
     private Date startTime;
     private Date endTime;
     @OneToMany

@@ -18,7 +18,7 @@ public class Lesson {
     @ManyToOne
     private StudyRoom studyRoom;
     @ManyToOne
-    private ClassType classType;
+    private LessonType lessonType;
     @ManyToOne
     private Teacher teacher;
     @ManyToOne
