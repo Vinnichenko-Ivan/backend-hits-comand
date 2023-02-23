@@ -24,4 +24,12 @@ public class Teacher {
 
     public Teacher() {
     }
+
+    public Teacher(String firstName, String lastName, String patronymicName, Set<Lesson> lessons, Account account) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymicName = patronymicName;
+        this.lessons = lessons;
+        this.account = account;
+    }
 }
