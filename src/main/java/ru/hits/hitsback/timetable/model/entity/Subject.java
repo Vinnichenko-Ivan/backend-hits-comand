@@ -1,8 +1,6 @@
 package ru.hits.hitsback.timetable.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +12,14 @@ import java.util.UUID;
 
 public class Subject {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
 
     public Subject() {
+    }
+
+    public Subject(String name) {
+        this.name = name;
     }
 }
