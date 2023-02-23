@@ -10,10 +10,11 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "timeSlot")
+@Table(name = "time_slot")
 @Getter @Setter
 public class TimeSlot {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private LocalTime date;
     private DayOfWeek dayOfWeek;
@@ -24,4 +25,10 @@ public class TimeSlot {
     public TimeSlot() {
     }
 
+    public TimeSlot(LocalTime date, DayOfWeek dayOfWeek, Set<Lesson> lessons, LessonTime lessonTime) {
+        this.date = date;
+        this.dayOfWeek = dayOfWeek;
+        this.lessons = lessons;
+        this.lessonTime = lessonTime;
+    }
 }

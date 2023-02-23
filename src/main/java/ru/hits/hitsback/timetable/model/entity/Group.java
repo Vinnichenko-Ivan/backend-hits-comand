@@ -1,9 +1,6 @@
 package ru.hits.hitsback.timetable.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,16 +8,22 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "group")
+@Table(name = "groups")
 @Getter @Setter
 
 public class Group {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String number;
     @OneToMany
     private Set<Account> accounts;
 
     public Group() {
+    }
+
+    public Group(String number, Set<Account> accounts) {
+        this.number = number;
+        this.accounts = accounts;
     }
 }
