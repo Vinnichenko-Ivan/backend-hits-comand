@@ -13,8 +13,11 @@ import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
 import java.util.Date;
 import java.util.List;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.SCHEDULE_URL;
+
 @RestController
-@RequestMapping(value = "schedule", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = BASE_URL + SCHEDULE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ScheduleController {
     @GetMapping
     public ResponseEntity<List<DayScheduleDto>> fetchSchedule(

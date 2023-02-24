@@ -11,8 +11,11 @@ import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomIdDto;
 
 import java.util.List;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.STUDY_ROOM_URL;
+
 @RestController
-@RequestMapping(value = "study-room", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = BASE_URL + STUDY_ROOM_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudyRoomController {
     @GetMapping
     public ResponseEntity<List<StudyRoomDto>> fetchStudyRooms(){

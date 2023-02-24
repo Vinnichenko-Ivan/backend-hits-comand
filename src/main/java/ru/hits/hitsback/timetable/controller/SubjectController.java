@@ -11,8 +11,11 @@ import ru.hits.hitsback.timetable.dto.subject.SubjectIdDto;
 
 import java.util.List;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.SUBJECT_URL;
+
 @RestController
-@RequestMapping(value = "subject", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = BASE_URL + SUBJECT_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class SubjectController {
     @GetMapping
     public ResponseEntity<List<SubjectDto>> fetchSubjects(){
