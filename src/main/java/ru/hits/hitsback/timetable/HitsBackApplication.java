@@ -1,4 +1,4 @@
-package ru.hits.hitsback;
+package ru.hits.hitsback.timetable;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
