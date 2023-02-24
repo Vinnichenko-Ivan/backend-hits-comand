@@ -2,7 +2,6 @@ package ru.hits.hitsback.timetable.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -31,7 +30,15 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         String message = ex.getBindingResult().getFieldErrors().stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .map(it-> {
+                    if (it.getDefaultMessage() == null) return it.getDefaultMessage();
+
+                    try {
+                        return messageSource.getMessage(it.getDefaultMessage(), null, Locale.ENGLISH);
+                    } catch (Exception e){
+                        return it.getDefaultMessage();
+                    }
+                })
                 .collect(Collectors.joining(", "));
 
         Map<String, Object> body = new HashMap<>();
