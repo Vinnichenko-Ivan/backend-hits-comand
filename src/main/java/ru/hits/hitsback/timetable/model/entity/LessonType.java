@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "class_type")
+@Table(name = "lesson_type")
 @Getter @Setter
 public class LessonType {
     @Id
