@@ -13,18 +13,18 @@ CREATE TABLE account
     CONSTRAINT pk_account PRIMARY KEY (id)
 );
 
-CREATE TABLE class_type
+CREATE TABLE lesson_type
 (
     id   UUID NOT NULL,
     name VARCHAR(255),
-    CONSTRAINT pk_classtype PRIMARY KEY (id)
+    CONSTRAINT pk_lessontype PRIMARY KEY (id)
 );
 
-CREATE TABLE class_type_lesson
+CREATE TABLE lesson_type_lesson
 (
     lessonType_id UUID NOT NULL,
     lesson_id      UUID NOT NULL,
-    CONSTRAINT pk_classtype_lesson PRIMARY KEY (lessonType_id, lesson_id)
+    CONSTRAINT pk_lessontype_lesson PRIMARY KEY (lessonType_id, lesson_id)
 );
 
 CREATE TABLE groups
@@ -131,7 +131,7 @@ CREATE TABLE time_slot_lesson
     CONSTRAINT pk_timeslot_lessons PRIMARY KEY (timeSlot_id, lessons_id)
 );
 
-ALTER TABLE class_type_lesson
+ALTER TABLE lesson_type_lesson
     ADD CONSTRAINT uc_class_type_lesson_lesson UNIQUE (lesson_id);
 
 ALTER TABLE group_accounts
@@ -156,7 +156,7 @@ ALTER TABLE account
     ADD CONSTRAINT FK_ACCOUNT_ON_TEACHER FOREIGN KEY (teacher_id) REFERENCES teacher (id);
 
 ALTER TABLE lesson
-    ADD CONSTRAINT FK_LESSON_ON_LESSONTYPE FOREIGN KEY (lessonType_id) REFERENCES class_type (id);
+    ADD CONSTRAINT FK_LESSON_ON_LESSONTYPE FOREIGN KEY (lessonType_id) REFERENCES lesson_type (id);
 
 ALTER TABLE lesson
     ADD CONSTRAINT FK_LESSON_ON_STUDYROOM FOREIGN KEY (studyRoom_id) REFERENCES study_room (id);
@@ -173,11 +173,11 @@ ALTER TABLE teacher
 ALTER TABLE time_slot
     ADD CONSTRAINT FK_TIMESLOT_ON_LESSONTIME FOREIGN KEY (lessonTime_id) REFERENCES lesson_time (id);
 
-ALTER TABLE class_type_lesson
+ALTER TABLE lesson_type_lesson
     ADD CONSTRAINT fk_clatyples_on_lesson FOREIGN KEY (lesson_id) REFERENCES lesson (id);
 
-ALTER TABLE class_type_lesson
-    ADD CONSTRAINT fk_clatyples_on_lesson_type FOREIGN KEY (lessonType_id) REFERENCES class_type (id);
+ALTER TABLE lesson_type_lesson
+    ADD CONSTRAINT fk_clatyples_on_lesson_type FOREIGN KEY (lessonType_id) REFERENCES lesson_type (id);
 
 ALTER TABLE group_accounts
     ADD CONSTRAINT fk_groacc_on_account FOREIGN KEY (accounts_id) REFERENCES account (id);
