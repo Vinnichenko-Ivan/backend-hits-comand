@@ -11,14 +11,25 @@ import java.util.UUID;
 @Getter @Setter
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String firstName;
     private String lastName;
     private String patronymicName;
     @OneToMany
     private Set<Lesson> lessons;
+    @OneToOne
+    private Account account;
+
 
     public Teacher() {
+    }
+
+    public Teacher(String firstName, String lastName, String patronymicName, Set<Lesson> lessons, Account account) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymicName = patronymicName;
+        this.lessons = lessons;
+        this.account = account;
     }
 }

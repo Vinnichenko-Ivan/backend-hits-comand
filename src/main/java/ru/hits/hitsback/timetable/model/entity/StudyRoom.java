@@ -1,9 +1,6 @@
 package ru.hits.hitsback.timetable.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,11 +8,12 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "studyRoom")
+@Table(name = "study_room")
 @Getter @Setter
 
 public class StudyRoom {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private Integer buildingNumber;
     private Integer floor;
@@ -25,5 +23,13 @@ public class StudyRoom {
     private Set<Lesson> lesson;
 
     public StudyRoom() {
+    }
+
+    public StudyRoom(Integer buildingNumber, Integer floor, String name, Integer number, Set<Lesson> lesson) {
+        this.buildingNumber = buildingNumber;
+        this.floor = floor;
+        this.name = name;
+        this.number = number;
+        this.lesson = lesson;
     }
 }
