@@ -11,8 +11,11 @@ import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 
 import java.util.List;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.GROUP_URL;
+
 @RestController
-@RequestMapping(value = "group", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = BASE_URL + GROUP_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class GroupController {
     @GetMapping
     public ResponseEntity<List<GroupDto>> fetchGroups(){

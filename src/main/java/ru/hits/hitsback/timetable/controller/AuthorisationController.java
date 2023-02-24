@@ -14,8 +14,11 @@ import ru.hits.hitsback.timetable.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.dto.authorisation.TeacherRegisterDto;
 import ru.hits.hitsback.timetable.dto.authorisation.TokenDto;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+
 @RestController
-@RequestMapping(value = "authorisation", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = BASE_URL + AUTHORISATION_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorisationController {
     @PostMapping(value = "student/sign-up", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> signUpStudent(@Valid @RequestBody StudentRegisterDto studentRegisterDto){

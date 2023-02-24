@@ -6,14 +6,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hits.hitsback.timetable.configuration.UrlConstant;
 import ru.hits.hitsback.timetable.dto.acoount.AccountDto;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.dto.acoount.PasswordModifyDto;
 
 import java.util.List;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.PROFILE_URL;
+
 @RestController
-@RequestMapping(value = "profile", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = BASE_URL + PROFILE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
     @GetMapping("me")
     public ResponseEntity<AccountDto> fetchAccountInfo(Authentication authentication){
