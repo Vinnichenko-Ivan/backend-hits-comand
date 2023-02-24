@@ -11,17 +11,17 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TeacherCreateDto implements Serializable {
-    @NotEmpty
+    @NotEmpty(message = "first-name.empty")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "last-name.empty")
     private String lastName;
-    @NotEmpty
+    @NotEmpty(message = "patronymic-name.empty")
     private String patronymicName;
-    @NotEmpty
+    @NotEmpty(message = "email.empty")
     @Email
     private String email;
-    @Size(min = 6, max = 64, message = "password must be at least 6 characters and no more than 64 characters")
+    @Size(min = 6, max = 64, message = "password.too-long-or-short")
     private String password;
-    @NotEmpty(message = "password must be confirmed")
+    @NotEmpty(message = "password.not-confirmed")
     private String confirmedPassword;
 }

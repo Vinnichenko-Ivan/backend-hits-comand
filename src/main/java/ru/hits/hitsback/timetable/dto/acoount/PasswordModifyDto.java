@@ -9,9 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PasswordModifyDto {
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password must include at least one letter and one numeric digit")
-    @Size(min = 6, max = 64, message = "password must be at least 6 characters and no more than 64 characters")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password.too-simple")
+    @Size(min = 6, max = 64, message = "password.too-long-or-short")
     private String password;
-    @NotEmpty(message = "password must be confirmed")
+    @NotEmpty(message = "password.not-confirmed")
     private String confirmedPassword;
 }

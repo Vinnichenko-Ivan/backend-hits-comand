@@ -1,11 +1,13 @@
 package ru.hits.hitsback.timetable.dto.schedule;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class TimeSlotDto {
-    private UUID id;
+    @JsonProperty("id")
+    private TimeSlotIdDto timeSlotIdDto;
     private LocalDate date;
     private DayOfWeek dayOfWeek;
     private LessonTimeDto lessonTime;

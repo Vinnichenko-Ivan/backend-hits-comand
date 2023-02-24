@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GroupCreateDto {
-    @NotEmpty
+    @NotEmpty(message = "number.empty")
     private String number;
 }

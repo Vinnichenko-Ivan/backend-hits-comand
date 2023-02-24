@@ -1,6 +1,6 @@
 package ru.hits.hitsback.timetable.dto.lesson;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
@@ -13,14 +13,14 @@ import java.util.Set;
 @Getter
 @Setter
 public class LessonCreateDto {
-    @NotEmpty
+    @NotNull(message = "group-id.required")
     private Set<GroupIdDto> groupIds;
-    @NotEmpty
-    private StudyRoomIdDto studyRoomIdDto;
-    @NotEmpty
+    @NotNull(message = "study-room-id.required")
+    private StudyRoomIdDto studyRoomId;
+    @NotNull(message = "lesson-id.required")
     private LessonTypeIdDto lessonTypeId;
-    @NotEmpty
+    @NotNull(message = "teacher-id.required")
     private TeacherIdDto teacherId;
-    @NotEmpty
+    @NotNull(message = "time-slot-id.required")
     private TimeSlotIdDto timeSlotId;
 }

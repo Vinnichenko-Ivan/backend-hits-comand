@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SubjectCreateDto {
-    @NotEmpty
+    @NotEmpty(message = "name.empty")
     private String name;
 }

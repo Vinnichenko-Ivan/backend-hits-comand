@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.lesson;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.dto.group.GroupDto;
@@ -12,7 +13,8 @@ import java.util.Set;
 @Getter
 @Setter
 public class LessonDto {
-    private LessonIdDto id;
+    @JsonProperty("id")
+    private LessonIdDto lessonIdDto;
     private Set<GroupDto> groups;
     private StudyRoomDto studyRoom;
     private LessonTypeDto lessonType;
