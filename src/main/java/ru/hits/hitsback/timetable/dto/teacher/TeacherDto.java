@@ -12,5 +12,4 @@ public class TeacherDto {
     private String firstName;
     private String lastName;
     private String patronymicName;
-    private String email;
 }
