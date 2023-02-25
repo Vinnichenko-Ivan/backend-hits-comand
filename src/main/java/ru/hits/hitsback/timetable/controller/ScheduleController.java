@@ -50,7 +50,7 @@ public class ScheduleController {
     @GetMapping(value = "staff", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DayScheduleDto>> fetchScheduleWithLessonOptions(
             @RequestParam String teacherId,
-            @RequestParam String studentId,
+            @RequestParam List<String> groupIds,
             @RequestParam String studyRoomId,
             @RequestParam Date startDate,
             @RequestParam() Date endDate
