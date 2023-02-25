@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -15,11 +16,17 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
+    @ManyToOne
+    private Teacher teacher;
+    @OneToMany
+    private Set<LessonGroup> lessonGroup;
 
     public Subject() {
     }
 
-    public Subject(String name) {
+    public Subject(String name, Teacher teacher, Set<LessonGroup> lessonGroup) {
         this.name = name;
+        this.teacher = teacher;
+        this.lessonGroup = lessonGroup;
     }
 }
