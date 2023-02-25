@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.lesson.LessonCreateDto;
 import ru.hits.hitsback.timetable.dto.lesson.LessonDto;
 import ru.hits.hitsback.timetable.dto.lesson.LessonIdDto;
+import ru.hits.hitsback.timetable.dto.lesson.LessonTypeDto;
+
+import java.util.List;
 
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.LESSON_URL;
@@ -21,6 +24,11 @@ public class LessonController {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
+    @GetMapping(value = "type")
+    public ResponseEntity<List<LessonTypeDto>> fetchLessonTypes(){
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LessonIdDto> createLesson(@Valid @RequestBody LessonCreateDto lessonCreateDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
@@ -28,6 +36,11 @@ public class LessonController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> modifyLesson(@Valid @RequestBody LessonDto lessonDto){
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    }
+
+    @PutMapping(value = "lesson-group", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> modifyLessonGroup(@Valid @RequestBody LessonDto lessonDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
