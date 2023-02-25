@@ -24,4 +24,9 @@ public class Group {
     public Group() {
     }
 
+    public Group(String number, Set<Account> accounts, Set<LessonGroup> lessonGroups) {
+        this.number = number;
+        this.accounts = accounts;
+        this.lessonGroups = lessonGroups;
+    }
 }
