@@ -4,25 +4,31 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "time_slot")
-@Getter @Setter
-public class TimeSlot {
+@Table(name="lesson_group")
+@Getter
+@Setter
+public class LessonGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private LocalTime date;
-    private DayOfWeek dayOfWeek;
     @OneToMany
     private Set<Lesson> lessons;
+    private LocalTime startingDay;
+    private LocalTime endDay;
     @ManyToOne
-    private LessonTime lessonTime;
-    public TimeSlot() {
+    private Subject subject;
+    @ManyToOne
+    private LessonType lessonType;
+    @ManyToOne
+    private Group group;
+
+    public LessonGroup() {
     }
+
 
 }

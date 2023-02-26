@@ -6,10 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.configuration.UrlConstant;
 import ru.hits.hitsback.timetable.dto.acoount.AccountDto;
-import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.dto.acoount.PasswordModifyDto;
+import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 
 import java.util.List;
 

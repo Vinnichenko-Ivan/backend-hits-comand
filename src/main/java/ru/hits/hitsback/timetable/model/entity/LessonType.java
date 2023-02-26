@@ -17,12 +17,9 @@ public class LessonType {
     private String name;
 
     @OneToMany
-    private Set<Lesson> lesson;
+    private Set<LessonGroup> lessonGroups;
     public LessonType() {
     }
 
-    public LessonType(String name, Set<Lesson> lesson) {
-        this.name = name;
-        this.lesson = lesson;
-    }
+
 }
