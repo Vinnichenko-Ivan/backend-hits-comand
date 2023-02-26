@@ -27,12 +27,5 @@ public class Teacher {
     public Teacher() {
     }
 
-    public Teacher(String firstName, String lastName, String patronymicName, Set<Lesson> lessons, Set<Subject> subjects, Account account) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymicName = patronymicName;
-        this.lessons = lessons;
-        this.subjects = subjects;
-        this.account = account;
-    }
+
 }

@@ -25,10 +25,4 @@ public class TimeSlot {
     public TimeSlot() {
     }
 
-    public TimeSlot(LocalTime date, DayOfWeek dayOfWeek, Set<Lesson> lessons, LessonTime lessonTime) {
-        this.date = date;
-        this.dayOfWeek = dayOfWeek;
-        this.lessons = lessons;
-        this.lessonTime = lessonTime;
-    }
 }

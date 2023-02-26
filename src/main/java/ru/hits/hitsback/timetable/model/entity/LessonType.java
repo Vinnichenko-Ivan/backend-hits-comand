@@ -21,8 +21,5 @@ public class LessonType {
     public LessonType() {
     }
 
-    public LessonType(String name, Set<LessonGroup> lessonGroups) {
-        this.name = name;
-        this.lessonGroups = lessonGroups;
-    }
+
 }

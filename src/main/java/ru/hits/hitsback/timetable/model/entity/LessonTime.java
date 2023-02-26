@@ -24,10 +24,5 @@ public class LessonTime {
     public LessonTime() {
     }
 
-    public LessonTime(LocalTime startTime, LocalTime endTime, Integer lessonNumber, Set<TimeSlot> timeSlot) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.lessonNumber = lessonNumber;
-        this.timeSlot = timeSlot;
-    }
+
 }

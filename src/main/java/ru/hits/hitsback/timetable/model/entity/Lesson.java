@@ -23,10 +23,5 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(StudyRoom studyRoom, Teacher teacher, TimeSlot timeSlot, LessonGroup lessonGroup) {
-        this.studyRoom = studyRoom;
-        this.teacher = teacher;
-        this.timeSlot = timeSlot;
-        this.lessonGroup = lessonGroup;
-    }
+
 }

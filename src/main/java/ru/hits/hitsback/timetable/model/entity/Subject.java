@@ -24,9 +24,4 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String name, Teacher teacher, Set<LessonGroup> lessonGroup) {
-        this.name = name;
-        this.teacher = teacher;
-        this.lessonGroup = lessonGroup;
-    }
 }

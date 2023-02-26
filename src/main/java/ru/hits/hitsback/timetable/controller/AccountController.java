@@ -1,41 +1,39 @@
 package ru.hits.hitsback.timetable.controller;
 
-import jakarta.validation.Valid;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.configuration.UrlConstant;
-import ru.hits.hitsback.timetable.dto.acoount.AccountDto;
-import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
-import ru.hits.hitsback.timetable.dto.acoount.PasswordModifyDto;
-
-import java.util.List;
-
-import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
-import static ru.hits.hitsback.timetable.configuration.UrlConstant.PROFILE_URL;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.hits.hitsback.timetable.repository.*;
 
 @RestController
-@RequestMapping(value = BASE_URL + PROFILE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("/")
 public class AccountController {
-    @GetMapping("me")
-    public ResponseEntity<AccountDto> fetchAccountInfo(Authentication authentication){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
-    }
+    @Autowired
+    AccountRepository accountRepository;
+    @Autowired
+    GroupRepository groupRepository;
+    @Autowired
+    LessonRepository lessonRepository;
+    @Autowired
+    StudyRoomRepository studyRoomRepository;
+    @Autowired
+    TeacherRepository teacherRepository;
+    @Autowired
+    LessonGroupRepository lessonGroupRepository;
+    @Autowired
+     SubjectRepository subjectRepository;
+    @Autowired
+     LessonTypeRepository lessonTypeRepository;
+    @Autowired
+     TimeSlotRepository timeSlotRepository;
+    @Autowired
+    private LessonTimeRepository lessonTimeRepository;
+
 
     @GetMapping
-    public ResponseEntity<List<AccountDto>> fetchAccountsInfo(){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
-    }
+    public void fetchAccountInfo(){
 
-    @PutMapping(value = "group", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> changeGroup(@Valid @RequestBody GroupIdDto groupIdDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
-    }
 
-    @PutMapping(value = "security/password", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> changePassword(@Valid @RequestBody PasswordModifyDto passwordModifyDto, Authentication authentication){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }

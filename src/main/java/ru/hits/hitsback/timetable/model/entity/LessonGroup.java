@@ -30,12 +30,5 @@ public class LessonGroup {
     public LessonGroup() {
     }
 
-    public LessonGroup(Set<Lesson> lessons, LocalTime startingDay, LocalTime endDay, Subject subject, LessonType lessonType, Group group) {
-        this.lessons = lessons;
-        this.startingDay = startingDay;
-        this.endDay = endDay;
-        this.subject = subject;
-        this.lessonType = lessonType;
-        this.group = group;
-    }
+
 }
