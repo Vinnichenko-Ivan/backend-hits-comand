@@ -1,17 +1,18 @@
 package ru.hits.hitsback.timetable.dto.studyroom;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class StudyRoomCreateDto {
-    @NotEmpty
+    @NotNull(message = "building-number.required")
     private Integer buildingNumber;
     private Integer floor;
-    @NotEmpty
+    @NotEmpty(message = "name.empty")
     private String name;
-    @NotEmpty
+    @NotNull(message = "number.required")
     private Integer number;
 }

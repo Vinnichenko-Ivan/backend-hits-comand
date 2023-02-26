@@ -1,7 +1,6 @@
 package ru.hits.hitsback.timetable.controller;
 
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +34,13 @@ public class AuthorisationController {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
-    @PostMapping(value = "sign-out")
-    public ResponseEntity<Void> signOut(Authentication authentication){
+    @PostMapping(value = "sign-out")/**/
+    public ResponseEntity<Void> signOut(/*Authentication authentication*/){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @PostMapping(value = "sign-out-all")
-    public ResponseEntity<Void> signOutAll(Authentication authentication){
+    public ResponseEntity<Void> signOutAll(/*Authentication authentication*/){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }

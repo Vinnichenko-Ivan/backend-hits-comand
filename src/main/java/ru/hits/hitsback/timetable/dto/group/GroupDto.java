@@ -1,11 +1,13 @@
 package ru.hits.hitsback.timetable.dto.group;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class GroupDto {
-    private GroupIdDto id;
+    @JsonProperty("id")
+    private GroupIdDto groupIdDto;
     private String number;
 }

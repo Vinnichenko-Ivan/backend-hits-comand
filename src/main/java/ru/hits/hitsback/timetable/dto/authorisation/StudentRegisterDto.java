@@ -1,31 +1,27 @@
 package ru.hits.hitsback.timetable.dto.authorisation;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
+import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 
 @Getter
 @Setter
 public class StudentRegisterDto {
-    @NotEmpty
+    @NotEmpty(message = "first-name.empty")
     private String firstName;
-    @NotEmpty
+    @NotEmpty(message = "last-name.empty")
     private String lastName;
-    @NotEmpty
+    @NotEmpty(message = "patronymic-name.empty")
     private String patronymicName;
-    @NotEmpty
-    private UUID groupId;
-    @NotEmpty
+    @NotNull(message = "group-id.required")
+    private GroupIdDto groupId;
+    @NotEmpty(message = "email.empty")
     @Email
     private String email;
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password must include at least one letter and one numeric digit")
-    @Size(min = 6, max = 64, message = "password must be at least 6 characters and no more than 64 characters")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password.too-simple")
+    @Size(min = 6, max = 64, message = "password.too-long-or-short")
     private String password;
-    @NotEmpty(message = "password must be confirmed")
+    @NotEmpty(message = "password.not-confirmed")
     private String confirmedPassword;
 }

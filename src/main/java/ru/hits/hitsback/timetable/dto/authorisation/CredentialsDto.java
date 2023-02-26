@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CredentialsDto {
-    @NotEmpty
+    @NotEmpty(message = "email.empty")
     @Email
     private String email;
-    @NotEmpty
+    @NotEmpty(message = "password.empty")
     private String password;
 }

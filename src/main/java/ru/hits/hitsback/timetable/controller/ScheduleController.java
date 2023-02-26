@@ -1,6 +1,5 @@
 package ru.hits.hitsback.timetable.controller;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,8 @@ public class ScheduleController {
     @GetMapping
     public ResponseEntity<List<DayScheduleDto>> fetchSchedule(
             @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate,
-            Authentication authentication
+            @RequestParam(required = false) Date endDate/*,
+            Authentication authentication*/
     ) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -37,6 +36,7 @@ public class ScheduleController {
         GroupIdDto groupIdDto = new GroupIdDto(id);
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
+
     @GetMapping(value = "teacher/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchTeacherSchedule(
             @RequestParam Date startDate,
@@ -50,7 +50,7 @@ public class ScheduleController {
     @GetMapping(value = "staff", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DayScheduleDto>> fetchScheduleWithLessonOptions(
             @RequestParam String teacherId,
-            @RequestParam String studentId,
+            @RequestParam List<String> groupIds,
             @RequestParam String studyRoomId,
             @RequestParam Date startDate,
             @RequestParam() Date endDate
