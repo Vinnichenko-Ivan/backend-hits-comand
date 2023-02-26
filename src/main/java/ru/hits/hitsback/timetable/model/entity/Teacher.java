@@ -18,8 +18,6 @@ public class Teacher {
     private String patronymicName;
     @OneToMany
     private Set<Lesson> lessons;
-    @OneToMany
-    private Set<Subject> subjects;
     @OneToOne
     private Account account;
 

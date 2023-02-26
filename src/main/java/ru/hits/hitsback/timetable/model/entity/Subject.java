@@ -16,8 +16,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    @ManyToOne
-    private Teacher teacher;
+
     @OneToMany
     private Set<LessonGroup> lessonGroup;
 

@@ -38,7 +38,6 @@ CREATE TABLE lesson
 (
     id              UUID NOT NULL,
     studyRoom_id   UUID,
-    teacher_id      UUID,
     timeSlot_id    UUID,
     lessonGroup_id UUID,
     CONSTRAINT pk_lesson PRIMARY KEY (id)
@@ -134,12 +133,6 @@ CREATE TABLE teacher
     CONSTRAINT pk_teacher PRIMARY KEY (id)
 );
 
-CREATE TABLE teacher_lesson
-(
-    teacher_id UUID NOT NULL,
-    lessons_id UUID NOT NULL,
-    CONSTRAINT pk_teacher_lessons PRIMARY KEY (teacher_id, lessons_id)
-);
 
 CREATE TABLE teacher_subject
 (
@@ -184,9 +177,6 @@ ALTER TABLE study_room_lesson
 
 ALTER TABLE subject_lesson_group
     ADD CONSTRAINT uc_subject_lesson_group_lessongroup UNIQUE (lessonGroup_id);
-
-ALTER TABLE teacher_lesson
-    ADD CONSTRAINT uc_teacher_lessons_lessons UNIQUE (lessons_id);
 
 ALTER TABLE teacher_subject
     ADD CONSTRAINT uc_teacher_subjects_subjects UNIQUE (subjects_id);
@@ -271,12 +261,6 @@ ALTER TABLE subject_lesson_group
 
 ALTER TABLE subject_lesson_group
     ADD CONSTRAINT fk_sublesgro_on_subject FOREIGN KEY (subject_id) REFERENCES subject (id);
-
-ALTER TABLE teacher_lesson
-    ADD CONSTRAINT fk_teales_on_lesson FOREIGN KEY (lessons_id) REFERENCES lesson (id);
-
-ALTER TABLE teacher_lesson
-    ADD CONSTRAINT fk_teales_on_teacher FOREIGN KEY (teacher_id) REFERENCES teacher (id);
 
 ALTER TABLE teacher_subject
     ADD CONSTRAINT fk_teasub_on_subject FOREIGN KEY (subjects_id) REFERENCES subject (id);
