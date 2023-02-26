@@ -59,7 +59,10 @@ public class ScheduleController {
     }
 
     @GetMapping(value = "time-slot")
-    public ResponseEntity<List<TimeSlotDto>> fetchTimeSlots() {
+    public ResponseEntity<List<TimeSlotDto>> fetchTimeSlots(
+            @RequestParam Date startDate,
+            @RequestParam(required = false) Date endDate
+    ) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }

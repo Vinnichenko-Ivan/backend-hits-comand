@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.dto.acoount;
+package ru.hits.hitsback.timetable.dto.account;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
