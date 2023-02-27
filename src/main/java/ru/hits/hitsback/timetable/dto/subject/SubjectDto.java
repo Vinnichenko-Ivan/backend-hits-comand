@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SubjectDto {
-    @JsonProperty("id")
-    private SubjectIdDto subjectIdDto;
-    private String name;
+    @JsonProperty("id") private SubjectIdDto subjectIdDto;
+    @JsonProperty private String name;
 }

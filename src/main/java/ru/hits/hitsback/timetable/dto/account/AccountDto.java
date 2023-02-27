@@ -1,22 +1,24 @@
 package ru.hits.hitsback.timetable.dto.account;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.dto.group.GroupDto;
 import ru.hits.hitsback.timetable.dto.teacher.TeacherDto;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
 @Setter
-public class AccountDto {
-    private UUID id;
-    private String firstName;
-    private String lastName;
-    private String patronymicName;
-    private Roles role;
-    private GroupDto group;
-    private TeacherDto teacher;
-    private String email;
+public class AccountDto implements Serializable {
+    @JsonProperty private UUID id;
+    @JsonProperty private String firstName;
+    @JsonProperty private String lastName;
+    @JsonProperty private String patronymicName;
+    @JsonProperty private Roles role;
+    @JsonProperty private GroupDto group;
+    @JsonProperty private TeacherDto teacher;
+    @JsonProperty private String email;
 }

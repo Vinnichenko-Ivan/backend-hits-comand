@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GroupDto {
-    @JsonProperty("id")
-    private GroupIdDto groupIdDto;
-    private String number;
+    @JsonProperty("id") private GroupIdDto groupIdDto;
+    @JsonProperty private String number;
 }

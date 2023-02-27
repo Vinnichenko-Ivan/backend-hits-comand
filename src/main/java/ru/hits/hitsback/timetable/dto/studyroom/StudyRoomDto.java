@@ -7,10 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StudyRoomDto {
-    @JsonProperty("id")
-    private StudyRoomIdDto studyRoomIdDto;
-    private Integer buildingNumber;
-    private Integer floor;
-    private String name;
-    private Integer number;
+    @JsonProperty("id") private StudyRoomIdDto studyRoomIdDto;
+    @JsonProperty private Integer buildingNumber;
+    @JsonProperty private Integer floor;
+    @JsonProperty private String name;
+    @JsonProperty private Integer number;
 }

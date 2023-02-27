@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.lesson;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,19 +17,19 @@ import java.util.Set;
 @Setter
 public class LessonCreateDto {
     @NotNull(message = "group-id.required")
-    private Set<GroupIdDto> groupIds;
+    @JsonProperty private Set<GroupIdDto> groupIds;
     @NotNull(message = "study-room-id.required")
-    private StudyRoomIdDto studyRoomId;
+    @JsonProperty private StudyRoomIdDto studyRoomId;
     @NotNull(message = "lesson-id.required")
-    private LessonTypeIdDto lessonTypeId;
+    @JsonProperty private LessonTypeIdDto lessonTypeId;
     @NotNull(message = "teacher-id.required")
-    private TeacherIdDto teacherId;
+    @JsonProperty private TeacherIdDto teacherId;
     @NotNull(message = "subject-id.required")
-    private SubjectIdDto subjectId;
+    @JsonProperty private SubjectIdDto subjectId;
     @NotNull(message = "time-slot-id.required")
-    private TimeSlotIdDto timeSlotId;
+    @JsonProperty private TimeSlotIdDto timeSlotId;
     @NotNull(message = "start-date.required")
-    private LocalDate startDate;
+    @JsonProperty private LocalDate startDate;
     @NotNull(message = "end-date.required")
-    private LocalDate endDate;
+    @JsonProperty private LocalDate endDate;
 }

@@ -8,7 +8,6 @@ import ru.hits.hitsback.timetable.dto.account.AccountDto;
 @Getter
 @Setter
 public class RegistrationRequestDto {
-    @JsonProperty("id")
-    private RegistrationRequestIdDto registrationRequestIdDto;
-    private AccountDto account;
+    @JsonProperty("id") private RegistrationRequestIdDto registrationRequestIdDto;
+    @JsonProperty private AccountDto account;
 }
