@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.dto.authorisation.StudentRegisterDto;
@@ -16,6 +17,7 @@ import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
 import ru.hits.hitsback.timetable.service.AuthService;
 
+import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 
@@ -40,17 +42,20 @@ public class AuthorisationController {
     @PostMapping(value = "sign-in")
     public ResponseEntity<TokenDto> signIn(@Valid @RequestBody CredentialsDto credentialsDto){
         TokenDto tokenDto = authService.singIn(credentialsDto);
-        return ResponseEntity.ok(tokenDto);
+
+        return ok(tokenDto);
 //        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @PostMapping(value = "sign-out")
-    public ResponseEntity<Void> signOut(Authentication authentication){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<Void> signOut(){
+        authService.singOut();
+        return ResponseEntity.status(200).build();
     }
 
     @PostMapping(value = "sign-out-all")
-    public ResponseEntity<Void> signOutAll(Authentication authentication){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<Void> signOutAll(){
+        authService.singOutAll();
+        return ResponseEntity.status(200).build();
     }
 }

@@ -9,4 +9,6 @@ import java.util.UUID;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, UUID> {
     Account getAccountByEmail(String email);
+
+    Account getAccountById(UUID uuid);
 }
