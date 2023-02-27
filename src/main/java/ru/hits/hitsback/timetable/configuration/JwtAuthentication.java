@@ -36,7 +36,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        return null;
+        return username;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override
@@ -66,11 +66,11 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        return false;
+        return authenticated;
     }
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
+        this.authenticated = isAuthenticated;
     }
 }

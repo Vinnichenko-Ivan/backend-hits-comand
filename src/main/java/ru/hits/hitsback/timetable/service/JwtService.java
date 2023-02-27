@@ -1,68 +1,169 @@
 package ru.hits.hitsback.timetable.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.hits.hitsback.timetable.dto.authorisation.JWTTokenDto;
+import ru.hits.hitsback.timetable.exception.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.entity.Account;
+import ru.hits.hitsback.timetable.model.entity.JWTToken;
+import ru.hits.hitsback.timetable.repository.AccountRepository;
+import ru.hits.hitsback.timetable.repository.JWTTokenRepository;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
+
 @Service
 @RequiredArgsConstructor
 public class JwtService {
 
-    private final Long expiration = 100000l;
+    private final Random random=new Random();
 
-    private final String secret = "secrewqewqadssadsdasdasdaadsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdseweqweqweqewqwet";
+    private final AccountRepository accountRepository;
 
-    private SecretKey key = Keys.hmacShaKeyFor(secret.getBytes());
+    private final JWTTokenRepository jwtTokenRepository;
 
-    public Claims getAllClaimsFromToken(String token) {
-        return null;
-//        return jwtParser.parseClaimsJws(token).getBody();
+    private final Long expiration = 1000000l;
+
+
+    public String generateToken(Account account) {
+        return doGenerateToken(account, 1000l);
     }
 
-    public String generateToken(Account user) {
-        return doGenerateToken(
-                new HashMap<String, Object>() {{ put("role", user.getRoles()); }},
-                user.getId(),
-                expiration
-        );
-    }
-
-    private String doGenerateToken(Map<String, Object> claims, UUID userId, long expiration) {
+    private String doGenerateToken(Account account, long expiration) {
         final Date createdDate = new Date();
         final Date expirationDate = new Date(createdDate.getTime() + expiration * 1000);
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userId.toString())
-                .setIssuedAt(createdDate)
-                .setExpiration(expirationDate)
-                .signWith(key)
-                .compact();
+        final String secret = getRandomString(20);
+
+        JWTToken jwtToken = new JWTToken();
+        JWTTokenDto jwtTokenDto = new JWTTokenDto();
+
+        jwtTokenDto.setAccountId(account.getId());
+        jwtToken.setAccount(account);
+
+        jwtTokenDto.setSecret(secret);
+        jwtToken.setSecret(hashed(secret));
+
+        jwtTokenDto.setDateCreated(createdDate);
+        jwtToken.setDateCreated(createdDate);
+
+        jwtTokenDto.setDateExp(expirationDate);
+        jwtToken.setDateExp(expirationDate);
+
+        jwtTokenRepository.save(jwtToken);
+        return toToken(jwtTokenDto);
     }
 
-    private Account getAccountByToken(String token){
+    public Account getAccountByToken(String token) throws UnauthorizedException{
+        JWTTokenDto jwtTokenDto = fromToken(token);
+        if(jwtTokenDto == null)
+        {
+            throw new UnauthorizedException();
+        }
+        String hashed = hashed(jwtTokenDto.getSecret());
+        JWTToken jwtToken = jwtTokenRepository.getBySecret(hashed);
+        if(jwtToken == null)
+        {
+            throw new UnauthorizedException();
+        }
+        if(!jwtToken.getAccount().getId().equals(jwtTokenDto.getAccountId()))
+        {
+            throw new UnauthorizedException();
+        }
+        if(jwtToken.getDateCreated().compareTo(jwtTokenDto.getDateCreated()) != 0)
+        {
+            throw new UnauthorizedException();
+        }
+        if(jwtToken.getDateExp().compareTo(jwtTokenDto.getDateExp()) != 0)
+        {
+            throw new UnauthorizedException();
+        }
+        if(jwtToken.getDateExp().before(new Date()))
+        {
+            throw new UnauthorizedException();
+        }
+        return jwtToken.getAccount();
+    }
 
-        Claims claims = Jwts.parser()
-                .setSigningKey(key)
-                .parseClaimsJws(token)
-                .getBody();
+    private String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
+    }
 
-        String userId = claims.getSubject();
-        String role = (String) claims.get("role");
+    private static String bytesToHex(byte[] bytes) {
+        StringBuffer result = new StringBuffer();
+        for (byte b : bytes) result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        return result.toString();
+    }
 
-        System.out.println("User Id: " + userId);
-        System.out.println("Role: " + role);
+    private String hashed(String secret) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(secret.getBytes(StandardCharsets.UTF_8));
+            return bytesToHex(hash);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 
-        return null;
+    private String toToken(JWTTokenDto jwtTokenDto)
+    {
+        try{
+            StringWriter writer = new StringWriter();
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(writer, jwtTokenDto);
+            String result = writer.toString();
+            return Base64.getEncoder().encodeToString(result.getBytes());
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    private JWTTokenDto fromToken(String token)
+    {
+        try{
+            byte[] decodedBytes = Base64.getDecoder().decode(token);
+            String decode = new String(decodedBytes);
+            StringReader reader = new StringReader(decode);
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(reader, JWTTokenDto.class);
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    @Transactional
+    public void deleteAllBySecret(String token)
+    {
+        String secret = fromToken(token).getSecret();
+        jwtTokenRepository.deleteAllBySecret(hashed(secret));
+    }
+
+    @Transactional
+    public void deleteAllByAccount(Account account)
+    {
+        jwtTokenRepository.deleteAllByAccount(account);
     }
 }

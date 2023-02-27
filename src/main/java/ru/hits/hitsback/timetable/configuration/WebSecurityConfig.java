@@ -17,23 +17,30 @@ import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import ru.hits.hitsback.timetable.service.JwtService;
 
 import java.security.Security;
 
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 @EnableMethodSecurity
 public class WebSecurityConfig {
-
-//    private final JwtFilter jwtFilter;
-    private final AuthManager authManager;
-    private SecurityContextImpl securityContextRepository;
-
+    public WebSecurityConfig(JwtService jwtService) {
+        this.jwtService = jwtService;
+        jwtFilter = new JwtFilter(jwtService);
+    }
+    @Autowired
+    private final JwtService jwtService;
+    private final JwtFilter jwtFilter;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -43,17 +50,17 @@ public class WebSecurityConfig {
                 .securityContext()
                 .and()
                 .authorizeHttpRequests()
-//                .requestMatchers("/api/**").permitAll()
-                .requestMatchers(
-                        "/swagger-ui/**",
-                        "/webjars/**",
-                        "/v3/api-docs/**"
-                ).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/webjars/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/sign-out")).authenticated()
+                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/sign-in")).permitAll()
+                .requestMatchers(BASE_URL + AUTHORISATION_URL + "/sign-out").authenticated()
                 .requestMatchers("/api/v1/teacher").authenticated()
-                .anyRequest().permitAll()
                 .and()
-//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(jwtFilter, SecurityContextHolderFilter.class)
                 .build();
+
     }
 
 
