@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.UUID;
 @Entity
 @Table(name = "lesson")
@@ -16,10 +18,12 @@ public class Lesson {
     private StudyRoom studyRoom;
     @ManyToOne
     private Teacher teacher;
-    @ManyToOne
-    private TimeSlot timeSlot;
+    private LocalDateTime date;
+    private DayOfWeek dayOfWeek;
     @ManyToOne
     private LessonGroup lessonGroup;
+    @ManyToOne
+    private LessonTime lessonTime;
     public Lesson() {
     }
 
