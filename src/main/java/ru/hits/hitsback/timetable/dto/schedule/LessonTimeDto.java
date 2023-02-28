@@ -5,12 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
-import java.util.UUID;
 
 @Getter
 @Setter
 public class LessonTimeDto {
-    @JsonProperty private UUID id;
     @JsonProperty private Integer lessonNumber;
     @JsonProperty private LocalTime startTime;
     @JsonProperty private LocalTime endTime;
