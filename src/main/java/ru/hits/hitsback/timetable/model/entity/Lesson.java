@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 @Entity
 @Table(name = "lesson")
@@ -18,7 +18,7 @@ public class Lesson {
     private StudyRoom studyRoom;
     @ManyToOne
     private Teacher teacher;
-    private LocalDateTime date;
+    private LocalDate date;
     private DayOfWeek dayOfWeek;
     @ManyToOne
     private LessonGroup lessonGroup;
