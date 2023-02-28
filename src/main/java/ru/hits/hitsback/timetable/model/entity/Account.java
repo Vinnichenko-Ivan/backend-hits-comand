@@ -28,14 +28,5 @@ public class Account {
     public Account() {
     }
 
-    public Account(String firstName, String lastName, String patronymicName, Roles roles, String email, String password, Group group, Teacher teacher) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymicName = patronymicName;
-        this.roles = roles;
-        this.email = email;
-        this.password = password;
-        this.group = group;
-        this.teacher = teacher;
-    }
+
 }

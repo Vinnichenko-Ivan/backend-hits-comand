@@ -25,11 +25,5 @@ public class StudyRoom {
     public StudyRoom() {
     }
 
-    public StudyRoom(Integer buildingNumber, Integer floor, String name, Integer number, Set<Lesson> lesson) {
-        this.buildingNumber = buildingNumber;
-        this.floor = floor;
-        this.name = name;
-        this.number = number;
-        this.lesson = lesson;
-    }
+
 }
