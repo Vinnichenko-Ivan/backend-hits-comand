@@ -20,7 +20,7 @@ public class LessonTime {
     private LocalTime endTime;
     private Integer lessonNumber;
     @OneToMany
-    private Set<TimeSlot> timeSlot;
+    private Set<Lesson> lesson;
     public LessonTime() {
     }
 
