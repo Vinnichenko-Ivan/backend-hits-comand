@@ -24,6 +24,9 @@ public class Account {
     private Group group;
     @OneToOne
     private Teacher teacher;
+
+    private Boolean accepted;
+
     public Account() {
     }
 
