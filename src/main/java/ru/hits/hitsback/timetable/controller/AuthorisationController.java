@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,18 @@ import ru.hits.hitsback.timetable.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.dto.authorisation.TeacherRegisterDto;
 import ru.hits.hitsback.timetable.dto.authorisation.TokenDto;
+import ru.hits.hitsback.timetable.service.AuthService;
 
+import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = BASE_URL + AUTHORISATION_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorisationController {
+    private final AuthService authService;
+
     @Operation(responses = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "400", content = @Content),
@@ -51,7 +57,10 @@ public class AuthorisationController {
     })
     @PostMapping(value = "sign-in", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> signIn(@Valid @RequestBody CredentialsDto credentialsDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        TokenDto tokenDto = authService.singIn(credentialsDto);
+
+        return ok(tokenDto);
+//        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @Operation(responses = {
@@ -61,7 +70,8 @@ public class AuthorisationController {
     })
     @PostMapping(value = "sign-out")
     public ResponseEntity<Void> signOut(){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        authService.singOut();
+        return ResponseEntity.status(200).build();
     }
 
     @Operation(description = "Выходит из аккаунта со всех устройств данного пользователя", responses = {
@@ -71,6 +81,7 @@ public class AuthorisationController {
     })
     @PostMapping(value = "sign-out-all")
     public ResponseEntity<Void> signOutAll(){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        authService.singOutAll();
+        return ResponseEntity.status(200).build();
     }
 }

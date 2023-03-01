@@ -8,4 +8,11 @@ import lombok.Setter;
 @Setter
 public class TokenDto {
     @JsonProperty private String token;
+
+    public TokenDto(String token) {
+        this.token = token;
+    }
+
+    public TokenDto() {
+    }
 }
