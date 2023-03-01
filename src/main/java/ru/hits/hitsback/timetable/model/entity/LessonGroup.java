@@ -12,7 +12,8 @@ import java.util.UUID;
 @Table(name="lesson_group")
 @Getter
 @Setter
-public class LessonGroup {
+public class LessonGroup {//123e4567-e89b-12d3-a456-426655440000,,,,,fox4080@gmail.com,111,,
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
