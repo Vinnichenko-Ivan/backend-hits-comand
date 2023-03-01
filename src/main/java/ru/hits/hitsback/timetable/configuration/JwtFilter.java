@@ -35,6 +35,7 @@ public class JwtFilter extends GenericFilterBean {
                 if (!account.getAccepted()) {
                     throw new UnauthorizedException();
                 }
+//                ((HttpServletRequest) servletRequest).isUserInRole(account.getRoles().toString())
                 authentication.setAuthenticated(true);
                 authentication.setAccount(account);
                 authentication.setFirstName(token);

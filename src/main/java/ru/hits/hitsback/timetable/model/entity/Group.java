@@ -3,6 +3,8 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ru.hits.hitsback.timetable.dto.group.GroupDto;
+import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 
 import java.util.Set;
 import java.util.UUID;
@@ -27,5 +29,12 @@ public class Group {
     public Group(String number, Set<Account> accounts) {
         this.number = number;
         this.accounts = accounts;
+    }
+
+    public GroupDto getDto() {
+        GroupDto groupDto = new GroupDto();
+        groupDto.setGroupIdDto(new GroupIdDto(id.toString()));
+        groupDto.setNumber(number);
+        return groupDto;
     }
 }

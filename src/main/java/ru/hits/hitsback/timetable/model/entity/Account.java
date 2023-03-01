@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ru.hits.hitsback.timetable.dto.account.AccountDto;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
 import java.util.UUID;
@@ -30,5 +31,16 @@ public class Account {
     public Account() {
     }
 
-
+    public AccountDto toDto() {
+        AccountDto accountDto = new AccountDto();
+        accountDto.setEmail(email);
+        accountDto.setFirstName(firstName);
+        accountDto.setLastName(lastName);
+        accountDto.setPatronymicName(patronymicName);
+        accountDto.setGroup(group.getDto());
+        accountDto.setTeacher(teacher != null ? teacher.getDto() : null);
+        accountDto.setId(id);
+        accountDto.setRole(roles);
+        return accountDto;
+    }
 }

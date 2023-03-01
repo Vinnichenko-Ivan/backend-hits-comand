@@ -15,8 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ru.hits.hitsback.timetable.service.JwtService;
 
-import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;
-import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
+import static ru.hits.hitsback.timetable.configuration.UrlConstant.*;
 
 @Configuration
 @EnableWebSecurity
@@ -45,6 +44,7 @@ public class WebSecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/sign-in")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/teacher/sign-up")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/student/sign-up")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/**")).hasAuthority("Admin")
                 .requestMatchers(BASE_URL + AUTHORISATION_URL + "/sign-out").authenticated()
                 .requestMatchers("/api/v1/teacher").authenticated()
                 .and()
