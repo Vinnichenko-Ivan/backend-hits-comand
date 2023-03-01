@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.studyroom;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -9,10 +10,10 @@ import lombok.Setter;
 @Setter
 public class StudyRoomCreateDto {
     @NotNull(message = "building-number.required")
-    private Integer buildingNumber;
-    private Integer floor;
+    @JsonProperty private Integer buildingNumber;
+    @JsonProperty private Integer floor;
     @NotEmpty(message = "name.empty")
-    private String name;
+    @JsonProperty private String name;
     @NotNull(message = "number.required")
-    private Integer number;
+    @JsonProperty private Integer number;
 }

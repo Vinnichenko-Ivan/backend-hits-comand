@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.schedule;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.dto.lesson.LessonDto;
@@ -10,6 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 public class DayScheduleDto {
-    private LocalDate date;
-    private List<LessonDto> lessons;
+    @JsonProperty private LocalDate date;
+    @JsonProperty private List<LessonDto> lessons;
 }

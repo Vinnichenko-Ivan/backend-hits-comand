@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.subject;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +9,5 @@ import lombok.Setter;
 @Setter
 public class SubjectCreateDto {
     @NotEmpty(message = "name.empty")
-    private String name;
+    @JsonProperty private String name;
 }

@@ -1,16 +1,15 @@
 package ru.hits.hitsback.timetable.dto.schedule;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
-import java.util.UUID;
 
 @Getter
 @Setter
 public class LessonTimeDto {
-    private UUID id;
-    private Integer lessonNumber;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    @JsonProperty private Integer lessonNumber;
+    @JsonProperty private LocalTime startTime;
+    @JsonProperty private LocalTime endTime;
 }

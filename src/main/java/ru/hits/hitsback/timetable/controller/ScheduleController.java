@@ -1,12 +1,15 @@
 package ru.hits.hitsback.timetable.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.dto.schedule.DayScheduleDto;
-import ru.hits.hitsback.timetable.dto.schedule.TimeSlotDto;
+import ru.hits.hitsback.timetable.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
 
 import java.util.Date;
@@ -18,15 +21,27 @@ import static ru.hits.hitsback.timetable.configuration.UrlConstant.SCHEDULE_URL;
 @RestController
 @RequestMapping(value = BASE_URL + SCHEDULE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ScheduleController {
+    @Operation(summary = "Получить расписание пользователя", description = "Для зарегистрированного пользователя автоматически вернётся расписание его группы/преподавателя", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content),
+            @ApiResponse(responseCode = "401", content = @Content),
+            @ApiResponse(responseCode = "403", content = @Content),
+            @ApiResponse(responseCode = "500", content = @Content),
+    })
     @GetMapping
     public ResponseEntity<List<DayScheduleDto>> fetchSchedule(
             @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate/*,
-            Authentication authentication*/
+            @RequestParam(required = false) Date endDate
     ) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
+    @Operation(summary = "Получить расписание группы", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content),
+            @ApiResponse(responseCode = "404", content = @Content),
+            @ApiResponse(responseCode = "500", content = @Content),
+    })
     @GetMapping(value = "group/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchGroupSchedule(
             @RequestParam Date startDate,
@@ -37,6 +52,12 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
+    @Operation(summary = "Получить расписание преподавателя", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content),
+            @ApiResponse(responseCode = "404", content = @Content),
+            @ApiResponse(responseCode = "500", content = @Content),
+    })
     @GetMapping(value = "teacher/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchTeacherSchedule(
             @RequestParam Date startDate,
@@ -47,6 +68,14 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
+    @Operation(summary = "Получить объединение расписаний по преподавателям, группам и аудиториям", description = "Этот запрос доступен только составителям расписания для того, чтобы видеть наложения пар по преподавателям, группам и аудиториям одновременно", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", content = @Content),
+            @ApiResponse(responseCode = "401", content = @Content),
+            @ApiResponse(responseCode = "403", content = @Content),
+            @ApiResponse(responseCode = "404", content = @Content),
+            @ApiResponse(responseCode = "500", content = @Content),
+    })
     @GetMapping(value = "staff", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<DayScheduleDto>> fetchScheduleWithLessonOptions(
             @RequestParam String teacherId,
@@ -58,11 +87,12 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
-    @GetMapping(value = "time-slot")
-    public ResponseEntity<List<TimeSlotDto>> fetchTimeSlots(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate
-    ) {
+    @Operation(summary = "Получить время каждой пары", description = "У каждой пары есть своё время. Например, первая пара начинается в 8:45 и заканчивается в 10:20", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "500", content = @Content),
+    })
+    @GetMapping(value = "lesson-time")
+    public ResponseEntity<List<LessonTimeDto>> fetchLessonTimes() {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }
