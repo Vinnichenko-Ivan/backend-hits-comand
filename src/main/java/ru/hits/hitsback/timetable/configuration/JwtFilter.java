@@ -7,14 +7,10 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.event.AuthenticationFailureProxyUntrustedEvent;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
+import ru.hits.hitsback.timetable.exception.NotAcceptedException;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.service.JwtService;
@@ -34,16 +30,19 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         JwtAuthentication authentication = new JwtAuthentication();
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
-
         try{
             Account account = jwtService.getAccountByToken(token);
-            if(account != null)
-            {
+            if(account != null) {
+                if (!account.getAccepted()) {
+                    throw new NotAcceptedException();
+                }
                 authentication.setAuthenticated(true);
                 authentication.setAccount(account);
                 authentication.setFirstName(token);
                 authentication.setUsername(account.getEmail());
-                authentication.setRoles(account.getRoles()!=null?Set.of(account.getRoles()):null);
+                authentication.setRoles(account.getRoles() != null ? Set.of(account.getRoles()) : null);
+            } else {
+                throw new UnauthorizedException();
             }
         }
         catch (UnauthorizedException e){

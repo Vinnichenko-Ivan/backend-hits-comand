@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +35,8 @@ public class AuthorisationController {
     })
     @PostMapping(value = "student/sign-up", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> signUpStudent(@Valid @RequestBody StudentRegisterDto studentRegisterDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        authService.registerStudent(studentRegisterDto);
+        return ResponseEntity.status(200).build();
     }
 
     @Operation(responses = {
@@ -46,8 +46,9 @@ public class AuthorisationController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PostMapping(value = "teacher/sign-up", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> signUpTeacher(@Valid @RequestBody TeacherRegisterDto teacherRegisterDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<Void> signUpTeacher(@Valid @RequestBody TeacherRegisterDto teacherRegisterDto) {
+        authService.registerTeacher(teacherRegisterDto);
+        return ResponseEntity.status(200).build();
     }
 
     @Operation(responses = {
@@ -58,9 +59,7 @@ public class AuthorisationController {
     @PostMapping(value = "sign-in", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> signIn(@Valid @RequestBody CredentialsDto credentialsDto){
         TokenDto tokenDto = authService.singIn(credentialsDto);
-
         return ok(tokenDto);
-//        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
     @Operation(responses = {

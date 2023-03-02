@@ -1,15 +1,16 @@
 
 CREATE TABLE account
 (
-    id              UUID NOT NULL,
+    id             UUID    NOT NULL,
     firstName      VARCHAR(255),
     lastName       VARCHAR(255),
     patronymicName VARCHAR(255),
-    roles           VARCHAR(255),
-    email           VARCHAR(255),
-    password        VARCHAR(255),
-    group_id        UUID,
-    teacher_id      UUID,
+    roles          VARCHAR(255),
+    email          VARCHAR(255),
+    password       VARCHAR(255),
+    group_id       UUID,
+    teacher_id     UUID,
+    accepted       BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT pk_account PRIMARY KEY (id)
 );
 
