@@ -1,12 +1,12 @@
 package ru.hits.hitsback.timetable.service.schedule;
 
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
-import ru.hits.hitsback.timetable.dto.schedule.DayScheduleDto;
-import ru.hits.hitsback.timetable.dto.schedule.LessonOptionsDto;
-import ru.hits.hitsback.timetable.dto.schedule.LessonTimeDto;
-import ru.hits.hitsback.timetable.dto.schedule.TimeIntervalDto;
-import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
+import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.LessonOptionsDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
+import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 
 import java.util.List;
 
