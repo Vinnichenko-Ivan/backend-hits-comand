@@ -15,7 +15,9 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.*;
+import java.util.Base64;
+import java.util.Date;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +56,8 @@ public class JwtService {
 
         jwtTokenDto.setDateExp(expirationDate);
         jwtToken.setDateExp(expirationDate);
+
+        jwtTokenDto.setRole(account.getRoles().getAuthority());
 
         jwtTokenRepository.save(jwtToken);
         return toToken(jwtTokenDto);
@@ -125,7 +129,7 @@ public class JwtService {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(writer, jwtTokenDto);
             String result = writer.toString();
-            return Base64.getEncoder().encodeToString(result.getBytes());
+            return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." + Base64.getEncoder().encodeToString(result.getBytes()) + ".SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
         }
         catch (Exception e){
             return null;
@@ -135,7 +139,7 @@ public class JwtService {
     private JWTTokenDto fromToken(String token)
     {
         try{
-            byte[] decodedBytes = Base64.getDecoder().decode(token);
+            byte[] decodedBytes = Base64.getDecoder().decode(token.split("\\.")[1]);
             String decode = new String(decodedBytes);
             StringReader reader = new StringReader(decode);
             ObjectMapper mapper = new ObjectMapper();

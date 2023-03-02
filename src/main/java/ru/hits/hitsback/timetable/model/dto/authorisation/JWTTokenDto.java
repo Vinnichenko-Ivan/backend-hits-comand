@@ -20,4 +20,7 @@ public class JWTTokenDto {
 
     @JsonProperty("exp")
     private Date dateExp;
+
+    @JsonProperty("role")
+    private String role;
 }
