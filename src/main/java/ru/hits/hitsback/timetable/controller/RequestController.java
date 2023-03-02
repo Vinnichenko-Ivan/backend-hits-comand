@@ -8,10 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.dto.request.AcceptDto;
-import ru.hits.hitsback.timetable.dto.request.GroupChangingRequestDto;
-import ru.hits.hitsback.timetable.dto.request.GroupChangingRequestIdDto;
-import ru.hits.hitsback.timetable.dto.request.RegistrationRequestDto;
+import ru.hits.hitsback.timetable.model.dto.request.*;
+import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
+import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;
+import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestIdDto;
+import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestDto;
 import ru.hits.hitsback.timetable.service.RequestService;
 
 import java.util.List;

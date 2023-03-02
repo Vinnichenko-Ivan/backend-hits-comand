@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomCreateDto;
-import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomDto;
-import ru.hits.hitsback.timetable.dto.studyroom.StudyRoomIdDto;
+import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomCreateDto;
+import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomDto;
+import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomIdDto;
 
 import java.util.List;
 

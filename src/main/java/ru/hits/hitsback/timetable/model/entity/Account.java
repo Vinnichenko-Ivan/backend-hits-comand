@@ -3,7 +3,7 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.hits.hitsback.timetable.dto.account.AccountDto;
+import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
 import java.util.UUID;
