@@ -3,24 +3,30 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.dto.schedule.DayScheduleDto;
+import ru.hits.hitsback.timetable.dto.schedule.LessonOptionsDto;
 import ru.hits.hitsback.timetable.dto.schedule.LessonTimeDto;
+import ru.hits.hitsback.timetable.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
+import ru.hits.hitsback.timetable.service.schedule.ScheduleService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.SCHEDULE_URL;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = BASE_URL + SCHEDULE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ScheduleController {
+    private final ScheduleService scheduleService;
+
     @Operation(summary = "Получить расписание пользователя", description = "Для зарегистрированного пользователя автоматически вернётся расписание его группы/преподавателя", responses = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "400", content = @Content),
@@ -30,10 +36,11 @@ public class ScheduleController {
     })
     @GetMapping
     public ResponseEntity<List<DayScheduleDto>> fetchSchedule(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate
+            @RequestParam LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate
     ) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
+        return ResponseEntity.ok(scheduleService.fetchSchedule(timeIntervalDto));
     }
 
     @Operation(summary = "Получить расписание группы", responses = {
@@ -44,12 +51,13 @@ public class ScheduleController {
     })
     @GetMapping(value = "group/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchGroupSchedule(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate,
+            @RequestParam LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate,
             @PathVariable String id
     ) {
         GroupIdDto groupIdDto = new GroupIdDto(id);
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
+        return ResponseEntity.ok(scheduleService.fetchGroupSchedule(timeIntervalDto, groupIdDto));
     }
 
     @Operation(summary = "Получить расписание преподавателя", responses = {
@@ -60,12 +68,13 @@ public class ScheduleController {
     })
     @GetMapping(value = "teacher/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchTeacherSchedule(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate,
+            @RequestParam LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate,
             @PathVariable String id
     ) {
         TeacherIdDto teacherIdDto = new TeacherIdDto(id);
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
+        return ResponseEntity.ok(scheduleService.fetchTeacherSchedule(timeIntervalDto, teacherIdDto));
     }
 
     @Operation(summary = "Получить объединение расписаний по преподавателям, группам и аудиториям", description = "Этот запрос доступен только составителям расписания для того, чтобы видеть наложения пар по преподавателям, группам и аудиториям одновременно", responses = {
@@ -81,10 +90,12 @@ public class ScheduleController {
             @RequestParam String teacherId,
             @RequestParam List<String> groupIds,
             @RequestParam String studyRoomId,
-            @RequestParam Date startDate,
-            @RequestParam() Date endDate
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate
     ) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
+        LessonOptionsDto lessonOptionsDto = new LessonOptionsDto(teacherId, groupIds, studyRoomId);
+        return ResponseEntity.ok(scheduleService.fetchScheduleWithLessonOptions(timeIntervalDto, lessonOptionsDto));
     }
 
     @Operation(summary = "Получить время каждой пары", description = "У каждой пары есть своё время. Например, первая пара начинается в 8:45 и заканчивается в 10:20", responses = {
@@ -93,6 +104,6 @@ public class ScheduleController {
     })
     @GetMapping(value = "lesson-time")
     public ResponseEntity<List<LessonTimeDto>> fetchLessonTimes() {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        return ResponseEntity.ok(scheduleService.fetchLessonTimes());
     }
 }
