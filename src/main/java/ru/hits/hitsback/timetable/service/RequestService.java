@@ -2,10 +2,10 @@ package ru.hits.hitsback.timetable.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.dto.request.AcceptDto;
-import ru.hits.hitsback.timetable.dto.request.GroupChangingRequestDto;
-import ru.hits.hitsback.timetable.dto.request.RegistrationRequestDto;
-import ru.hits.hitsback.timetable.dto.request.RegistrationRequestIdDto;
+import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
+import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;
+import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestDto;
+import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestIdDto;
 import ru.hits.hitsback.timetable.exception.AccountNotFoundException;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.repository.AccountRepository;

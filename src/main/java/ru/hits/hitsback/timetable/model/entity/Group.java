@@ -3,8 +3,8 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.hits.hitsback.timetable.dto.group.GroupDto;
-import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
+import ru.hits.hitsback.timetable.model.dto.group.GroupDto;
+import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 
 import java.util.Set;
 import java.util.UUID;

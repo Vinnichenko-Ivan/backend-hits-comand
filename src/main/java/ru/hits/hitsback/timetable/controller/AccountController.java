@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.dto.account.AccountDto;
-import ru.hits.hitsback.timetable.dto.account.PasswordModifyDto;
-import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
+import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
+import ru.hits.hitsback.timetable.model.dto.account.PasswordModifyDto;
+import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 
 import java.util.List;
 
