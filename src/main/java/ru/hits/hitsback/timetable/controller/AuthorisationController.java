@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.hits.hitsback.timetable.dto.authorisation.CredentialsDto;
-import ru.hits.hitsback.timetable.dto.authorisation.StudentRegisterDto;
-import ru.hits.hitsback.timetable.dto.authorisation.TeacherRegisterDto;
-import ru.hits.hitsback.timetable.dto.authorisation.TokenDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.TokenDto;
 import ru.hits.hitsback.timetable.service.AuthService;
 
 import static org.springframework.http.ResponseEntity.ok;

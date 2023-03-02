@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.dto.authorisation.JWTTokenDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.JWTTokenDto;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.model.entity.JWTToken;

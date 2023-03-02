@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
-import ru.hits.hitsback.timetable.dto.schedule.DayScheduleDto;
-import ru.hits.hitsback.timetable.dto.schedule.LessonOptionsDto;
-import ru.hits.hitsback.timetable.dto.schedule.LessonTimeDto;
-import ru.hits.hitsback.timetable.dto.schedule.TimeIntervalDto;
-import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
+import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.LessonOptionsDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
+import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.service.schedule.ScheduleService;
 
 import java.time.LocalDate;
