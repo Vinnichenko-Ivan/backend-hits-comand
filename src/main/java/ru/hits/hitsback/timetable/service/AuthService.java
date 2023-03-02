@@ -9,6 +9,7 @@ import ru.hits.hitsback.timetable.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.dto.authorisation.TeacherRegisterDto;
 import ru.hits.hitsback.timetable.dto.authorisation.TokenDto;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.NotAcceptedException;
 import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.entity.Account;
@@ -35,6 +36,8 @@ public class AuthService {
         Account account = accountRepository.getAccountByEmail(credentialsDto.getEmail());
         if (account == null || !credentialsDto.getPassword().equals(account.getPassword())) {
             throw new UnauthorizedException();
+        } else if (!account.getAccepted()) {
+            throw new NotAcceptedException();
         }
         return new TokenDto(jwtService.generateToken(account));
     }

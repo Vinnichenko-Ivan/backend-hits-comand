@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
+import ru.hits.hitsback.timetable.exception.NotAcceptedException;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.service.JwtService;
@@ -33,9 +34,8 @@ public class JwtFilter extends GenericFilterBean {
             Account account = jwtService.getAccountByToken(token);
             if(account != null) {
                 if (!account.getAccepted()) {
-                    throw new UnauthorizedException();
+                    throw new NotAcceptedException();
                 }
-//                ((HttpServletRequest) servletRequest).isUserInRole(account.getRoles().toString())
                 authentication.setAuthenticated(true);
                 authentication.setAccount(account);
                 authentication.setFirstName(token);
