@@ -9,10 +9,11 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name="lesson_group")
+@Table(name = "lesson_group")
 @Getter
 @Setter
 public class LessonGroup {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

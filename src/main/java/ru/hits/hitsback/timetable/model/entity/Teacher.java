@@ -3,6 +3,8 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ru.hits.hitsback.timetable.dto.teacher.TeacherDto;
+import ru.hits.hitsback.timetable.dto.teacher.TeacherIdDto;
 
 import java.util.Set;
 import java.util.UUID;
@@ -25,5 +27,20 @@ public class Teacher {
     public Teacher() {
     }
 
+    public Teacher(String firstName, String lastName, String patronymicName, Set<Lesson> lessons, Account account) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymicName = patronymicName;
+        this.lessons = lessons;
+        this.account = account;
+    }
 
+    public TeacherDto getDto() {
+        TeacherDto teacherDto = new TeacherDto();
+        teacherDto.setTeacherIdDto(new TeacherIdDto(id.toString()));
+        teacherDto.setFirstName(firstName);
+        teacherDto.setLastName(lastName);
+        teacherDto.setPatronymicName(patronymicName);
+        return teacherDto;
+    }
 }

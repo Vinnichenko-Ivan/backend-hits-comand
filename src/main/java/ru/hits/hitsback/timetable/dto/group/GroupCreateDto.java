@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.group;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GroupCreateDto {
-    @NotEmpty
-    private String number;
+    @NotEmpty(message = "number.empty")
+    @JsonProperty private String number;
 }

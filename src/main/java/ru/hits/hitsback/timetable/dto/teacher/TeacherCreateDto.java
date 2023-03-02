@@ -1,8 +1,7 @@
 package ru.hits.hitsback.timetable.dto.teacher;
 
-import jakarta.validation.constraints.Email;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,17 +10,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TeacherCreateDto implements Serializable {
-    @NotEmpty
-    private String firstName;
-    @NotEmpty
-    private String lastName;
-    @NotEmpty
-    private String patronymicName;
-    @NotEmpty
-    @Email
-    private String email;
-    @Size(min = 6, max = 64, message = "password must be at least 6 characters and no more than 64 characters")
-    private String password;
-    @NotEmpty(message = "password must be confirmed")
-    private String confirmedPassword;
+    @NotEmpty(message = "first-name.empty")
+    @JsonProperty private String firstName;
+    @NotEmpty(message = "last-name.empty")
+    @JsonProperty private String lastName;
+    @NotEmpty(message = "patronymic-name.empty")
+    @JsonProperty private String patronymicName;
 }

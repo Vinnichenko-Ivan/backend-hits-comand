@@ -1,12 +1,13 @@
 package ru.hits.hitsback.timetable.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import ru.hits.hitsback.timetable.dto.acoount.AccountDto;
+import ru.hits.hitsback.timetable.dto.account.AccountDto;
 
 @Getter
 @Setter
 public class RegistrationRequestDto {
-    private RegistrationRequestIdDto id;
-    private AccountDto account;
+    @JsonProperty("id") private RegistrationRequestIdDto registrationRequestIdDto;
+    @JsonProperty private AccountDto account;
 }

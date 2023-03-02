@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.dto.authorisation;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -8,9 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CredentialsDto {
-    @NotEmpty
+    @NotEmpty(message = "email.empty")
     @Email
-    private String email;
-    @NotEmpty
-    private String password;
+    @JsonProperty private String email;
+    @NotEmpty(message = "password.empty")
+    @JsonProperty private String password;
 }

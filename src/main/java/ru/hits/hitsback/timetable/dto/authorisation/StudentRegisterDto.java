@@ -1,31 +1,28 @@
 package ru.hits.hitsback.timetable.dto.authorisation;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
+import ru.hits.hitsback.timetable.dto.group.GroupIdDto;
 
 @Getter
 @Setter
 public class StudentRegisterDto {
-    @NotEmpty
-    private String firstName;
-    @NotEmpty
-    private String lastName;
-    @NotEmpty
-    private String patronymicName;
-    @NotEmpty
-    private UUID groupId;
-    @NotEmpty
+    @NotEmpty(message = "first-name.empty")
+    @JsonProperty private String firstName;
+    @NotEmpty(message = "last-name.empty")
+    @JsonProperty private String lastName;
+    @NotEmpty(message = "patronymic-name.empty")
+    @JsonProperty private String patronymicName;
+    @NotNull(message = "group-id.required")
+    @JsonProperty private GroupIdDto groupId;
+    @NotEmpty(message = "email.empty")
     @Email
-    private String email;
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password must include at least one letter and one numeric digit")
-    @Size(min = 6, max = 64, message = "password must be at least 6 characters and no more than 64 characters")
-    private String password;
-    @NotEmpty(message = "password must be confirmed")
-    private String confirmedPassword;
+    @JsonProperty private String email;
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password.too-simple")
+    @Size(min = 6, max = 64, message = "password.too-long-or-short")
+    @JsonProperty private String password;
+    @NotEmpty(message = "password.not-confirmed")
+    @JsonProperty private String confirmedPassword;
 }
