@@ -16,6 +16,7 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String firstName;
+
     private String lastName;
     private String patronymicName;
     @OneToMany
