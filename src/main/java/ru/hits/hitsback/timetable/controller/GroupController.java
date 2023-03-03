@@ -4,29 +4,32 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.group.GroupCreateDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
+import ru.hits.hitsback.timetable.service.GroupService;
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.GROUP_URL;
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = BASE_URL + GROUP_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class GroupController {
+    private final GroupService groupService;
     @Operation(responses = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping
     public ResponseEntity<List<GroupDto>> fetchGroups(){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        return ok(groupService.fetchGroups());
     }
 
     @Operation(responses = {
@@ -38,7 +41,7 @@ public class GroupController {
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GroupIdDto> createGroup(@Valid @RequestBody GroupCreateDto groupCreateDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        return ok(groupService.createGroup(groupCreateDto));
     }
 
     @Operation(responses = {
@@ -51,7 +54,8 @@ public class GroupController {
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupDto groupDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        groupService.editGroup(groupDto);
+        return ResponseEntity.status(200).build();
     }
 
     @Operation(responses = {
@@ -64,6 +68,7 @@ public class GroupController {
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable String id){
         GroupIdDto groupIdDto = new GroupIdDto(id);
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        groupService.removeGroup(groupIdDto) ;
+        return ResponseEntity.status(200).build();
     }
 }

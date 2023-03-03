@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -47,9 +48,14 @@ public class WebSecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/**")).hasAuthority("Admin")
                 .requestMatchers(BASE_URL + AUTHORISATION_URL + "/sign-out").authenticated()
                 .requestMatchers("/api/v1/teacher").authenticated()
+                .requestMatchers(HttpMethod.POST,"/" + BASE_URL + GROUP_URL).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.PUT,"/" + BASE_URL + GROUP_URL).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.DELETE,"/" + BASE_URL + GROUP_URL).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" +BASE_URL+GROUP_URL).permitAll()
                 .and()
                 .addFilterAfter(jwtFilter, SecurityContextHolderFilter.class)
                 .build();
+
 
     }
 
