@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import ru.hits.hitsback.timetable.exception.GroupAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 
 import java.util.HashMap;
@@ -49,6 +51,14 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(TeacherNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException(){
         return handleCustomException(HttpStatus.NOT_FOUND, "teacher.not-found");
+    }
+    @ExceptionHandler(GroupAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleGroupAlreadyExistException(){
+        return handleCustomException(HttpStatus.BAD_REQUEST, "group.bad-request");
+    }
+    @ExceptionHandler(GroupNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleGGroupNotFoundException(){
+        return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
     }
 
     private String getErrorMessage(String code){
