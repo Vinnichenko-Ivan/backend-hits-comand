@@ -46,6 +46,7 @@ public class WebSecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/teacher/sign-up")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/student/sign-up")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/**")).hasAuthority("Admin")
+                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() //TODO для дебага пока так
                 .requestMatchers(BASE_URL + AUTHORISATION_URL + "/sign-out").authenticated()
                 .requestMatchers("/api/v1/teacher").authenticated()
                 .requestMatchers(HttpMethod.POST,"/" + BASE_URL + GROUP_URL).hasAuthority("ScheduleWriter")

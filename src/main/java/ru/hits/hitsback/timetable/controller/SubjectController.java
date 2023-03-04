@@ -4,13 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectCreateDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectIdDto;
+import ru.hits.hitsback.timetable.service.SubjectService;
 
 import java.util.List;
 
@@ -18,15 +19,19 @@ import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.SUBJECT_URL;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = BASE_URL + SUBJECT_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class SubjectController {
+
+    private final SubjectService subjectService;
+
     @Operation(responses = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping
-    public ResponseEntity<List<SubjectDto>> fetchSubjects(){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<List<SubjectDto>> fetchSubjects() {
+        return ResponseEntity.ok(subjectService.fetchSubjects());
     }
 
     @Operation(responses = {
@@ -38,7 +43,7 @@ public class SubjectController {
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SubjectIdDto> createSubject(@Valid @RequestBody SubjectCreateDto subjectCreateDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        return ResponseEntity.ok(subjectService.createSubject(subjectCreateDto));
     }
 
     @Operation(responses = {
@@ -50,8 +55,9 @@ public class SubjectController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifySubject(@Valid @RequestBody SubjectDto subjectDto){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<Void> modifySubject(@Valid @RequestBody SubjectDto subjectDto) {
+        subjectService.modifySubject(subjectDto);
+        return ResponseEntity.status(200).build();
     }
 
     @Operation(responses = {
@@ -62,8 +68,9 @@ public class SubjectController {
             @ApiResponse(responseCode = "500"),
     })
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Void> deleteSubject(@PathVariable String id){
+    public ResponseEntity<Void> deleteSubject(@PathVariable String id) {
         SubjectIdDto subjectIdDto = new SubjectIdDto(id);
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        subjectService.deleteSubject(subjectIdDto);
+        return ResponseEntity.status(200).build();
     }
 }
