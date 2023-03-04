@@ -18,6 +18,7 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.GROUP_URL;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = BASE_URL + GROUP_URL, produces = MediaType.APPLICATION_JSON_VALUE)

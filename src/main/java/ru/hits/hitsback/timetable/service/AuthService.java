@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.configuration.JwtAuthentication;
-import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
-import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
-import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;
-import ru.hits.hitsback.timetable.model.dto.authorisation.TokenDto;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.NotAcceptedException;
 import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
+import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;
+import ru.hits.hitsback.timetable.model.dto.authorisation.TokenDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.model.entity.Group;
 import ru.hits.hitsback.timetable.model.entity.Teacher;
@@ -80,7 +80,7 @@ public class AuthService {
         account.setLastName(teacher.getLastName());
         account.setPatronymicName(teacher.getPatronymicName());
         account.setAccepted(false);
-        account.setRoles(Roles.Teacher);
+        account.setRole(Roles.Teacher);
 
         accountRepository.save(account);
     }
@@ -91,7 +91,7 @@ public class AuthService {
         account.setFirstName(studentRegisterDto.getFirstName());
         account.setLastName(studentRegisterDto.getLastName());
         account.setPatronymicName(studentRegisterDto.getPatronymicName());
-        account.setRoles(Roles.Student);
+        account.setRole(Roles.Student);
 
 
         Group group = groupRepository.findById(studentRegisterDto.getGroupId().getId()).orElse(null);

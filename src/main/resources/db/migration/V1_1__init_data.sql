@@ -1,4 +1,3 @@
-INSERT INTO groups(id, number)VALUES('5c816938-b5cc-11ed-afa1-0242ac120089',100041);
 INSERT INTO groups(id, number)VALUES('5c814c82-b5cc-11ed-afa1-0242ac120042',119169);
 INSERT INTO groups(id, number)VALUES('5c815a10-b5cc-11ed-afa1-0242ac120093',126962);
 INSERT INTO groups(id, number)VALUES('5c814e26-b5cc-11ed-afa1-0242ac120087',123281);
@@ -76,15 +75,15 @@ INSERT INTO lesson_type (id, name) VALUES('5c814e26-b5cc-11ed-afa1-0242ac120046'
 INSERT INTO lesson_type (id, name) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac120049','Консультация');
 INSERT INTO lesson_type (id, name) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac120033','Бронь');
 
-INSERT INTO account(id, firstname, lastname, patronymicname, roles, email, password, group_id, teacher_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac100441','Олег','Андреева','Федорович','Student','Олег28145@gmail.com','Федорович16827','5c814c82-b5cc-11ed-afa1-0242ac120042',null);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac100441','Олег','Андреева','Федорович','Student','Олег28145@gmail.com','Федорович16827',null,null);
 INSERT INTO groups_account(group_id, accounts_id)VALUES('5c814c82-b5cc-11ed-afa1-0242ac120042','5c814e26-b5cc-11ed-afa1-0242ac100041');
-INSERT INTO account(id, firstname, lastname, patronymicname, roles, email, password, group_id, teacher_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac109961','Егор','Никифоров','Алиевна','Student','Егор12382@gmail.com','Алиевна18716','5c816938-b5cc-11ed-afa1-0242ac120078',null);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac109961','Егор','Никифоров','Алиевна','Student','Егор12382@gmail.com','Алиевна18716','5c816938-b5cc-11ed-afa1-0242ac120078',null);
 INSERT INTO groups_account(group_id, accounts_id)VALUES('5c816938-b5cc-11ed-afa1-0242ac120078','5c814e26-b5cc-11ed-afa1-0242ac109961');
-INSERT INTO account(id, firstname, lastname, patronymicname, roles, email, password, group_id, teacher_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac119718','Максим','Зайцев','Маркович','Student','Максим9894@gmail.com','Маркович23811','5c8158bc-b5cc-11ed-afa1-0242ac120071',null);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac119718','Максим','Зайцев','Маркович','Student','Максим9894@gmail.com','Маркович23811','5c8158bc-b5cc-11ed-afa1-0242ac120071',null);
 INSERT INTO groups_account(group_id, accounts_id)VALUES('5c8158bc-b5cc-11ed-afa1-0242ac120071','5c814e26-b5cc-11ed-afa1-0242ac119718');
-INSERT INTO account(id, firstname, lastname, patronymicname, roles, email, password, group_id, teacher_id) VALUES('5c815f7e-b5cc-11ed-afa1-0242ac131322','Кристина','Демидов','Иванов','Student','Кристина32757@gmail.com','Иванов12859','5c815e84-b5cc-11ed-afa1-0242ac120062',null);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id) VALUES('5c815f7e-b5cc-11ed-afa1-0242ac131322','Кристина','Демидов','Иванов','Student','Кристина32757@gmail.com','Иванов12859','5c815e84-b5cc-11ed-afa1-0242ac120062',null);
 INSERT INTO groups_account(group_id, accounts_id)VALUES('5c815e84-b5cc-11ed-afa1-0242ac120062','5c815f7e-b5cc-11ed-afa1-0242ac131322');
-INSERT INTO account(id, firstname, lastname, patronymicname, roles, email, password, group_id, teacher_id) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac108723','Михаил','Андреева','Алексеевна','Student','Михаил8942@gmail.com','Алексеевна22648','5c8158bc-b5cc-11ed-afa1-0242ac120049',null);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac108723','Михаил','Андреева','Алексеевна','Student','Михаил8942@gmail.com','Алексеевна22648','5c8158bc-b5cc-11ed-afa1-0242ac120049',null);
 INSERT INTO groups_account(group_id, accounts_id)VALUES('5c8158bc-b5cc-11ed-afa1-0242ac120049','5c8167e4-b5cc-11ed-afa1-0242ac108723');
-INSERT INTO account(id, firstname, lastname, patronymicname, roles, email, password, group_id, teacher_id) VALUES('5c815a10-b5cc-11ed-afa1-0242ac127446','Максим','Андреева','Эмировна','Student','Максим12623@gmail.com','Эмировна19954','5c816064-b5cc-11ed-afa1-0242ac120082',null);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id) VALUES('5c815a10-b5cc-11ed-afa1-0242ac127446','Максим','Андреева','Эмировна','Student','Максим12623@gmail.com','Эмировна19954','5c816064-b5cc-11ed-afa1-0242ac120082',null);
 INSERT INTO groups_account(group_id, accounts_id)VALUES('5c816064-b5cc-11ed-afa1-0242ac120082','5c815a10-b5cc-11ed-afa1-0242ac127446');

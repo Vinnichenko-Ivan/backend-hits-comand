@@ -25,5 +25,4 @@ public class StudyRoom {
     public StudyRoom() {
     }
 
-
 }

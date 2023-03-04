@@ -18,18 +18,22 @@ public class Account {
     private String lastName;
     private String patronymicName;
     @Enumerated(EnumType.STRING)
-    private Roles roles;
+    private Roles role;
     private String email;
     private String password;
     @ManyToOne
     private Group group;
     @OneToOne
     private Teacher teacher;
+    @OneToOne
+    private GroupChangingRequest groupChangingRequest;
 
     private Boolean accepted;
 
     public Account() {
+
     }
+
 
     public AccountDto toDto() {
         AccountDto accountDto = new AccountDto();
@@ -40,7 +44,7 @@ public class Account {
         accountDto.setGroup(group.getDto());
         accountDto.setTeacher(teacher != null ? teacher.getDto() : null);
         accountDto.setId(id);
-        accountDto.setRole(roles);
+        accountDto.setRole(role);
         return accountDto;
     }
 }
