@@ -15,7 +15,6 @@ import ru.hits.hitsback.timetable.service.GroupService;
 
 import java.util.List;
 
-import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.GROUP_URL;
 
@@ -30,7 +29,7 @@ public class GroupController {
     })
     @GetMapping
     public ResponseEntity<List<GroupDto>> fetchGroups(){
-        return ok(groupService.fetchGroups());
+        return ResponseEntity.ok(groupService.fetchGroups());
     }
 
     @Operation(responses = {
@@ -42,7 +41,7 @@ public class GroupController {
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GroupIdDto> createGroup(@Valid @RequestBody GroupCreateDto groupCreateDto){
-        return ok(groupService.createGroup(groupCreateDto));
+        return ResponseEntity.ok(groupService.createGroup(groupCreateDto));
     }
 
     @Operation(responses = {
@@ -55,8 +54,8 @@ public class GroupController {
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupDto groupDto){
-        groupService.editGroup(groupDto);
-        return ResponseEntity.status(200).build();
+        groupService.modify(groupDto);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(responses = {
@@ -69,7 +68,7 @@ public class GroupController {
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteGroup(@PathVariable String id){
         GroupIdDto groupIdDto = new GroupIdDto(id);
-        groupService.removeGroup(groupIdDto) ;
-        return ResponseEntity.status(200).build();
+        groupService.delete(groupIdDto); ;
+        return ResponseEntity.ok().build();
     }
 }

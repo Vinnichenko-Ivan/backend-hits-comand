@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.hits.hitsback.timetable.exception.GroupAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 
@@ -52,12 +52,12 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException(){
         return handleCustomException(HttpStatus.NOT_FOUND, "teacher.not-found");
     }
-    @ExceptionHandler(GroupAlreadyExistException.class)
-    public ResponseEntity<Map<String, Object>> handleGroupAlreadyExistException(){
-        return handleCustomException(HttpStatus.BAD_REQUEST, "group.bad-request");
+    @ExceptionHandler(GroupIsAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException(){
+        return handleCustomException(HttpStatus.BAD_REQUEST, "group.same-number");
     }
     @ExceptionHandler(GroupNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleGGroupNotFoundException(){
+    public ResponseEntity<Map<String, Object>> handleGroupNotFoundException(){
         return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
     }
 

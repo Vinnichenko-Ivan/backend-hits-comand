@@ -2,7 +2,7 @@ package ru.hits.hitsback.timetable.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.GroupAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.model.dto.group.GroupCreateDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupDto;
@@ -23,29 +23,28 @@ public class GroupService {
     }
     public GroupIdDto createGroup (GroupCreateDto groupCreateDto){
         if(groupRepository.existsByNumber(groupCreateDto.getNumber())){
-            throw new GroupAlreadyExistException();
+            throw new GroupIsAlreadyExistException();
          }
         Group group = new Group();
         group.setNumber(groupCreateDto.getNumber());
         groupRepository.save(group);
         return group.getDto().getGroupIdDto();
     }
-    public void editGroup (GroupDto groupDto){
+    public void modify (GroupDto groupDto){
         Group group = groupRepository.findById(groupDto.getGroupIdDto().getId()).orElse(null);
         if(group == null) {
             throw new GroupNotFoundException();
         }
-        if(groupRepository.existsByNumber(group.getNumber()))
-            throw new GroupAlreadyExistException();
+        if(groupRepository.existsByNumber(groupDto.getNumber()))
+            throw new GroupIsAlreadyExistException();
         group.setNumber(groupDto.getNumber());
         groupRepository.save(group);
     }
-    public void removeGroup(GroupIdDto groupIdDto){
+    public void delete(GroupIdDto groupIdDto){
         Group group = groupRepository.findById(groupIdDto.getId()).orElse(null);
         if(group==null){
             throw new GroupNotFoundException();
         }
         groupRepository.delete(group);
     }
-
 }
