@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -68,6 +69,7 @@ public class AuthorisationController {
             @ApiResponse(responseCode = "500"),
     })
     @PostMapping(value = "sign-out")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> signOut(){
         authService.singOut();
         return ResponseEntity.status(200).build();
@@ -79,6 +81,7 @@ public class AuthorisationController {
             @ApiResponse(responseCode = "500"),
     })
     @PostMapping(value = "sign-out-all")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> signOutAll(){
         authService.singOutAll();
         return ResponseEntity.status(200).build();

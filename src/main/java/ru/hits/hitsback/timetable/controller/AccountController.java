@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ public class AccountController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping("me")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AccountDto> fetchAccountInfo(){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -37,6 +39,7 @@ public class AccountController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<AccountDto>> fetchAccountsInfo(){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -50,6 +53,7 @@ public class AccountController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(value = "group", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> changeGroup(@Valid @RequestBody GroupIdDto groupIdDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -61,6 +65,7 @@ public class AccountController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(value = "security/password", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> changePassword(@Valid @RequestBody PasswordModifyDto passwordModifyDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }

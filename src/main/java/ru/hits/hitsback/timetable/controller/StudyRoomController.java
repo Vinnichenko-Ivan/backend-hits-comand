@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -37,6 +38,7 @@ public class StudyRoomController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<StudyRoomIdDto> createStudyRoom(@Valid @RequestBody StudyRoomCreateDto studyRoomCreateDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -50,6 +52,7 @@ public class StudyRoomController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> modifyStudyRoom(@Valid @RequestBody StudyRoomDto studyRoomDto){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -62,6 +65,7 @@ public class StudyRoomController {
             @ApiResponse(responseCode = "500"),
     })
     @DeleteMapping(value = "{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> deleteStudyRoom(@PathVariable String id){
         StudyRoomIdDto studyRoomIdDto = new StudyRoomIdDto(id);
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();

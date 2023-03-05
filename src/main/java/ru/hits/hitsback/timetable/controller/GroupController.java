@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -41,6 +42,7 @@ public class GroupController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<GroupIdDto> createGroup(@Valid @RequestBody GroupCreateDto groupCreateDto) {
         return ResponseEntity.ok(groupService.createGroup(groupCreateDto));
     }
@@ -54,6 +56,7 @@ public class GroupController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupDto groupDto) {
         groupService.modifyGroup(groupDto);
         return ResponseEntity.ok().build();
@@ -67,6 +70,7 @@ public class GroupController {
             @ApiResponse(responseCode = "500"),
     })
     @DeleteMapping(value = "{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> deleteGroup(@PathVariable String id) {
         GroupIdDto groupIdDto = new GroupIdDto(id);
         groupService.deleteGroup(groupIdDto);

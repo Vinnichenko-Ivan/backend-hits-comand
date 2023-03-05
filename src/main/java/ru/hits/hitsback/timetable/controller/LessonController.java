@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -46,6 +47,7 @@ public class LessonController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<LessonIdDto> createLesson(@Valid @RequestBody LessonCreateDto lessonCreateDto) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -59,6 +61,7 @@ public class LessonController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> modifyLesson(@Valid @RequestBody LessonModifyDto lessonModifyDto) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -72,6 +75,7 @@ public class LessonController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(value = "lesson-group", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> modifyLessonGroup(@Valid @RequestBody LessonModifyDto lessonModifyDto) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -84,6 +88,7 @@ public class LessonController {
             @ApiResponse(responseCode = "500"),
     })
     @DeleteMapping(value = "{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> deleteLesson(@PathVariable String id) {
         LessonIdDto lessonIdDto = new LessonIdDto(id);
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
