@@ -144,19 +144,6 @@ CREATE TABLE time_slot_lesson
     CONSTRAINT pk_timeslot_lessons PRIMARY KEY (timeSlot_id, lessons_id)
 );
 
-CREATE TABLE jwt_token
-(
-    id          UUID NOT NULL,
-    secret      VARCHAR(255),
-    dateCreated TIMESTAMP WITHOUT TIME ZONE,
-    dateExp     TIMESTAMP WITHOUT TIME ZONE,
-    account_id  UUID,
-    CONSTRAINT pk_jwt_token PRIMARY KEY (id)
-);
-
-ALTER TABLE jwt_token
-    ADD CONSTRAINT FK_JWT_TOKEN_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES account (id);
-
 ALTER TABLE lesson_type_lesson
     ADD CONSTRAINT uc_class_type_lesson_lesson UNIQUE (lesson_id);
 
