@@ -4,21 +4,21 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "lesson_type")
+@Table (name = "group_changing_request")
 @Getter @Setter
-public class LessonType {
+public class GroupChangingRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private String name;
+    @OneToOne
+    private Account account;
+    @OneToOne
+    private Group group;
 
-    @OneToMany
-    private Set<LessonGroup> lessonGroups;
-    public LessonType() {
+    public GroupChangingRequest() {
     }
 
 }
