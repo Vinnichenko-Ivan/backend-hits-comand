@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -42,6 +43,7 @@ public class SubjectController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<SubjectIdDto> createSubject(@Valid @RequestBody SubjectCreateDto subjectCreateDto){
         return ResponseEntity.ok(subjectService.createSubject(subjectCreateDto));
     }
@@ -55,6 +57,7 @@ public class SubjectController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> modifySubject(@Valid @RequestBody SubjectDto subjectDto) {
         subjectService.modifySubject(subjectDto);
         return ResponseEntity.status(200).build();
@@ -68,6 +71,7 @@ public class SubjectController {
             @ApiResponse(responseCode = "500"),
     })
     @DeleteMapping(value = "{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> deleteSubject(@PathVariable String id) {
         SubjectIdDto subjectIdDto = new SubjectIdDto(id);
         subjectService.deleteSubject(subjectIdDto);
