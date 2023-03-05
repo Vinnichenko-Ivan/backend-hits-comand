@@ -23,12 +23,13 @@ import static ru.hits.hitsback.timetable.configuration.UrlConstant.GROUP_URL;
 @RequestMapping(value = BASE_URL + GROUP_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class GroupController {
     private final GroupService groupService;
+
     @Operation(responses = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping
-    public ResponseEntity<List<GroupDto>> fetchGroups(){
+    public ResponseEntity<List<GroupDto>> fetchGroups() {
         return ResponseEntity.ok(groupService.fetchGroups());
     }
 
@@ -40,7 +41,7 @@ public class GroupController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GroupIdDto> createGroup(@Valid @RequestBody GroupCreateDto groupCreateDto){
+    public ResponseEntity<GroupIdDto> createGroup(@Valid @RequestBody GroupCreateDto groupCreateDto) {
         return ResponseEntity.ok(groupService.createGroup(groupCreateDto));
     }
 
@@ -53,8 +54,8 @@ public class GroupController {
             @ApiResponse(responseCode = "500"),
     })
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupDto groupDto){
-        groupService.modify(groupDto);
+    public ResponseEntity<Void> modifyGroup(@Valid @RequestBody GroupDto groupDto) {
+        groupService.modifyGroup(groupDto);
         return ResponseEntity.ok().build();
     }
 
@@ -66,9 +67,9 @@ public class GroupController {
             @ApiResponse(responseCode = "500"),
     })
     @DeleteMapping(value = "{id}")
-    public ResponseEntity<Void> deleteGroup(@PathVariable String id){
+    public ResponseEntity<Void> deleteGroup(@PathVariable String id) {
         GroupIdDto groupIdDto = new GroupIdDto(id);
-        groupService.delete(groupIdDto); ;
+        groupService.deleteGroup(groupIdDto);
         return ResponseEntity.ok().build();
     }
 }
