@@ -33,7 +33,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf().disable()
-                .cors().disable()
+                .cors().configurationSource(corsConfiguration())
+                .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .securityContext()
