@@ -58,12 +58,12 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/" + BASE_URL + STUDY_ROOM_URL).hasAuthority("Admin")
                 .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + STUDY_ROOM_URL + "/{id}").hasAuthority("Admin")
 
-                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SCHEDULE_URL + "/lesson").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + SCHEDULE_URL + "/lesson").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SCHEDULE_URL + "/lesson/lesson-group").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson/{id}").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + SCHEDULE_URL + "/lesson/{id}").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson/type").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SCHEDULE_URL + "/" + LESSON_URL).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + SCHEDULE_URL + "/" + LESSON_URL).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SCHEDULE_URL + "/" + LESSON_URL + "/lesson-group").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/" + LESSON_URL + "/{id}").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + SCHEDULE_URL + "/" + LESSON_URL + "/{id}").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/" + LESSON_URL + "/type").permitAll()
 
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/registration/{id}").hasAuthority("ScheduleWriter")
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/group/{id}").hasAuthority("ScheduleWriter")
@@ -72,7 +72,7 @@ public class WebSecurityConfig {
 
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/security/password").authenticated()
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/group").hasAuthority("Student")
-                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "").hasAnyAuthority("Admin", "ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "").hasAuthority("Admin")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "/me").hasAnyAuthority("Student", "Teacher")
 
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + GROUP_URL).permitAll()
