@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -42,47 +43,54 @@ public class WebSecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/webjars/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/sign-out")).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/sign-out-all")).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/sign-in")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/teacher/sign-up")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + AUTHORISATION_URL + "/student/sign-up")).permitAll()
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + TEACHER_URL).permitAll()
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + TEACHER_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + TEACHER_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + TEACHER_URL + "/{id}").hasAuthority("Admin")
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + PROFILE_URL)).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + PROFILE_URL + "/me")).hasAuthority("Admin")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + PROFILE_URL + "/group")).hasAuthority("Student")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + PROFILE_URL + "/security/password")).authenticated()
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SUBJECT_URL).permitAll()
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SUBJECT_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + SUBJECT_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + SUBJECT_URL + "/{id}").hasAuthority("Admin")
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + GROUP_URL)).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + GROUP_URL + "/**")).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + STUDY_ROOM_URL).permitAll()
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + STUDY_ROOM_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + STUDY_ROOM_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + STUDY_ROOM_URL + "/{id}").hasAuthority("Admin")
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + STUDY_ROOM_URL)).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + STUDY_ROOM_URL + "/**")).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SCHEDULE_URL + "/lesson").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + SCHEDULE_URL + "/lesson").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + SCHEDULE_URL + "/lesson/lesson-group").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson/{id}").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + SCHEDULE_URL + "/lesson/{id}").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson/type").permitAll()
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + TEACHER_URL)).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + TEACHER_URL + "/**")).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/registration/{id}").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/group/{id}").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + REQUEST_URL + "/registration").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + REQUEST_URL + "/group").hasAuthority("ScheduleWriter")
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SUBJECT_URL)).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SUBJECT_URL + "/**")).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/security/password").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/group").hasAuthority("Student")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "").hasAnyAuthority("Admin", "ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "/me").hasAnyAuthority("Student", "Teacher")
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SCHEDULE_URL)).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SCHEDULE_URL + "/group/**")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SCHEDULE_URL + "/teacher/**")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SCHEDULE_URL + "/staff")).hasAuthority("ScheduleWriter")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + SCHEDULE_URL + "/lesson-time")).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + GROUP_URL).permitAll()
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + GROUP_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + GROUP_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + GROUP_URL + "/{id}").hasAuthority("Admin")
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + LESSON_URL + "/**")).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + LESSON_URL + "/type")).hasAuthority("ScheduleWriter")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + LESSON_URL + "/staff")).hasAuthority("ScheduleWriter")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + LESSON_URL + "/lesson-group")).hasAuthority("ScheduleWriter")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + LESSON_URL + "/staff")).hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + AUTHORISATION_URL + "/teacher/sign-up").permitAll()
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + AUTHORISATION_URL + "/student/sign-up").permitAll()
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + AUTHORISATION_URL + "/sign-out").authenticated()
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + AUTHORISATION_URL + "/sign-out-all").authenticated()
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + AUTHORISATION_URL + "/sign-in").permitAll()
 
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/registration")).hasAuthority("Admin")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/group")).hasAuthority("Admin")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/registration/**")).hasAuthority("Admin")
-                .requestMatchers(new AntPathRequestMatcher("/" + BASE_URL + REQUEST_URL + "/group/**")).hasAuthority("Admin")
-
-
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL).hasAnyAuthority("Student", "Teacher")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/teacher/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/staff").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson-time").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/group/{id}").permitAll()
 //                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() //TODO для дебага пока так
 
                 .and()
