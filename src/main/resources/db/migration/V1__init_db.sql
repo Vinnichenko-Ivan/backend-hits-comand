@@ -63,8 +63,8 @@ CREATE TABLE lesson
 CREATE TABLE lesson_group
 (
     id             UUID NOT NULL,
-    startDay      Date,
-    endDay        Date,
+    startDate      Date,
+    endDate        Date,
     frequency      INTEGER,
     subject_id     UUID,
     lessonType_id UUID,
