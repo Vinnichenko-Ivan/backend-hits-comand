@@ -18,7 +18,7 @@ public class StudyRoom {
     private Integer buildingNumber;
     private Integer floor;
     private String name;
-    private Integer number;
+    private String number;
     @OneToMany
     private Set<Lesson> lesson;
 
