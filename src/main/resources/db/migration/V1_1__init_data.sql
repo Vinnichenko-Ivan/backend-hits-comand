@@ -278,3 +278,8 @@ INSERT INTO subject_lesson_group (subject_id, lessonGroup_id) VALUES('5c815a10-b
 INSERT INTO lesson_type_lesson_group (lessonType_id, lessonGroups_id) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac120043','5c815f7e-b5cc-11ed-afa1-0242ac117210');
 INSERT INTO subject_lesson_group (subject_id, lessonGroup_id) VALUES('5c815d76-b5cc-11ed-afa1-0242ac120078','5c816a32-b5cc-11ed-afa1-0242ac107360');
 INSERT INTO lesson_type_lesson_group (lessonType_id, lessonGroups_id) VALUES('5c814e26-b5cc-11ed-afa1-0242ac120046','5c816a32-b5cc-11ed-afa1-0242ac107360');
+
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id, groupchangingrequest_id, accepted)
+VALUES ('5c815650-b5cc-11ed-afa1-0242ac113739','admin','admin','admin','Admin','admin@gmail.com','admin',null,null,null,true);
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id, groupchangingrequest_id, accepted)
+VALUES ('5c815650-b5cc-11ed-afa1-0242ac113749','terminator','terminator','terminator','ScheduleWriter','terminator@gmail.com','terminatorBest',null,null,null,true)
