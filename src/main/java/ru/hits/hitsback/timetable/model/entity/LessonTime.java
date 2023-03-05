@@ -24,5 +24,4 @@ public class LessonTime {
     public LessonTime() {
     }
 
-
 }

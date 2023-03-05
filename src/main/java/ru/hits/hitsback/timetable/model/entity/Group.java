@@ -20,15 +20,10 @@ public class Group {
     private String number;
     @OneToMany
     private Set<Account> accounts;
-    @OneToMany
-    private Set<LessonGroup> lessonGroups;
+    @OneToOne
+    private GroupChangingRequest groupChangingRequest;
 
     public Group() {
-    }
-
-    public Group(String number, Set<Account> accounts) {
-        this.number = number;
-        this.accounts = accounts;
     }
 
     public GroupDto getDto() {
@@ -36,5 +31,12 @@ public class Group {
         groupDto.setGroupIdDto(new GroupIdDto(id.toString()));
         groupDto.setNumber(number);
         return groupDto;
+    }
+
+    public static GroupDto toModel(Group groupEntity){
+       GroupDto groupDto = new GroupDto();
+       groupDto.setGroupIdDto(new GroupIdDto(groupEntity.getId().toString()));
+       groupDto.setNumber(groupEntity.getNumber());
+       return groupDto;
     }
 }

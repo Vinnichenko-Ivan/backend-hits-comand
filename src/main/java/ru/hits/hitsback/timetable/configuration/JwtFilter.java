@@ -40,7 +40,7 @@ public class JwtFilter extends GenericFilterBean {
                 authentication.setAccount(account);
                 authentication.setFirstName(token);
                 authentication.setUsername(account.getEmail());
-                authentication.setRoles(account.getRoles() != null ? Set.of(account.getRoles()) : null);
+                authentication.setRoles(account.getRole() != null ? Set.of(account.getRole()) : null);
             } else {
                 throw new UnauthorizedException();
             }
