@@ -10,9 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PasswordModifyDto {
+    @NotEmpty(message = "old-password.empty")
+    @JsonProperty private String oldPassword;
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password.too-simple")
     @Size(min = 6, max = 64, message = "password.too-long-or-short")
-    @JsonProperty private String password;
-    @NotEmpty(message = "password.not-confirmed")
-    @JsonProperty private String confirmedPassword;
+    @NotEmpty(message = "new-password.empty")
+    @JsonProperty private String newPassword;
 }

@@ -22,7 +22,6 @@ public class StudentRegisterDto {
     @JsonProperty private String email;
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z]).*", message = "password.too-simple")
     @Size(min = 6, max = 64, message = "password.too-long-or-short")
+    @NotEmpty(message = "password.empty")
     @JsonProperty private String password;
-    @NotEmpty(message = "password.not-confirmed")
-    @JsonProperty private String confirmedPassword;
 }
