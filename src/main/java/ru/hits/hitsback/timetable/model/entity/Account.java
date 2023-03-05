@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
+import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
 import java.util.UUID;
@@ -38,7 +39,7 @@ public class Account {
         accountDto.setLastName(lastName);
         accountDto.setPatronymicName(patronymicName);
         accountDto.setGroup(group.getDto());
-        accountDto.setTeacher(teacher != null ? teacher.getDto() : null);
+        accountDto.setTeacherId(teacher != null ? new TeacherIdDto(teacher.getId().toString()) : null);
         accountDto.setId(id);
         accountDto.setRole(roles);
         return accountDto;

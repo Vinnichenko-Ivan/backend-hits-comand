@@ -12,7 +12,7 @@ import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
@@ -30,8 +30,8 @@ public class ScheduleController {
     })
     @GetMapping
     public ResponseEntity<List<DayScheduleDto>> fetchSchedule(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate
+            @RequestParam LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate
     ) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -44,8 +44,8 @@ public class ScheduleController {
     })
     @GetMapping(value = "group/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchGroupSchedule(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate,
+            @RequestParam LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate,
             @PathVariable String id
     ) {
         GroupIdDto groupIdDto = new GroupIdDto(id);
@@ -60,8 +60,8 @@ public class ScheduleController {
     })
     @GetMapping(value = "teacher/{id}")
     public ResponseEntity<List<DayScheduleDto>> fetchTeacherSchedule(
-            @RequestParam Date startDate,
-            @RequestParam(required = false) Date endDate,
+            @RequestParam LocalDate startDate,
+            @RequestParam(required = false) LocalDate endDate,
             @PathVariable String id
     ) {
         TeacherIdDto teacherIdDto = new TeacherIdDto(id);
@@ -81,8 +81,8 @@ public class ScheduleController {
             @RequestParam String teacherId,
             @RequestParam List<String> groupIds,
             @RequestParam String studyRoomId,
-            @RequestParam Date startDate,
-            @RequestParam() Date endDate
+            @RequestParam LocalDate startDate,
+            @RequestParam() LocalDate endDate
     ) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
