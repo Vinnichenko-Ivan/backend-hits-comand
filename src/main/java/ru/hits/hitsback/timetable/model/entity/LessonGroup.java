@@ -19,17 +19,17 @@ public class LessonGroup {
     private UUID id;
     @OneToMany
     private Set<Lesson> lessons;
-    private LocalTime startingDay;
+    private LocalTime startDay;
     private LocalTime endDay;
+    private Integer frequency;
     @ManyToOne
     private Subject subject;
     @ManyToOne
     private LessonType lessonType;
-    @ManyToOne
-    private Group group;
+    @ManyToMany
+    private Set<Group> group;
 
     public LessonGroup() {
     }
-
 
 }

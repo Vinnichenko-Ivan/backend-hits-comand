@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.model.dto.authorisation.JWTTokenDto;
 import ru.hits.hitsback.timetable.exception.UnauthorizedException;
+import ru.hits.hitsback.timetable.model.dto.authorisation.JWTTokenDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.model.entity.JWTToken;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
@@ -57,7 +57,7 @@ public class JwtService {
         jwtTokenDto.setDateExp(expirationDate);
         jwtToken.setDateExp(expirationDate);
 
-        jwtTokenDto.setRole(account.getRoles().getAuthority());
+        jwtTokenDto.setRole(account.getRole().getAuthority());
 
         jwtTokenRepository.save(jwtToken);
         return toToken(jwtTokenDto);
