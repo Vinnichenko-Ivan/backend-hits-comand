@@ -63,8 +63,8 @@ CREATE TABLE lesson
 CREATE TABLE lesson_group
 (
     id             UUID NOT NULL,
-    startDay      TIME WITHOUT TIME ZONE,
-    endDay        TIME WITHOUT TIME ZONE,
+    startDate      Date,
+    endDate        Date,
     frequency      INTEGER,
     subject_id     UUID,
     lessonType_id UUID,
@@ -121,7 +121,7 @@ CREATE TABLE study_room
     buildingNumber INTEGER,
     floor           INTEGER,
     name            VARCHAR(255),
-    number          INTEGER,
+    number          VARCHAR(255),
     CONSTRAINT pk_study_room PRIMARY KEY (id)
 );
 
