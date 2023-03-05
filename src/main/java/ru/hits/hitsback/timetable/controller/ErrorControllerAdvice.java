@@ -54,7 +54,7 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(GroupIsAlreadyExistException.class)
     public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException(){
-        return handleCustomException(HttpStatus.BAD_REQUEST, "group.same-number");
+        return handleCustomException(HttpStatus.BAD_REQUEST, "group.used-number");
     }
     @ExceptionHandler(GroupNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleGroupNotFoundException(){
