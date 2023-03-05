@@ -19,8 +19,8 @@ public class LessonGroup {
     private UUID id;
     @OneToMany
     private Set<Lesson> lessons;
-    private LocalTime startDay;
-    private LocalTime endDay;
+    private LocalTime startDate;
+    private LocalTime endDate;
     private Integer frequency;
     @ManyToOne
     private Subject subject;
