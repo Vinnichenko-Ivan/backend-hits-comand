@@ -188,19 +188,19 @@ ALTER TABLE account
     ADD CONSTRAINT FK_ACCOUNT_ON_GROUP FOREIGN KEY (group_id) REFERENCES groups (id);
 
 ALTER TABLE account
-    ADD CONSTRAINT FK_ACCOUNT_ON_GROUPCHANGINGREQUEST FOREIGN KEY (groupChangingRequest_id) REFERENCES group_changing_request (id);
+    ADD CONSTRAINT FK_ACCOUNT_ON_GROUPCHANGINGREQUEST FOREIGN KEY (groupChangingRequest_id) REFERENCES group_changing_request (id) on delete set null;
 
 ALTER TABLE account
-    ADD CONSTRAINT FK_ACCOUNT_ON_TEACHER FOREIGN KEY (teacher_id) REFERENCES teacher (id);
+    ADD CONSTRAINT FK_ACCOUNT_ON_TEACHER FOREIGN KEY (teacher_id) REFERENCES teacher (id) on delete cascade;
 
 ALTER TABLE groups
-    ADD CONSTRAINT FK_GROUPS_ON_GROUPCHANGINGREQUEST FOREIGN KEY (groupChangingRequest_id) REFERENCES group_changing_request (id);
+    ADD CONSTRAINT FK_GROUPS_ON_GROUPCHANGINGREQUEST FOREIGN KEY (groupChangingRequest_id) REFERENCES group_changing_request (id) on delete set null ;
 
 ALTER TABLE group_changing_request
-    ADD CONSTRAINT FK_GROUP_CHANGING_REQUEST_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES account (id);
+    ADD CONSTRAINT FK_GROUP_CHANGING_REQUEST_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES account (id) on delete set null ;
 
 ALTER TABLE group_changing_request
-    ADD CONSTRAINT FK_GROUP_CHANGING_REQUEST_ON_GROUP FOREIGN KEY (group_id) REFERENCES groups (id);
+    ADD CONSTRAINT FK_GROUP_CHANGING_REQUEST_ON_GROUP FOREIGN KEY (group_id) REFERENCES groups (id) on delete set null;
 
 ALTER TABLE jwt_token
     ADD CONSTRAINT FK_JWT_TOKEN_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES account (id);
@@ -227,22 +227,22 @@ ALTER TABLE teacher
     ADD CONSTRAINT FK_TEACHER_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES account (id);
 
 ALTER TABLE groups_account
-    ADD CONSTRAINT fk_groacc_on_account FOREIGN KEY (accounts_id) REFERENCES account (id);
+    ADD CONSTRAINT fk_groacc_on_account FOREIGN KEY (accounts_id) REFERENCES account (id) on delete cascade ;
 
 ALTER TABLE groups_account
-    ADD CONSTRAINT fk_groacc_on_group FOREIGN KEY (group_id) REFERENCES groups (id);
+    ADD CONSTRAINT fk_groacc_on_group FOREIGN KEY (group_id) REFERENCES groups (id) on delete cascade ;
 
 ALTER TABLE lesson_group_groups
-    ADD CONSTRAINT fk_lesgrogro_on_group FOREIGN KEY (group_id) REFERENCES groups (id);
+    ADD CONSTRAINT fk_lesgrogro_on_group FOREIGN KEY (group_id) REFERENCES groups (id) on delete cascade;
 
 ALTER TABLE lesson_group_groups
-    ADD CONSTRAINT fk_lesgrogro_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id);
+    ADD CONSTRAINT fk_lesgrogro_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id) on delete cascade;
 
 ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT fk_lesgroles_on_lesson FOREIGN KEY (lessons_id) REFERENCES lesson (id);
+    ADD CONSTRAINT fk_lesgroles_on_lesson FOREIGN KEY (lessons_id) REFERENCES lesson (id) on delete cascade;
 
 ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT fk_lesgroles_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id);
+    ADD CONSTRAINT fk_lesgroles_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id) on delete cascade;
 
 ALTER TABLE lesson_time_lesson
     ADD CONSTRAINT fk_lestimles_on_lesson FOREIGN KEY (lesson_id) REFERENCES lesson (id);

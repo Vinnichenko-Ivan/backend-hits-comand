@@ -136,6 +136,11 @@ INSERT INTO account(id, firstname, lastname, patronymicname, role, email, passwo
 INSERT INTO group_changing_request (id, account_id, group_id) VALUES('5c816938-b5cc-11ed-afa1-0242ac106837','5c815650-b5cc-11ed-afa1-0242ac113729','5c814e26-b5cc-11ed-afa1-0242ac110627');
 UPDATE account SET groupChangingRequest_id ='5c816938-b5cc-11ed-afa1-0242ac106837'WHERE id = '5c815650-b5cc-11ed-afa1-0242ac113729';
 UPDATE groups SET groupChangingRequest_id ='5c816938-b5cc-11ed-afa1-0242ac106837'WHERE id = '5c814e26-b5cc-11ed-afa1-0242ac110627';
+INSERT INTO account(id, firstname, lastname, patronymicname, role, email, password, group_id, teacher_id,groupChangingRequest_id, accepted) VALUES('5c815650-b5cc-11ed-afa1-1342ac113729','Егор','Печкин','Романова','Student','Егор10805@gmail.com','Романова7732','5c816938-b5cc-11ed-afa1-0242ac120036',null,null,'true');
+INSERT INTO group_changing_request (id, account_id, group_id) VALUES('5c816938-b5cc-11ed-afa1-0242ac666837','5c815650-b5cc-11ed-afa1-1342ac113729','5c814c82-b5cc-11ed-afa1-0242ac120042');
+UPDATE account SET groupChangingRequest_id ='5c816938-b5cc-11ed-afa1-0242ac666837'WHERE id = '5c815650-b5cc-11ed-afa1-1342ac113729';
+UPDATE groups SET groupChangingRequest_id ='5c816938-b5cc-11ed-afa1-0242ac666837'WHERE id = '5c814c82-b5cc-11ed-afa1-0242ac120042';
+INSERT INTO groups(id, number)VALUES('5c815c22-b5cc-11ed-afa1-0242ac103242',1142316);
 
 INSERT INTO lesson_group (id, startDate, endDate, frequency, subject_id, lessonType_id)VALUES('5c815006-b5cc-11ed-afa1-0242ac102610','2775-2-22','2775-11-6','2','5c8158bc-b5cc-11ed-afa1-0242ac120071','5c815f7e-b5cc-11ed-afa1-0242ac120014');
 INSERT INTO lesson_group (id, startDate, endDate, frequency, subject_id, lessonType_id)VALUES('5c8158bc-b5cc-11ed-afa1-0242ac114781','2340-1-10','2340-10-25','1','5c815d76-b5cc-11ed-afa1-0242ac120078','5c814e26-b5cc-11ed-afa1-0242ac120046');
