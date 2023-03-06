@@ -3,12 +3,12 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hits.hitsback.timetable.model.dto.request.*;
 import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
 import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;
 import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestIdDto;
@@ -34,6 +34,7 @@ public class RequestController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping(value = "registration")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<RegistrationRequestDto>> fetchRegistrationRequests() {
         return ResponseEntity.ok(requestService.fetchRegistrationRequests());
     }
@@ -45,6 +46,7 @@ public class RequestController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping(value = "group")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<GroupChangingRequestDto>> fetchGroupChangingRequests(){
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
@@ -58,6 +60,7 @@ public class RequestController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PutMapping(value = "registration/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AcceptDto> resolveRegistrationRequest(@PathVariable String id, @RequestParam Boolean accept){
         return ResponseEntity.ok(requestService.resolveRegistrationRequest(id, accept));
     }
@@ -71,6 +74,7 @@ public class RequestController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @PutMapping(value = "group/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AcceptDto> resolveGroupChangingRequest(@PathVariable String id, @RequestParam Boolean accept){
         GroupChangingRequestIdDto groupChangingRequestIdDto = new GroupChangingRequestIdDto(id);
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();

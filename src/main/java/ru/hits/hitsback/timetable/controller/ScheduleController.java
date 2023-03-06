@@ -3,6 +3,8 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,7 @@ public class ScheduleController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<DayScheduleDto>> fetchSchedule(
             @RequestParam LocalDate startDate,
             @RequestParam(required = false) LocalDate endDate
@@ -86,6 +89,7 @@ public class ScheduleController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping(value = "staff", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<DayScheduleDto>> fetchScheduleWithLessonOptions(
             @RequestParam String teacherId,
             @RequestParam List<String> groupIds,
