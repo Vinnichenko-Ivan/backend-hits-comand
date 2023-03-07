@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,8 +18,6 @@ public class StudyRoom {
     private Integer floor;
     private String name;
     private String number;
-    @OneToMany
-    private Set<Lesson> lesson;
 
     public StudyRoom() {
     }

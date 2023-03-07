@@ -17,8 +17,6 @@ public class LessonGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @OneToMany
-    private Set<Lesson> lessons;
     private LocalTime startDate;
     private LocalTime endDate;
     private Integer frequency;
@@ -28,6 +26,8 @@ public class LessonGroup {
     private LessonType lessonType;
     @ManyToMany
     private Set<Group> group;
+    @OneToMany
+    private Set<Lesson> lessons;
 
     public LessonGroup() {
     }

@@ -26,15 +26,11 @@ public class Account {
     private Group group;
     @OneToOne
     private Teacher teacher;
-    @OneToOne(mappedBy = "account", cascade = CascadeType.REMOVE)
-    private GroupChangingRequest groupChangingRequest;
-
     private Boolean accepted;
 
     public Account() {
 
     }
-
 
     public AccountDto toDto() {
         AccountDto accountDto = new AccountDto();

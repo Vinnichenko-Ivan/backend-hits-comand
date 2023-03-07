@@ -18,13 +18,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String number;
-    @OneToOne(mappedBy = "group",cascade = CascadeType.REMOVE)
-    private GroupChangingRequest groupChangingRequest;
     @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
-
-
-
 
     public Group() {
     }

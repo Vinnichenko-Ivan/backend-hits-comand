@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,8 +18,6 @@ public class LessonTime {
     private LocalTime startTime;
     private LocalTime endTime;
     private Integer lessonNumber;
-    @OneToMany
-    private Set<Lesson> lesson;
     public LessonTime() {
     }
 
