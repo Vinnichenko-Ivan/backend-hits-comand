@@ -15,22 +15,12 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String firstName;
-
     private String lastName;
     private String patronymicName;
     @OneToOne
     private Account account;
-
     public Teacher() {
     }
-
-    public Teacher(String firstName, String lastName, String patronymicName, Account account) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.patronymicName = patronymicName;
-        this.account = account;
-    }
-
     public TeacherDto getDto() {
         TeacherDto teacherDto = new TeacherDto();
         teacherDto.setTeacherIdDto(new TeacherIdDto(id.toString()));

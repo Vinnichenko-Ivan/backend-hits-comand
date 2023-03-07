@@ -14,7 +14,6 @@ public class LessonTime {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
     private LocalTime startTime;
     private LocalTime endTime;
     private Integer lessonNumber;

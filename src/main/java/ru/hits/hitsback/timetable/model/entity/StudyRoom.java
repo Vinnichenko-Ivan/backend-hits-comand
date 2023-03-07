@@ -18,8 +18,6 @@ public class StudyRoom {
     private Integer floor;
     private String name;
     private String number;
-
     public StudyRoom() {
     }
-
 }
