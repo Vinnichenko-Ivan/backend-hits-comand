@@ -48,7 +48,7 @@ public class AuthorisationServiceImpl implements AuthorisationService {
     @Override
     public Account getUser() {
         try {
-            return (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return ((JwtAuthentication) SecurityContextHolder.getContext().getAuthentication()).getAccount();
         } catch (Exception e) {
             return null;
         }
