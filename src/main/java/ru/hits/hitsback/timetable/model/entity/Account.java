@@ -24,6 +24,8 @@ public class Account {
     private String password;
     @ManyToOne
     private Group group;
+    @OneToOne (cascade = CascadeType.REMOVE)
+    GroupChangingRequest groupChangingRequest;
     @OneToOne
     private Teacher teacher;
     private Boolean accepted;
