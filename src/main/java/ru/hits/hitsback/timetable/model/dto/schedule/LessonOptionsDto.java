@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.model.dto.schedule;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
@@ -11,13 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class LessonOptionsDto {
-    private TeacherIdDto teacherIdDto;
-    private List<GroupIdDto> groupIdDtos;
-    private StudyRoomIdDto studyRoomIdDto;
-
-    public LessonOptionsDto(String teacherId, List<String> groupIds, String studyRoomId) {
-        teacherIdDto = new TeacherIdDto(teacherId);
-        groupIdDtos = groupIds.stream().map(GroupIdDto::new).toList();
-        studyRoomIdDto = new StudyRoomIdDto(studyRoomId);
-    }
+    @JsonProperty("teacherId") private TeacherIdDto teacherIdDto;
+    @JsonProperty("studyRoomId") private StudyRoomIdDto studyRoomIdDto;
+    @JsonProperty("groupIds") private List<GroupIdDto> groupIdDtos;
 }

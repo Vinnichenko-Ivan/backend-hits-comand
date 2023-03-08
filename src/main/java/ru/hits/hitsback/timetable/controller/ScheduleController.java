@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.http.HttpStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,8 @@ import ru.hits.hitsback.timetable.model.dto.schedule.LessonOptionsDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
+import ru.hits.hitsback.timetable.model.entity.Account;
+import ru.hits.hitsback.timetable.service.AuthorisationService;
 import ru.hits.hitsback.timetable.service.schedule.ScheduleService;
 
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ import static ru.hits.hitsback.timetable.configuration.UrlConstant.SCHEDULE_URL;
 @RequestMapping(value = BASE_URL + SCHEDULE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ScheduleController {
     private final ScheduleService scheduleService;
+    private final AuthorisationService authorisationService;
 
     @Operation(summary = "Получить расписание пользователя", description = "Для зарегистрированного пользователя автоматически вернётся расписание его группы/преподавателя", responses = {
             @ApiResponse(responseCode = "200"),
@@ -42,8 +44,9 @@ public class ScheduleController {
             @RequestParam LocalDate startDate,
             @RequestParam(required = false) LocalDate endDate
     ) {
+        Account account = authorisationService.getUser();
         TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
-        return ResponseEntity.ok(scheduleService.fetchSchedule(timeIntervalDto));
+        return ResponseEntity.ok(scheduleService.fetchSchedule(timeIntervalDto, account));
     }
 
     @Operation(summary = "Получить расписание группы", responses = {
@@ -91,14 +94,11 @@ public class ScheduleController {
     @GetMapping(value = "staff", consumes = MediaType.APPLICATION_JSON_VALUE)
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<DayScheduleDto>> fetchScheduleWithLessonOptions(
-            @RequestParam String teacherId,
-            @RequestParam List<String> groupIds,
-            @RequestParam String studyRoomId,
             @RequestParam LocalDate startDate,
-            @RequestParam LocalDate endDate
+            @RequestParam LocalDate endDate,
+            @RequestBody LessonOptionsDto lessonOptionsDto
     ) {
         TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
-        LessonOptionsDto lessonOptionsDto = new LessonOptionsDto(teacherId, groupIds, studyRoomId);
         return ResponseEntity.ok(scheduleService.fetchScheduleWithLessonOptions(timeIntervalDto, lessonOptionsDto));
     }
 
