@@ -5,9 +5,9 @@ import org.mapstruct.Mapping;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomDto;
 import ru.hits.hitsback.timetable.model.entity.StudyRoom;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface StudyRoomMapper {
     @Mapping(target = "studyRoomIdDto.id", source = "id")
-    StudyRoomDto map(StudyRoom studyRoom);
-    StudyRoom map(StudyRoomDto studyRoomDto);
+    StudyRoomDto toDto(StudyRoom studyRoom);
+    StudyRoom toEntity(StudyRoomDto studyRoomDto);
 }

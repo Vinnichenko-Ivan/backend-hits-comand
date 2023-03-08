@@ -5,9 +5,9 @@ import org.mapstruct.Mapping;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonTypeDto;
 import ru.hits.hitsback.timetable.model.entity.LessonType;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface LessonTypeMapper {
     @Mapping(target = "lessonTypeIdDto.id", source = "id")
-    LessonTypeDto map(LessonType lessonType);
-    LessonType map(LessonTypeDto lessonTypeDto);
+    LessonTypeDto toDto(LessonType lessonType);
+    LessonType toEntity(LessonTypeDto lessonTypeDto);
 }
