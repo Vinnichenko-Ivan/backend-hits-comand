@@ -23,5 +23,4 @@ public interface StudyRoomMapper {
 
     StudyRoomIdDto map(StudyRoom studyRoom);
 
-    StudyRoom map(StudyRoomDto studyRoomDto);
 }

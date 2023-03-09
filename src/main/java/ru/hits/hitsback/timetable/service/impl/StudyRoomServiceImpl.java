@@ -49,7 +49,7 @@ public class StudyRoomServiceImpl implements StudyRoomService {
         )) {
             throw new StudyRoomIsAlreadyExistsException();
         }
-        StudyRoom studyRoom = studyRoomMapper.map(studyRoomDto);
+        StudyRoom studyRoom = studyRoomMapper.toEntity(studyRoomDto);
         studyRoomRepository.save(studyRoom);
     }
 
