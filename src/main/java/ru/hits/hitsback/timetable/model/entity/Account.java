@@ -19,17 +19,19 @@ public class Account {
     private String lastName;
     private String patronymicName;
     @Enumerated(EnumType.STRING)
-    private Roles roles;
+    private Roles role;
     private String email;
     private String password;
     @ManyToOne
     private Group group;
+    @OneToOne (mappedBy = "account", cascade = CascadeType.REMOVE)
+    GroupChangingRequest groupChangingRequest;
     @OneToOne
     private Teacher teacher;
-
     private Boolean accepted;
 
     public Account() {
+
     }
 
     public AccountDto toDto() {
@@ -41,7 +43,7 @@ public class Account {
         accountDto.setGroup(group.getDto());
         accountDto.setTeacherId(teacher != null ? new TeacherIdDto(teacher.getId().toString()) : null);
         accountDto.setId(id);
-        accountDto.setRole(roles);
+        accountDto.setRole(role);
         return accountDto;
     }
 }

@@ -4,20 +4,21 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "lesson_time")
+@Table (name = "group_changing_request")
 @Getter @Setter
-public class LessonTime {
+public class GroupChangingRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private Integer lessonNumber;
-    public LessonTime() {
+    @OneToOne
+    private Account account;
+    @OneToOne
+    private Group group;
+
+    public GroupChangingRequest() {
     }
 
 }

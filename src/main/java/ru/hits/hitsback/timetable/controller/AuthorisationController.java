@@ -3,6 +3,7 @@ package ru.hits.hitsback.timetable.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.TokenDto;
-import ru.hits.hitsback.timetable.service.AuthService;
+import ru.hits.hitsback.timetable.service.AuthorisationService;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;
@@ -25,7 +26,7 @@ import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 @RestController
 @RequestMapping(value = BASE_URL + AUTHORISATION_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthorisationController {
-    private final AuthService authService;
+    private final AuthorisationService authService;
 
     @Operation(responses = {
             @ApiResponse(responseCode = "200"),
@@ -68,6 +69,7 @@ public class AuthorisationController {
             @ApiResponse(responseCode = "500"),
     })
     @PostMapping(value = "sign-out")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> signOut(){
         authService.singOut();
         return ResponseEntity.status(200).build();
@@ -79,6 +81,7 @@ public class AuthorisationController {
             @ApiResponse(responseCode = "500"),
     })
     @PostMapping(value = "sign-out-all")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> signOutAll(){
         authService.singOutAll();
         return ResponseEntity.status(200).build();

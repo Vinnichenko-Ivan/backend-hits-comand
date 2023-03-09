@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.UUID;
+
 @Entity
 @Table(name = "lesson")
 @Getter @Setter
@@ -18,7 +19,7 @@ public class Lesson {
     private StudyRoom studyRoom;
     @ManyToOne
     private Teacher teacher;
-    private LocalDate date;
+    private Date date;
     private DayOfWeek dayOfWeek;
     @ManyToOne
     private LessonGroup lessonGroup;
@@ -26,6 +27,5 @@ public class Lesson {
     private LessonTime lessonTime;
     public Lesson() {
     }
-
 
 }

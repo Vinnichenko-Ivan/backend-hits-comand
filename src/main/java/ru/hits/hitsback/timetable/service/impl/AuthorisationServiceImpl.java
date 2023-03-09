@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +19,12 @@ import ru.hits.hitsback.timetable.model.enums.Roles;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
 import ru.hits.hitsback.timetable.repository.GroupRepository;
 import ru.hits.hitsback.timetable.repository.TeacherRepository;
+import ru.hits.hitsback.timetable.service.AuthorisationService;
+import ru.hits.hitsback.timetable.service.JwtService;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthorisationServiceImpl implements AuthorisationService {
 
     private final TeacherRepository teacherRepository;
 
@@ -32,6 +34,7 @@ public class AuthService {
 
     private final JwtService jwtService;
 
+    @Override
     public TokenDto singIn(CredentialsDto credentialsDto) throws UnauthorizedException {
         Account account = accountRepository.getAccountByEmail(credentialsDto.getEmail());
         if (account == null || !credentialsDto.getPassword().equals(account.getPassword())) {
@@ -42,30 +45,33 @@ public class AuthService {
         return new TokenDto(jwtService.generateToken(account));
     }
 
+    @Override
     public Account getUser() {
         try {
-            return (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        }
-        catch (Exception e)
-        {
+            return ((JwtAuthentication) SecurityContextHolder.getContext().getAuthentication()).getAccount();
+        } catch (Exception e) {
             return null;
         }
     }
 
+    @Override
     public void singOut() {
         jwtService.deleteAllBySecret(((JwtAuthentication) SecurityContextHolder.getContext().getAuthentication()).getFirstName());
     }
 
+    @Override
     public void singOutAll() {
         jwtService.deleteAllByAccount(getUser());
     }
 
+    @Override
     public void registerStudent(StudentRegisterDto studentRegisterDto) {
         Account account = new Account();
         map(studentRegisterDto, account);
         accountRepository.save(account);
     }
 
+    @Override
     public void registerTeacher(TeacherRegisterDto teacherRegisterDto) {
         Teacher teacher = teacherRepository.findById(teacherRegisterDto.getTeacherId().getId()).orElse(null);
         if (teacher == null) {
@@ -80,7 +86,7 @@ public class AuthService {
         account.setLastName(teacher.getLastName());
         account.setPatronymicName(teacher.getPatronymicName());
         account.setAccepted(false);
-        account.setRoles(Roles.Teacher);
+        account.setRole(Roles.Teacher);
 
         accountRepository.save(account);
     }
@@ -91,7 +97,7 @@ public class AuthService {
         account.setFirstName(studentRegisterDto.getFirstName());
         account.setLastName(studentRegisterDto.getLastName());
         account.setPatronymicName(studentRegisterDto.getPatronymicName());
-        account.setRoles(Roles.Student);
+        account.setRole(Roles.Student);
 
 
         Group group = groupRepository.findById(studentRegisterDto.getGroupId().getId()).orElse(null);

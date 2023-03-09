@@ -18,17 +18,10 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String number;
-    @OneToMany
+    @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
-    @OneToMany
-    private Set<LessonGroup> lessonGroups;
 
     public Group() {
-    }
-
-    public Group(String number, Set<Account> accounts) {
-        this.number = number;
-        this.accounts = accounts;
     }
 
     public GroupDto getDto() {
@@ -36,5 +29,12 @@ public class Group {
         groupDto.setGroupIdDto(new GroupIdDto(id.toString()));
         groupDto.setNumber(number);
         return groupDto;
+    }
+
+    public static GroupDto toModel(Group groupEntity){
+       GroupDto groupDto = new GroupDto();
+       groupDto.setGroupIdDto(new GroupIdDto(groupEntity.getId().toString()));
+       groupDto.setNumber(groupEntity.getNumber());
+       return groupDto;
     }
 }
