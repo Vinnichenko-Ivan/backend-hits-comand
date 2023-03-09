@@ -15,7 +15,6 @@ public class LessonShortDto {
     @JsonProperty("id") private LessonIdDto lessonIdDto;
     @NotNull
     @JsonProperty private Set<GroupDto> groups;
-    @NotNull
     @JsonProperty private StudyRoomDto studyRoom;
     @NotNull
     @JsonProperty private LessonTypeDto lessonType;
