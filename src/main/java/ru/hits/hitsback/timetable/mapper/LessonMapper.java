@@ -6,8 +6,8 @@ import ru.hits.hitsback.timetable.model.dto.lesson.LessonDto;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonShortDto;
 import ru.hits.hitsback.timetable.model.entity.Lesson;
 
-@Mapper(componentModel = "spring")
-public interface LessonMapper extends StudyRoomMapper, LessonTypeMapper, TeacherMapper, LessonTimeMapper, GroupMapper {
+@Mapper(componentModel = "spring", uses = {StudyRoomMapper.class, LessonTypeMapper.class, TeacherMapper.class, LessonTimeMapper.class, GroupMapper.class, SubjectMapper.class})
+public interface LessonMapper {
     @Mapping(target = "lessonIdDto.id", source = "id")
     @Mapping(target = "groups", source = "lessonGroup.group")
     @Mapping(target = "lessonType", source = "lessonGroup.lessonType")
