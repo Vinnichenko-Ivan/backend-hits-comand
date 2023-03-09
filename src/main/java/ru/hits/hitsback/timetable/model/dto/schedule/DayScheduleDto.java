@@ -2,7 +2,9 @@ package ru.hits.hitsback.timetable.model.dto.schedule;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonShortDto;
 
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DayScheduleDto {
     @NotNull
     @JsonProperty private LocalDate date;
