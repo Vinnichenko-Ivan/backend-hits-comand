@@ -20,6 +20,8 @@ public class Group {
     private String number;
     @OneToMany(mappedBy = "group",cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
+    @OneToOne(mappedBy = "group", cascade = CascadeType.REMOVE)
+    private GroupChangingRequest groupChangingRequest;
 
     public Group() {
     }
