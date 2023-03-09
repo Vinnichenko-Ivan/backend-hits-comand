@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
-import ru.hits.hitsback.timetable.exception.StudyRoomIsAlreadyExistsException;
-import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
+import ru.hits.hitsback.timetable.exception.*;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -50,13 +47,18 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(TeacherNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException(){
+    public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException() {
         return handleCustomException(HttpStatus.NOT_FOUND, "teacher.not-found");
     }
 
     @ExceptionHandler(GroupIsAlreadyExistException.class)
     public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "group.used-number");
+    }
+
+    @ExceptionHandler(TeacherIsAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleTeacherIsAlreadyExistException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "teacher.already-exists");
     }
 
     @ExceptionHandler(GroupNotFoundException.class)
@@ -67,6 +69,11 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
     public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
+        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
     }
 
     private String getErrorMessage(String code) {
