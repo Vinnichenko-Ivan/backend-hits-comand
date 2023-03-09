@@ -1,9 +1,9 @@
 CREATE TABLE account
 (
     id              UUID NOT NULL,
-    first_name      VARCHAR(255),
-    last_name       VARCHAR(255),
-    patronymic_name VARCHAR(255),
+    firstName      VARCHAR(255),
+    lastName       VARCHAR(255),
+    patronymicName VARCHAR(255),
     role            VARCHAR(255),
     email           VARCHAR(255),
     password        VARCHAR(255),
