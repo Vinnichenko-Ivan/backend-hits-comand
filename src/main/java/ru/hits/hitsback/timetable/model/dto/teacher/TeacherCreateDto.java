@@ -14,6 +14,5 @@ public class TeacherCreateDto implements Serializable {
     @JsonProperty private String firstName;
     @NotEmpty(message = "last-name.empty")
     @JsonProperty private String lastName;
-    @NotEmpty(message = "patronymic-name.empty")
     @JsonProperty private String patronymicName;
 }
