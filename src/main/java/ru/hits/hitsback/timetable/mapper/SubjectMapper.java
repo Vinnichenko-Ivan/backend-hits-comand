@@ -10,8 +10,7 @@ import ru.hits.hitsback.timetable.model.entity.Subject;
 public interface SubjectMapper {
 
     @Mapping(target = "subjectIdDto.id", source = "id")
-    SubjectDto map(Subject subjects);
-
-    Subject map(SubjectCreateDto subjectCreateDto);
+    SubjectDto toDto(Subject subjects);
+    Subject toEntity(SubjectCreateDto subjectCreateDto);
 
 }

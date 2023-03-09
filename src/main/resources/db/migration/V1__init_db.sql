@@ -43,7 +43,7 @@ CREATE TABLE lesson
     id              UUID NOT NULL,
     studyRoom_id   UUID,
     teacher_id      UUID,
-    date            date,
+    date            TIMESTAMP WITHOUT TIME ZONE,
     dayOfWeek     INTEGER,
     lessonGroup_id UUID,
     lessonTime_id  UUID,

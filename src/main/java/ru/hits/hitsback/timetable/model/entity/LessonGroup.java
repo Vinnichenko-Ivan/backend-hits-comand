@@ -3,8 +3,8 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDate;
+import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,17 +17,17 @@ public class LessonGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    @OneToMany
+    private Set<Lesson> lessons;
+    private Date startDate;
+    private Date endDate;
     private Integer frequency;
     @ManyToOne
     private Subject subject;
     @ManyToOne
     private LessonType lessonType;
     @ManyToMany
-    private Set<Group> groups;
-    @OneToMany
-    private Set<Lesson> lessons;
+    private List<Group> group;
     public LessonGroup() {
     }
 
