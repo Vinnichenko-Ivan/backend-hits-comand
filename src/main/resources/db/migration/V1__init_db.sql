@@ -1,18 +1,15 @@
-
-
 CREATE TABLE account
 (
     id              UUID NOT NULL,
-    firstName      VARCHAR(255),
-    lastName       VARCHAR(255),
-    patronymicName VARCHAR(255),
+    first_name      VARCHAR(255),
+    last_name       VARCHAR(255),
+    patronymic_name VARCHAR(255),
     role            VARCHAR(255),
     email           VARCHAR(255),
     password        VARCHAR(255),
     group_id        UUID,
     teacher_id      UUID,
     accepted        BOOLEAN,
-    groupChangingRequest_id UUID,
     CONSTRAINT pk_account PRIMARY KEY (id)
 );
 
@@ -129,9 +126,6 @@ ALTER TABLE account
 
 ALTER TABLE account
     ADD CONSTRAINT FK_ACCOUNT_ON_TEACHER FOREIGN KEY (teacher_id) REFERENCES teacher (id) on delete cascade;
-
-ALTER TABLE account
-    ADD CONSTRAINT FK_ACCOUNT_ON_GROUPCHANGINGREQUEST FOREIGN KEY (groupChangingRequest_id) REFERENCES group_changing_request (id) on delete cascade;
 
 ALTER TABLE group_changing_request
     ADD CONSTRAINT FK_GROUP_CHANGING_REQUEST_ON_GROUP FOREIGN KEY (group_id) REFERENCES groups (id) on delete set null ;
