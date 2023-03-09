@@ -24,17 +24,15 @@ public class Account {
     private String password;
     @ManyToOne
     private Group group;
+    @OneToOne (mappedBy = "account", cascade = CascadeType.REMOVE)
+    GroupChangingRequest groupChangingRequest;
     @OneToOne
     private Teacher teacher;
-    @OneToOne
-    private GroupChangingRequest groupChangingRequest;
-
     private Boolean accepted;
 
     public Account() {
 
     }
-
 
     public AccountDto toDto() {
         AccountDto accountDto = new AccountDto();

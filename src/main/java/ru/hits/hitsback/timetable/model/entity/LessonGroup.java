@@ -3,8 +3,8 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalTime;
+import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,16 +19,15 @@ public class LessonGroup {
     private UUID id;
     @OneToMany
     private Set<Lesson> lessons;
-    private LocalTime startDate;
-    private LocalTime endDate;
+    private Date startDate;
+    private Date endDate;
     private Integer frequency;
     @ManyToOne
     private Subject subject;
     @ManyToOne
     private LessonType lessonType;
     @ManyToMany
-    private Set<Group> group;
-
+    private List<Group> group;
     public LessonGroup() {
     }
 

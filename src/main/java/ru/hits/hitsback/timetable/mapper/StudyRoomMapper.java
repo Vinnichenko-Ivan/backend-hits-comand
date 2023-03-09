@@ -15,6 +15,8 @@ public interface StudyRoomMapper {
     @Mapping(target = "studyRoomIdDto.id", source = "id")
     StudyRoomDto toDto(StudyRoom studyRoom);
 
+    StudyRoom toEntity(StudyRoomDto studyRoomDto);
+
     List<StudyRoomDto> map(List<StudyRoom> studyRooms);
 
     StudyRoom map(StudyRoomCreateDto studyRoomCreateDto);
