@@ -13,7 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
-import ru.hits.hitsback.timetable.exception.StudyRoomAlreadyExistsException;
+import ru.hits.hitsback.timetable.exception.StudyRoomIsAlreadyExistsException;
 import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 
 import java.util.HashMap;
@@ -64,7 +64,7 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
     }
 
-    @ExceptionHandler(StudyRoomAlreadyExistsException.class)
+    @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
     public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
     }

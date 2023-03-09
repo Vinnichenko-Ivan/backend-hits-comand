@@ -2,7 +2,7 @@ package ru.hits.hitsback.timetable.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.StudyRoomAlreadyExistsException;
+import ru.hits.hitsback.timetable.exception.StudyRoomIsAlreadyExistsException;
 import ru.hits.hitsback.timetable.mapper.StudyRoomMapper;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomCreateDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomDto;
@@ -33,7 +33,7 @@ public class StudyRoomServiceImpl implements StudyRoomService {
                 studyRoomCreateDto.getFloor(),
                 studyRoomCreateDto.getNumber()
         )) {
-            throw new StudyRoomAlreadyExistsException();
+            throw new StudyRoomIsAlreadyExistsException();
         }
         StudyRoom studyRoom = studyRoomMapper.map(studyRoomCreateDto);
         studyRoomRepository.save(studyRoom);
@@ -47,7 +47,7 @@ public class StudyRoomServiceImpl implements StudyRoomService {
                 studyRoomDto.getFloor(),
                 studyRoomDto.getNumber()
         )) {
-            throw new StudyRoomAlreadyExistsException();
+            throw new StudyRoomIsAlreadyExistsException();
         }
         StudyRoom studyRoom = studyRoomMapper.map(studyRoomDto);
         studyRoomRepository.save(studyRoom);
