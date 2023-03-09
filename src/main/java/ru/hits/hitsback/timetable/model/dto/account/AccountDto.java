@@ -20,7 +20,6 @@ public class AccountDto implements Serializable {
     @JsonProperty private String firstName;
     @NotNull
     @JsonProperty private String lastName;
-    @NotNull
     @JsonProperty private String patronymicName;
     @NotNull
     @JsonProperty private Roles role;

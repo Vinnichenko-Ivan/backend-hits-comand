@@ -13,7 +13,6 @@ public class StudentRegisterDto {
     @JsonProperty private String firstName;
     @NotEmpty(message = "last-name.empty")
     @JsonProperty private String lastName;
-    @NotEmpty(message = "patronymic-name.empty")
     @JsonProperty private String patronymicName;
     @NotNull(message = "group-id.required")
     @JsonProperty private GroupIdDto groupId;
