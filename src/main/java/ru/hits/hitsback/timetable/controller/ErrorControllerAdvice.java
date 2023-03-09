@@ -13,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.StudyRoomAlreadyExistsException;
 import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
 
 import java.util.HashMap;
@@ -52,16 +53,23 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException(){
         return handleCustomException(HttpStatus.NOT_FOUND, "teacher.not-found");
     }
+
     @ExceptionHandler(GroupIsAlreadyExistException.class)
-    public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException(){
+    public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "group.used-number");
     }
+
     @ExceptionHandler(GroupNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleGroupNotFoundException(){
+    public ResponseEntity<Map<String, Object>> handleGroupNotFoundException() {
         return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
     }
 
-    private String getErrorMessage(String code){
+    @ExceptionHandler(StudyRoomAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
+    }
+
+    private String getErrorMessage(String code) {
         return messageSource.getMessage(code, null, Locale.ENGLISH);
     }
 
