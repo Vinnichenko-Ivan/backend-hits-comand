@@ -2,7 +2,6 @@ package ru.hits.hitsback.timetable.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.TeacherIsAlreadyExistException;
 import ru.hits.hitsback.timetable.mapper.TeacherMapper;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherCreateDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherDto;
@@ -28,13 +27,13 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public TeacherIdDto createTeacher(TeacherCreateDto teacherCreateDto) {
-        if (teacherRepository.existsTeacherByFirstNameAndLastNameAndPatronymicName(
-                teacherCreateDto.getFirstName(),
-                teacherCreateDto.getLastName(),
-                teacherCreateDto.getPatronymicName()
-        )) {
-            throw new TeacherIsAlreadyExistException();
-        }
+//        if (teacherRepository.existsTeacherByFirstNameAndLastNameAndPatronymicName(
+//                teacherCreateDto.getFirstName(),
+//                teacherCreateDto.getLastName(),
+//                teacherCreateDto.getPatronymicName()
+//        )) {
+//            throw new TeacherIsAlreadyExistException();
+//        }
         Teacher teacher = teacherMapper.map(teacherCreateDto);
         teacher = teacherRepository.save(teacher);
         return teacherMapper.map(teacher);
@@ -42,14 +41,15 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void modifyTeacher(TeacherDto teacherDto) {
-        if (teacherRepository.existsTeacherByFirstNameAndLastNameAndPatronymicName(
-                teacherDto.getFirstName(),
-                teacherDto.getLastName(),
-                teacherDto.getPatronymicName()
-        )) {
-            Teacher teacher = teacherMapper.toEntity(teacherDto);
-            teacherRepository.save(teacher);
-        }
+//        if (teacherRepository.existsTeacherByFirstNameAndLastNameAndPatronymicName(
+//                teacherDto.getFirstName(),
+//                teacherDto.getLastName(),
+//                teacherDto.getPatronymicName()
+//        )) {
+//            throw new TeacherIsAlreadyExistException();
+//        }
+        Teacher teacher = teacherMapper.toEntity(teacherDto);
+        teacherRepository.save(teacher);
     }
 
     @Override
