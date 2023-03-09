@@ -24,14 +24,14 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepository subjectRepository;
 
     public List<SubjectDto> fetchSubjects() {
-        return subjectRepository.findAll().stream().map(subjectMapper::map).collect(Collectors.toList());
+        return subjectRepository.findAll().stream().map(subjectMapper::toDto).collect(Collectors.toList());
     }
 
     public SubjectIdDto createSubject(SubjectCreateDto subjectCreateDto) {
         if (subjectRepository.existsByName(subjectCreateDto.getName())) {
             throw new SubjectCopyException();
         } else {
-            subjectRepository.save(subjectMapper.map(subjectCreateDto));
+            subjectRepository.save(subjectMapper.toEntity(subjectCreateDto));
         }
         return new SubjectIdDto(subjectRepository.getSubjectByName(subjectCreateDto.getName()).getId().toString());
     }

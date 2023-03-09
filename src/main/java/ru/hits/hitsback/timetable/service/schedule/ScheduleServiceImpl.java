@@ -176,7 +176,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .stream()
                 .map(lessonMapper::toShortDto)
                 .toList();
-        
+
         return new DayScheduleDto(day, day.getDayOfWeek(), lessonShortDtos);
     }
 
