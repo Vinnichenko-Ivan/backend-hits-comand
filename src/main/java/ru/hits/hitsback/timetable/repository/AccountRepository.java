@@ -13,6 +13,5 @@ public interface AccountRepository extends CrudRepository<Account, UUID> {
 
     Account getAccountById(UUID uuid);
     List<Account> findAll();
-
     List<Account> getAccountByAcceptedEquals(Boolean accepted);
 }
