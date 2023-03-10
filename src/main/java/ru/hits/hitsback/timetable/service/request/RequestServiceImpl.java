@@ -1,15 +1,19 @@
-package ru.hits.hitsback.timetable.service.request;
+package ru.hits.hitsback.timetable.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.exception.AccountNotFoundException;
+import ru.hits.hitsback.timetable.mapper.AccountMapper;
+import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
+import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;
+import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestDto;
+import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestIdDto;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.mapper.GroupChangingRequestMapper;
 import ru.hits.hitsback.timetable.model.dto.request.*;
 import ru.hits.hitsback.timetable.model.entity.Account;
-import ru.hits.hitsback.timetable.model.entity.GroupChangingRequest;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
-import ru.hits.hitsback.timetable.repository.GroupChangingRequestRepository;
+import ru.hits.hitsback.timetable.service.RequestService;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +26,7 @@ public class RequestServiceImpl implements RequestService {
     private final AccountRepository accountRepository;
     private final GroupChangingRequestRepository groupChangingRequestRepository;
     private final GroupChangingRequestMapper groupChangingRequestMapper;
+    private final AccountMapper accountMapper;
 
     @Override
     public List<RegistrationRequestDto> fetchRegistrationRequests() {
@@ -79,7 +84,7 @@ public class RequestServiceImpl implements RequestService {
     private RegistrationRequestDto map(Account account) {
         RegistrationRequestDto registrationRequestDto = new RegistrationRequestDto();
         registrationRequestDto.setRegistrationRequestIdDto(new RegistrationRequestIdDto(account.getId().toString()));
-        registrationRequestDto.setAccount(account.toDto());
+        registrationRequestDto.setAccount(accountMapper.toDto(account));
         return registrationRequestDto;
     }
 }

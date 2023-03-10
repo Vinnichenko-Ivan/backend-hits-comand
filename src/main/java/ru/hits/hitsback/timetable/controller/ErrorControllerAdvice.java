@@ -47,32 +47,41 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(TeacherNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException(){
+    public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException() {
         return handleCustomException(HttpStatus.NOT_FOUND, "teacher.not-found");
     }
-
     @ExceptionHandler(GroupIsAlreadyExistException.class)
     public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "group.used-number");
+    }
+    @ExceptionHandler(GroupNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleGroupNotFoundException() {
+        return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
+    }
+    @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
+    }
+    @ExceptionHandler(IncorrectPasswordException.class)
+    public ResponseEntity<Map<String, Object>> handleIncorrectPasswordException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "password.old-incorrect");
+    }
+    @ExceptionHandler(UserIsAlreadyInThisGroupException.class)
+    public ResponseEntity<Map<String, Object>> handleIUserIsAlreadyInThisGroupException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "user.already-in-group");
+    }
+    @ExceptionHandler(SamePasswordsException.class)
+    public ResponseEntity<Map<String, Object>> handleNotTheSamePasswordsException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "password.same");
     }
 
     @ExceptionHandler(TeacherIsAlreadyExistException.class)
     public ResponseEntity<Map<String, Object>> handleTeacherIsAlreadyExistException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "teacher.already-exists");
     }
-
-    @ExceptionHandler(GroupNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleGroupNotFoundException() {
-        return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
-    }
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeException() {
         return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
-    }
-
-    @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
-    public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
-        return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
     }
 
     private String getErrorMessage(String code) {
