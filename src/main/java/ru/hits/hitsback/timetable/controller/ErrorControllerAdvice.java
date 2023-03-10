@@ -80,6 +80,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return handleCustomException(HttpStatus.BAD_REQUEST, "password.same");
     }
 
+    @ExceptionHandler(TeacherIsAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleTeacherIsAlreadyExistException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "teacher.already-exists");
+    }
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeException() {
         return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
