@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +16,7 @@ import ru.hits.hitsback.timetable.service.RequestService;
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.REQUEST_URL;
 
@@ -36,7 +36,7 @@ public class RequestController {
     @GetMapping(value = "registration")
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<RegistrationRequestDto>> fetchRegistrationRequests() {
-        return ResponseEntity.ok(requestService.fetchRegistrationRequests());
+        return ok(requestService.fetchRegistrationRequests());
     }
 
     @Operation(summary = "Получить запросы на смену группы (админка)", responses = {
@@ -48,7 +48,7 @@ public class RequestController {
     @GetMapping(value = "group")
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<GroupChangingRequestDto>> fetchGroupChangingRequests(){
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        return ok(requestService.fetchGroupChangingRequests());
     }
 
     @Operation(summary = "Подтвердить/отклонить запрос на регистрацию", responses = {
@@ -62,7 +62,7 @@ public class RequestController {
     @PutMapping(value = "registration/{id}")
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AcceptDto> resolveRegistrationRequest(@PathVariable String id, @RequestParam Boolean accept){
-        return ResponseEntity.ok(requestService.resolveRegistrationRequest(id, accept));
+        return ok(requestService.resolveRegistrationRequest(id, accept));
     }
 
     @Operation(summary = "Подтвердить/отклонить запрос на смену группы", responses = {
@@ -77,6 +77,6 @@ public class RequestController {
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AcceptDto> resolveGroupChangingRequest(@PathVariable String id, @RequestParam Boolean accept){
         GroupChangingRequestIdDto groupChangingRequestIdDto = new GroupChangingRequestIdDto(id);
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+        return ok(requestService.resolveGroupChangingRequest(groupChangingRequestIdDto,accept));
     }
 }
