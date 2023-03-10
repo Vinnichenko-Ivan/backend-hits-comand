@@ -1,19 +1,16 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.request;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.exception.AccountNotFoundException;
-import ru.hits.hitsback.timetable.mapper.AccountMapper;
-import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
-import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;
-import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestDto;
-import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestIdDto;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
+import ru.hits.hitsback.timetable.mapper.AccountMapper;
 import ru.hits.hitsback.timetable.mapper.GroupChangingRequestMapper;
 import ru.hits.hitsback.timetable.model.dto.request.*;
 import ru.hits.hitsback.timetable.model.entity.Account;
+import ru.hits.hitsback.timetable.model.entity.GroupChangingRequest;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
-import ru.hits.hitsback.timetable.service.RequestService;
+import ru.hits.hitsback.timetable.repository.GroupChangingRequestRepository;
 
 import java.util.List;
 import java.util.UUID;

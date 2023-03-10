@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RequestService {
 
-    public List<RegistrationRequestDto> fetchRegistrationRequests();
+    List<RegistrationRequestDto> fetchRegistrationRequests();
 
     List<GroupChangingRequestDto> fetchGroupChangingRequests();
 
