@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
-import ru.hits.hitsback.timetable.exception.StudyRoomIsAlreadyExistsException;
-import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
+import ru.hits.hitsback.timetable.exception.*;
 
 import java.util.HashMap;
 import java.util.Locale;
