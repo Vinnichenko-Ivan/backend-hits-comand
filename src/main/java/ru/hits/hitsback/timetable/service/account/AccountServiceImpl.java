@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.IncorrectPasswordException;
+import ru.hits.hitsback.timetable.exception.UserIsAlreadyInThisGroupException;
 import ru.hits.hitsback.timetable.mapper.AccountMapper;
 import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
 import ru.hits.hitsback.timetable.model.dto.account.PasswordModifyDto;
@@ -45,6 +46,10 @@ public class AccountServiceImpl implements AccountService {
 
         if(group==null){
             throw new GroupNotFoundException();
+        }
+
+        if(!Objects.equals(groupIdDto.getId(),account.getGroup().getId())){
+            throw new UserIsAlreadyInThisGroupException();
         }
 
         groupChangingRequest.setAccount(account);
