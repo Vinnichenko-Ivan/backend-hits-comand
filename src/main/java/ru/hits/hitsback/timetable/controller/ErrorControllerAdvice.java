@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
-import ru.hits.hitsback.timetable.exception.StudyRoomIsAlreadyExistsException;
-import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
+import ru.hits.hitsback.timetable.exception.*;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -72,15 +69,6 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
     public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
-    }
-    @ExceptionHandler(IncorrectPasswordException.class)
-    public ResponseEntity<Map<String, Object>> handleIncorrectPasswordException() {
-        return handleCustomException(HttpStatus.BAD_REQUEST, "password.old-incorrect");
-    }
-
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
-        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
     }
 
     private String getErrorMessage(String code) {

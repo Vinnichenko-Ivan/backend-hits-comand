@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.request;
 
 import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
 import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;

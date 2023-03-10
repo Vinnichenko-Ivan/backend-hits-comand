@@ -12,7 +12,7 @@ import ru.hits.hitsback.timetable.model.dto.request.AcceptDto;
 import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestDto;
 import ru.hits.hitsback.timetable.model.dto.request.GroupChangingRequestIdDto;
 import ru.hits.hitsback.timetable.model.dto.request.RegistrationRequestDto;
-import ru.hits.hitsback.timetable.service.RequestService;
+import ru.hits.hitsback.timetable.service.request.RequestService;
 
 import java.util.List;
 
