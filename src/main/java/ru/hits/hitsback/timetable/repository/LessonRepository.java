@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface LessonRepository extends JpaRepository<Lesson, UUID> {
-    List<Lesson> findAllByDateBetweenAndLessonGroupGroupIsContaining(Date startDate, Date endDate, Group groups);
+    List<Lesson> findAllByDateBetweenAndLessonGroupGroupsIsContaining(Date startDate, Date endDate, Group groups);
 
     @Query(value = "" +
             "select l " +
@@ -24,6 +24,6 @@ public interface LessonRepository extends JpaRepository<Lesson, UUID> {
             "where l.date between :startDate and :endDate " +
             "   and (l.teacher.id = :teacherId " +
             "   or l.studyRoom.id = :studyRoomId " +
-            "   or exists (select g from l.lessonGroup.group g where g in :groups))")
+            "   or exists (select g from l.lessonGroup.groups g where g in :groups))")
     List<Lesson> findAllByLessonOptions(Date startDate, Date endDate, UUID teacherId, UUID studyRoomId, List<Group> groups);
 }
