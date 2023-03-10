@@ -75,9 +75,9 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/group").hasAuthority("Student")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "").hasAuthority("Admin")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "/me").hasAnyAuthority("Student", "Teacher")
-                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/modify").hasAuthority("Admin")
-                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + PROFILE_URL + "/create").hasAuthority("Admin")
-                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + PROFILE_URL + "/delete").hasAuthority("Admin")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + PROFILE_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + PROFILE_URL).hasAuthority("Admin")
 
 
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + GROUP_URL).permitAll()
