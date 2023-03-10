@@ -2,7 +2,6 @@ package ru.hits.hitsback.timetable.service.schedule;
 
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
-import ru.hits.hitsback.timetable.model.dto.schedule.LessonOptionsDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
@@ -17,7 +16,7 @@ public interface ScheduleService {
 
     List<DayScheduleDto> fetchTeacherSchedule(TimeIntervalDto timeIntervalDto, TeacherIdDto teacherIdDto);
 
-    List<DayScheduleDto> fetchScheduleWithLessonOptions(TimeIntervalDto timeIntervalDto, LessonOptionsDto lessonOptionsDto);
+    List<DayScheduleDto> fetchScheduleWithLessonOptions(TimeIntervalDto timeIntervalDto, String teacherId, String studyRoomId, List<String> groupIds);
 
     List<LessonTimeDto> fetchLessonTimes();
 }
