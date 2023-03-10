@@ -30,7 +30,7 @@ public class GroupServiceImpl implements GroupService {
         }
         Group group = new Group();
         group.setNumber(groupCreateDto.getNumber());
-        groupRepository.save(group);
+        group = groupRepository.save(group);
         return group.getDto().getGroupIdDto();
     }
 

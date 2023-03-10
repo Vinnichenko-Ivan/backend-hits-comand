@@ -10,7 +10,6 @@ import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonDto;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonShortDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
-import ru.hits.hitsback.timetable.model.dto.schedule.LessonOptionsDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
@@ -55,8 +54,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<DayScheduleDto> fetchScheduleWithLessonOptions(TimeIntervalDto timeIntervalDto, LessonOptionsDto lessonOptionsDto) {
-        List<Lesson> lessons = fetchLessonsWithLessonOptionsLessons(timeIntervalDto, lessonOptionsDto);
+    public List<DayScheduleDto> fetchScheduleWithLessonOptions(TimeIntervalDto timeIntervalDto, String teacherId, String studyRoomId, List<String> groupIds) {
+
+        List<Lesson> lessons = fetchLessonsWithLessonOptionsLessons(timeIntervalDto, teacherId, studyRoomId, groupIds);
         return lessonsToDayScheduleDtos(lessons, timeIntervalDto);
     }
 
@@ -77,7 +77,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     private List<Lesson> fetchGroupLessons(TimeIntervalDto timeIntervalDto, Group group) {
         return lessonRepository
-                .findAllByDateBetweenAndLessonGroupGroupIsContaining(
+                .findAllByDateBetweenAndLessonGroupGroupsIsContaining(
                         Date.valueOf(timeIntervalDto.getStartDate()),
                         Date.valueOf(timeIntervalDto.getEndDate()),
                         group);
@@ -91,36 +91,36 @@ public class ScheduleServiceImpl implements ScheduleService {
                         teacherIdDto.getId());
     }
 
-    private List<Lesson> fetchLessonsWithLessonOptionsLessons(TimeIntervalDto timeIntervalDto, LessonOptionsDto lessonOptionsDto) {
-        UUID teacherId;
-        UUID studyRoomId;
-        List<Group> groupIds;
+    private List<Lesson> fetchLessonsWithLessonOptionsLessons(TimeIntervalDto timeIntervalDto, String teacherId, String studyRoomId, List<String> groupIds) {
+        UUID teacherUUID;
+        UUID studyRoomUUID;
+        List<Group> groups;
 
         try {
-            teacherId = lessonOptionsDto.getTeacherIdDto().getId();
+            teacherUUID = UUID.fromString(teacherId);
         } catch (Exception e){
-            teacherId = null;
+            teacherUUID = null;
         }
 
         try {
-            studyRoomId = lessonOptionsDto.getStudyRoomIdDto().getId();
+            studyRoomUUID = UUID.fromString(studyRoomId);
         } catch (Exception e){
-            studyRoomId = null;
+            studyRoomUUID = null;
         }
 
         try {
-            groupIds = fetchGroupByIdIn(lessonOptionsDto.getGroupIdDtos());
+            groups = fetchGroupByIdIn(groupIds.stream().map(GroupIdDto::new).toList());
         } catch (Exception e){
-            groupIds = null;
+            groups = null;
         }
 
         return lessonRepository
                 .findAllByLessonOptions(
                         Date.valueOf(timeIntervalDto.getStartDate()),
                         Date.valueOf(timeIntervalDto.getEndDate()),
-                        teacherId,
-                        studyRoomId,
-                        groupIds);
+                        teacherUUID,
+                        studyRoomUUID,
+                        groups);
     }
 
     private Group fetchGroupById(GroupIdDto groupIdDto) {
@@ -155,10 +155,7 @@ public class ScheduleServiceImpl implements ScheduleService {
              currentDate = currentDate.plusDays(1)
         ) {
             DayScheduleDto dayScheduleDto = getDayScheduleFromLessonsByDate(lessonsByDate, currentDate);
-
-            if (dayScheduleDto != null) {
-                dayScheduleDtos.add(dayScheduleDto);
-            }
+            dayScheduleDtos.add(dayScheduleDto);
         }
 
         return dayScheduleDtos;
@@ -166,12 +163,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     private DayScheduleDto getDayScheduleFromLessonsByDate(Map<LocalDate, List<LessonDto>> lessonsByDate, LocalDate day) {
         List<LessonDto> dayLessons = lessonsByDate.get(day);
-
-        if (dayLessons != null) return dayLessonsToDayScheduleDto(dayLessons, day);
-        return null;
+        return dayLessonsToDayScheduleDto(dayLessons, day);
     }
 
     private DayScheduleDto dayLessonsToDayScheduleDto(List<LessonDto> dayLessons, LocalDate day) {
+        if (dayLessons == null) return new DayScheduleDto(day, day.getDayOfWeek());
+
         List<LessonShortDto> lessonShortDtos = dayLessons
                 .stream()
                 .map(lessonMapper::toShortDto)

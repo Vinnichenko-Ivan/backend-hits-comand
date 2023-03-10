@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
-import ru.hits.hitsback.timetable.model.dto.schedule.LessonOptionsDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
@@ -91,15 +90,17 @@ public class ScheduleController {
             @ApiResponse(responseCode = "404", content = @Content),
             @ApiResponse(responseCode = "500", content = @Content),
     })
-    @GetMapping(value = "staff", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "staff")
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<List<DayScheduleDto>> fetchScheduleWithLessonOptions(
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate,
-            @RequestBody LessonOptionsDto lessonOptionsDto
+            @RequestParam(required = false) String teacherId,
+            @RequestParam(required = false) String studyRoomId,
+            @RequestParam(required = false) List<String> groupIds
     ) {
         TimeIntervalDto timeIntervalDto = new TimeIntervalDto(startDate, endDate);
-        return ResponseEntity.ok(scheduleService.fetchScheduleWithLessonOptions(timeIntervalDto, lessonOptionsDto));
+        return ResponseEntity.ok(scheduleService.fetchScheduleWithLessonOptions(timeIntervalDto, teacherId, studyRoomId, groupIds));
     }
 
     @Operation(summary = "Получить время каждой пары", description = "У каждой пары есть своё время. Например, первая пара начинается в 8:45 и заканчивается в 10:20", responses = {
