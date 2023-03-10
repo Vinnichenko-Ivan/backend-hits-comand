@@ -24,17 +24,15 @@ public class Account {
     private String password;
     @ManyToOne
     private Group group;
+    @OneToOne (mappedBy = "account", cascade = CascadeType.REMOVE)
+    GroupChangingRequest groupChangingRequest;
     @OneToOne
     private Teacher teacher;
-    @OneToOne
-    private GroupChangingRequest groupChangingRequest;
-
     private Boolean accepted;
 
     public Account() {
 
     }
-
 
     public AccountDto toDto() {
         AccountDto accountDto = new AccountDto();
@@ -42,7 +40,7 @@ public class Account {
         accountDto.setFirstName(firstName);
         accountDto.setLastName(lastName);
         accountDto.setPatronymicName(patronymicName);
-        accountDto.setGroup(group.getDto());
+        accountDto.setGroup(group == null ? null : group.getDto());
         accountDto.setTeacherId(teacher != null ? new TeacherIdDto(teacher.getId().toString()) : null);
         accountDto.setId(id);
         accountDto.setRole(role);

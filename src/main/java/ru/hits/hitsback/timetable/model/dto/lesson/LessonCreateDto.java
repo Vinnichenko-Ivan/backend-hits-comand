@@ -20,7 +20,6 @@ import java.util.Set;
 public class LessonCreateDto {
     @NotNull(message = "group-id.required")
     @JsonProperty private Set<GroupIdDto> groupIds;
-    @NotNull(message = "study-room-id.required")
     @JsonProperty private StudyRoomIdDto studyRoomId;
     @NotNull(message = "lesson-type-id.required")
     @JsonProperty private LessonTypeIdDto lessonTypeId;
