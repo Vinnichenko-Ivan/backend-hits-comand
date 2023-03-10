@@ -27,8 +27,5 @@ public class LessonGroup {
     @ManyToOne
     private LessonType lessonType;
     @ManyToMany
-    private List<Group> group;
-    public LessonGroup() {
-    }
-
+    private List<Group> groups;
 }

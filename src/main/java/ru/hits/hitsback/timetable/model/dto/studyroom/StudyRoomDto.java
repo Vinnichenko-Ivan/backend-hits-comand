@@ -14,7 +14,6 @@ public class StudyRoomDto {
     @NotNull(message = "building-number.required")
     @JsonProperty private Integer buildingNumber;
     @JsonProperty private Integer floor;
-    @NotEmpty(message = "name.empty")
     @JsonProperty private String name;
     @NotEmpty(message = "number.required")
     @JsonProperty private String number;
