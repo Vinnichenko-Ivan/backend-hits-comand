@@ -92,7 +92,7 @@ public class AccountController {
             @ApiResponse(responseCode = "401"),
             @ApiResponse(responseCode = "500"),
     })
-    @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<UUID> registerAccount(@Valid @RequestBody RegisterAccountDto registerAccountDto) {
         return ResponseEntity.status(201).body(accountService.registerAccount(registerAccountDto));
@@ -105,7 +105,7 @@ public class AccountController {
             @ApiResponse(responseCode = "404"),
             @ApiResponse(responseCode = "500"),
     })
-    @PutMapping(value = "modify", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> modifyAccount(@Valid @RequestBody AccountModifyDto accountModifyDto) {
         accountService.modifyAccount(accountModifyDto);
@@ -119,7 +119,7 @@ public class AccountController {
             @ApiResponse(responseCode = "404"),
             @ApiResponse(responseCode = "500"),
     })
-    @DeleteMapping(value = "delete", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> deleteAccount(@Valid @RequestBody UUID id) {
         accountService.deleteAccount(id);
