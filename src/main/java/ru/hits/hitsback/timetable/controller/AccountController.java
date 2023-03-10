@@ -10,13 +10,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
+import ru.hits.hitsback.timetable.model.dto.account.AccountModifyDto;
 import ru.hits.hitsback.timetable.model.dto.account.PasswordModifyDto;
+import ru.hits.hitsback.timetable.model.dto.account.RegisterAccountDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.service.AuthorisationService;
 import ru.hits.hitsback.timetable.service.account.AccountService;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.BASE_URL;
@@ -77,9 +80,49 @@ public class AccountController {
     })
     @PutMapping(value = "security/password", consumes = MediaType.APPLICATION_JSON_VALUE)
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<Void> changePassword(@Valid @RequestBody PasswordModifyDto passwordModifyDto){
+    public ResponseEntity<Void> changePassword(@Valid @RequestBody PasswordModifyDto passwordModifyDto) {
         Account account = authorisationService.getUser();
         accountService.changePassword(passwordModifyDto, account);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400"),
+            @ApiResponse(responseCode = "401"),
+            @ApiResponse(responseCode = "500"),
+    })
+    @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
+    public ResponseEntity<UUID> registerAccount(@Valid @RequestBody RegisterAccountDto registerAccountDto) {
+        return ResponseEntity.status(201).body(accountService.registerAccount(registerAccountDto));
+    }
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400"),
+            @ApiResponse(responseCode = "401"),
+            @ApiResponse(responseCode = "404"),
+            @ApiResponse(responseCode = "500"),
+    })
+    @PutMapping(value = "modify", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
+    public ResponseEntity<Void> modifyAccount(@Valid @RequestBody AccountModifyDto accountModifyDto) {
+        accountService.modifyAccount(accountModifyDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400"),
+            @ApiResponse(responseCode = "401"),
+            @ApiResponse(responseCode = "404"),
+            @ApiResponse(responseCode = "500"),
+    })
+    @DeleteMapping(value = "delete", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @SecurityRequirement(name = "Bearer Authentication")
+    public ResponseEntity<Void> deleteAccount(@Valid @RequestBody UUID id) {
+        accountService.deleteAccount(id);
         return ResponseEntity.ok().build();
     }
 }
