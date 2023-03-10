@@ -47,7 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 }
             } catch (UnauthorizedException e) {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                response.getWriter().write("Un");
+                response.getWriter().write("Bad Token");
                 return;
             }
         }

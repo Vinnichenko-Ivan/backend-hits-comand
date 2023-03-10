@@ -92,6 +92,16 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
     }
 
+    @ExceptionHandler(WrongCredentialsException.class)
+    public ResponseEntity<Map<String, Object>> handleWrongCredentialsException() {
+        return handleCustomException(HttpStatus.UNAUTHORIZED, "wrong.credentials");
+    }
+
+    @ExceptionHandler(NotAcceptedException.class)
+    public ResponseEntity<Map<String, Object>> handleNotAcceptedException() {
+        return handleCustomException(HttpStatus.UNAUTHORIZED, "not.accepted");
+    }
+
     private String getErrorMessage(String code) {
         return messageSource.getMessage(code, null, Locale.ENGLISH);
     }
