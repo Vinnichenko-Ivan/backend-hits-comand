@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.IncorrectPasswordException;
+import ru.hits.hitsback.timetable.exception.SamePasswordsException;
 import ru.hits.hitsback.timetable.exception.UserIsAlreadyInThisGroupException;
 import ru.hits.hitsback.timetable.mapper.AccountMapper;
 import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
@@ -31,12 +32,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto fetchAccountInfo(Account account) {
-        return accountMapper.toDTO(account);
+        return accountMapper.toDto(account);
     }
 
     @Override
     public List<AccountDto> fetchAccountsInfo() {
-        return accountRepository.findAll().stream().map(accountMapper::toDTO).collect(Collectors.toList());
+        return accountRepository.findAll().stream().map(accountMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -63,6 +64,10 @@ public class AccountServiceImpl implements AccountService {
 
         if(!Objects.equals(account.getPassword(), passwordModifyDto.getOldPassword())){
             throw new IncorrectPasswordException();
+        }
+
+        if(Objects.equals(passwordModifyDto.getOldPassword(),passwordModifyDto.getNewPassword())){
+            throw new SamePasswordsException();
         }
 
         account.setPassword(passwordModifyDto.getNewPassword());

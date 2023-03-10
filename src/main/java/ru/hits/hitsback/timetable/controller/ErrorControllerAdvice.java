@@ -73,6 +73,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleIUserIsAlreadyInThisGroupException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "user.already-in-group");
     }
+    @ExceptionHandler(SamePasswordsException.class)
+    public ResponseEntity<Map<String, Object>> handleNotTheSamePasswordsException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "password.same");
+    }
     private String getErrorMessage(String code) {
         return messageSource.getMessage(code, null, Locale.ENGLISH);
     }

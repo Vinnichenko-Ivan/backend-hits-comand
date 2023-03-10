@@ -57,7 +57,7 @@ public class RequestServiceImpl implements RequestService {
     private RegistrationRequestDto map(Account account) {
         RegistrationRequestDto registrationRequestDto = new RegistrationRequestDto();
         registrationRequestDto.setRegistrationRequestIdDto(new RegistrationRequestIdDto(account.getId().toString()));
-        registrationRequestDto.setAccount(accountMapper.toDTO(account));
+        registrationRequestDto.setAccount(accountMapper.toDto(account));
         return registrationRequestDto;
     }
 }
