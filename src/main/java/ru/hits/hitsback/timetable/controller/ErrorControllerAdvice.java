@@ -65,6 +65,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleGroupNotFoundException() {
         return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
     }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
+        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
+    }
 
     @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
     public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
