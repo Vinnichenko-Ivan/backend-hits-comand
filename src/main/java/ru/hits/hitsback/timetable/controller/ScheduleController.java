@@ -14,7 +14,7 @@ import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
-import ru.hits.hitsback.timetable.service.AuthorisationService;
+import ru.hits.hitsback.timetable.service.authorisation.AuthorisationService;
 import ru.hits.hitsback.timetable.service.schedule.ScheduleService;
 
 import java.time.LocalDate;

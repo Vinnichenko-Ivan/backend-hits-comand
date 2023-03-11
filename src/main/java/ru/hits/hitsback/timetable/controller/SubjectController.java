@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectCreateDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectIdDto;
-import ru.hits.hitsback.timetable.service.SubjectService;
+import ru.hits.hitsback.timetable.service.subject.SubjectService;
 
 import java.util.List;
 

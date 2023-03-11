@@ -3,7 +3,7 @@ package ru.hits.hitsback.timetable.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
 import ru.hits.hitsback.timetable.mapper.LessonMapper;
 import ru.hits.hitsback.timetable.mapper.LessonTimeMapper;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
