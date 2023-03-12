@@ -1,16 +1,15 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.subject;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.SubjectCopyException;
-import ru.hits.hitsback.timetable.exception.SubjectIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.subject.SubjectCopyException;
+import ru.hits.hitsback.timetable.exception.subject.SubjectIsAlreadyExistException;
 import ru.hits.hitsback.timetable.mapper.SubjectMapper;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectCreateDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectIdDto;
 import ru.hits.hitsback.timetable.model.entity.Subject;
 import ru.hits.hitsback.timetable.repository.SubjectRepository;
-import ru.hits.hitsback.timetable.service.SubjectService;
 
 import java.util.List;
 import java.util.stream.Collectors;

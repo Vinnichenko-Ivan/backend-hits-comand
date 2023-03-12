@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.jwt;
 
 import ru.hits.hitsback.timetable.model.entity.Account;
 

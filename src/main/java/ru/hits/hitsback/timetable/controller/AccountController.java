@@ -15,8 +15,8 @@ import ru.hits.hitsback.timetable.model.dto.account.PasswordModifyDto;
 import ru.hits.hitsback.timetable.model.dto.account.RegisterAccountDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
-import ru.hits.hitsback.timetable.service.AuthorisationService;
 import ru.hits.hitsback.timetable.service.account.AccountService;
+import ru.hits.hitsback.timetable.service.authorisation.AuthorisationService;
 
 import java.util.List;
 import java.util.UUID;

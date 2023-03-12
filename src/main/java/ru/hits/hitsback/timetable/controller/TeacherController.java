@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherCreateDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
-import ru.hits.hitsback.timetable.service.TeacherService;
+import ru.hits.hitsback.timetable.service.teacher.TeacherService;
 
 import java.util.List;
 

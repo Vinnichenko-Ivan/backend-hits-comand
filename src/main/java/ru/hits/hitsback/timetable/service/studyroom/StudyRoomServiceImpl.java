@@ -1,15 +1,14 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.studyroom;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.StudyRoomIsAlreadyExistsException;
+import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomIsAlreadyExistsException;
 import ru.hits.hitsback.timetable.mapper.StudyRoomMapper;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomCreateDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomIdDto;
 import ru.hits.hitsback.timetable.model.entity.StudyRoom;
 import ru.hits.hitsback.timetable.repository.StudyRoomRepository;
-import ru.hits.hitsback.timetable.service.StudyRoomService;
 
 import java.util.List;
 

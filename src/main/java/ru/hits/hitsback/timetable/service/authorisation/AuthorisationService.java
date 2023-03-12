@@ -1,6 +1,6 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.authorisation;
 
-import ru.hits.hitsback.timetable.exception.UnauthorizedException;
+import ru.hits.hitsback.timetable.exception.common.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;

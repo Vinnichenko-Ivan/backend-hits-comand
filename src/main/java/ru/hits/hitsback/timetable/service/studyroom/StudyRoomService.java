@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.studyroom;
 
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomCreateDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomDto;

@@ -2,7 +2,7 @@ package ru.hits.hitsback.timetable.service.request;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.AccountNotFoundException;
+import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
 import ru.hits.hitsback.timetable.exception.GroupChangingRequestIsNotFoundException;
 import ru.hits.hitsback.timetable.mapper.AccountMapper;
 import ru.hits.hitsback.timetable.mapper.GroupChangingRequestMapper;

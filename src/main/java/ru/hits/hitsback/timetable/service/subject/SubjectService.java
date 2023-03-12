@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.subject;
 
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectCreateDto;
 import ru.hits.hitsback.timetable.model.dto.subject.SubjectDto;
