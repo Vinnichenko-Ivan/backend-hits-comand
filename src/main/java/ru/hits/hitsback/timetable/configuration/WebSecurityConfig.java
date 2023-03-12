@@ -96,6 +96,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/staff").hasAuthority("ScheduleWriter")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson-time").permitAll()
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/group/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/study-room/{id}").permitAll()
 //                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() //TODO для дебага пока так
 
                 .and()

@@ -10,15 +10,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface LessonRepository extends JpaRepository<Lesson, UUID> {
-    List<Lesson> findAllByDateBetweenAndLessonGroupGroupsIsContaining(Date startDate, Date endDate, Group groups);
-
-    @Query(value = "" +
-            "select l " +
-            "from Lesson l " +
-            "where l.date between :startDate and :endDate " +
-            "and l.teacher.id = :teacherId")
-    List<Lesson> findAllByDateBetweenAndTeacherId(Date startDate, Date endDate, UUID teacherId);
-
     @Query(value = "select l " +
             "from Lesson l " +
             "where l.date between :startDate and :endDate " +
