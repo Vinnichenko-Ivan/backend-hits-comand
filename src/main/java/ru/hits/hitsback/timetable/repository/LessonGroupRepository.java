@@ -6,4 +6,5 @@ import ru.hits.hitsback.timetable.model.entity.LessonGroup;
 import java.util.UUID;
 
 public interface LessonGroupRepository extends CrudRepository<LessonGroup, UUID> {
+//    void deleteByLessonsContains(Set<Lesson> lessons);
 }

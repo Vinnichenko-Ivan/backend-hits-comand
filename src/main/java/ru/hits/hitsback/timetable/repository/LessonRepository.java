@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface LessonRepository extends JpaRepository<Lesson, UUID> {
+//    Optional<Lesson> findById(UUID id);
+
     @Query(value = "select l " +
             "from Lesson l " +
             "where l.date between :startDate and :endDate " +

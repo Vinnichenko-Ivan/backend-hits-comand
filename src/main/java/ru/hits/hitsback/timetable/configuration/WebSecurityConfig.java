@@ -64,6 +64,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + LESSON_URL + "/lesson-group").hasAuthority("ScheduleWriter")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + LESSON_URL + "/{id}").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + LESSON_URL + "/{id}").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + LESSON_URL + "/{id}/lesson-group").hasAuthority("ScheduleWriter")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + LESSON_URL + "/type").permitAll()
 
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/registration/{id}").hasAuthority("Admin")

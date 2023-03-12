@@ -112,7 +112,7 @@ public class LessonController {
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> deleteLessonGroup(@PathVariable String id) {
         LessonIdDto lessonIdDto = new LessonIdDto(id);
-        lessonService.deleteLesson(lessonIdDto);
+        lessonService.deleteLessonGroup(lessonIdDto);
         return ResponseEntity.ok().build();
     }
 }
