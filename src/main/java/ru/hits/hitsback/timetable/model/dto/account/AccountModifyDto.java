@@ -32,4 +32,7 @@ public class AccountModifyDto {
     @NotNull
     @JsonProperty
     private String email;
+    @NotNull
+    @JsonProperty
+    private String password;
 }
