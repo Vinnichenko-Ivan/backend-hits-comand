@@ -185,11 +185,11 @@ public class LessonServiceImpl implements LessonService {
         for (LocalDate date = startDate; date.isBefore(endDate) || date.isEqual(endDate); date = date.plusWeeks(frequency)) {
             LocalDate finalDate = date;
 
-            intersectedLessons = lessons
+            intersectedLessons.addAll(lessons
                     .stream()
                     .filter(it -> it.getDate().toLocalDate().isEqual(finalDate)
                             && it.getLessonTime().getLessonNumber() == lessonNumber)
-                    .toList();
+                    .toList());
         }
 
         if (intersectedLessons.size() != 0) {
