@@ -11,7 +11,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ru.hits.hitsback.timetable.exception.*;
+import ru.hits.hitsback.timetable.exception.IncorrectPasswordException;
+import ru.hits.hitsback.timetable.exception.SamePasswordsException;
+import ru.hits.hitsback.timetable.exception.UserIsAlreadyInThisGroupException;
+import ru.hits.hitsback.timetable.exception.WrongCredentialsException;
+import ru.hits.hitsback.timetable.exception.common.NotAcceptedException;
+import ru.hits.hitsback.timetable.exception.group.GroupIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
+import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomIsAlreadyExistsException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherNotFoundException;
 
 import java.util.HashMap;
 import java.util.Locale;
