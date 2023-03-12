@@ -106,10 +106,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return handleCustomException(HttpStatus.BAD_REQUEST, "teacher.already-exists");
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
-//        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
-//    }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
+        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
+    }
 
     @ExceptionHandler(LessonTypeNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleLessonTypeNotFoundException() {
