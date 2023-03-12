@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.ShortDayScheduleDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomIdDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
@@ -40,7 +41,7 @@ public class ScheduleController {
     })
     @GetMapping
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<List<DayScheduleDto>> fetchSchedule(
+    public ResponseEntity<List<ShortDayScheduleDto>> fetchSchedule(
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate
     ) {
@@ -55,7 +56,7 @@ public class ScheduleController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping(value = "group/{id}")
-    public ResponseEntity<List<DayScheduleDto>> fetchGroupSchedule(
+    public ResponseEntity<List<ShortDayScheduleDto>> fetchGroupSchedule(
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate,
             @PathVariable String id
@@ -71,7 +72,7 @@ public class ScheduleController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping(value = "study-room/{id}")
-    public ResponseEntity<List<DayScheduleDto>> fetchStudyRoomSchedule(
+    public ResponseEntity<List<ShortDayScheduleDto>> fetchStudyRoomSchedule(
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate,
             @PathVariable String id
@@ -87,7 +88,7 @@ public class ScheduleController {
             @ApiResponse(responseCode = "500", content = @Content),
     })
     @GetMapping(value = "teacher/{id}")
-    public ResponseEntity<List<DayScheduleDto>> fetchTeacherSchedule(
+    public ResponseEntity<List<ShortDayScheduleDto>> fetchTeacherSchedule(
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate,
             @PathVariable String id

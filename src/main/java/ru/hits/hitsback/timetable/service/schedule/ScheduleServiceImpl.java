@@ -10,6 +10,7 @@ import ru.hits.hitsback.timetable.model.dto.lesson.LessonDto;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonShortDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
+import ru.hits.hitsback.timetable.model.dto.schedule.ShortDayScheduleDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomIdDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
@@ -38,23 +39,29 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final GroupRepository groupRepository;
 
     @Override
-    public List<DayScheduleDto> fetchSchedule(TimeIntervalDto timeIntervalDto, Account account) {
+    public List<ShortDayScheduleDto> fetchSchedule(TimeIntervalDto timeIntervalDto, Account account) {
         return fetchGroupSchedule(timeIntervalDto, new GroupIdDto(account.getGroup().getId().toString()));
     }
 
     @Override
-    public List<DayScheduleDto> fetchGroupSchedule(TimeIntervalDto timeIntervalDto, GroupIdDto groupIdDto) {
-        return fetchScheduleWithLessonOptions(timeIntervalDto, null, null, List.of(groupIdDto.getId().toString()));
+    public List<ShortDayScheduleDto> fetchGroupSchedule(TimeIntervalDto timeIntervalDto, GroupIdDto groupIdDto) {
+        return toShortDto(
+                fetchScheduleWithLessonOptions(timeIntervalDto, null, null, List.of(groupIdDto.getId().toString()))
+        );
     }
 
     @Override
-    public List<DayScheduleDto> fetchTeacherSchedule(TimeIntervalDto timeIntervalDto, TeacherIdDto teacherIdDto) {
-        return fetchScheduleWithLessonOptions(timeIntervalDto, teacherIdDto.getId().toString(), null, null);
+    public List<ShortDayScheduleDto> fetchTeacherSchedule(TimeIntervalDto timeIntervalDto, TeacherIdDto teacherIdDto) {
+        return toShortDto(
+                fetchScheduleWithLessonOptions(timeIntervalDto, teacherIdDto.getId().toString(), null, null)
+        );
     }
 
     @Override
-    public List<DayScheduleDto> fetchStudyRoomSchedule(TimeIntervalDto timeIntervalDto, StudyRoomIdDto studyRoomIdDto){
-        return fetchScheduleWithLessonOptions(timeIntervalDto, null, studyRoomIdDto.getId().toString(), null);
+    public List<ShortDayScheduleDto> fetchStudyRoomSchedule(TimeIntervalDto timeIntervalDto, StudyRoomIdDto studyRoomIdDto){
+        return toShortDto(
+                fetchScheduleWithLessonOptions(timeIntervalDto, null, studyRoomIdDto.getId().toString(), null)
+        );
     }
 
     @Override
@@ -116,7 +123,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     private List<DayScheduleDto> lessonsToDayScheduleDtos(List<Lesson> lessons, TimeIntervalDto timeIntervalDto) {
         List<LessonDto> lessonDtos = lessons
                 .stream()
-                .map(lessonMapper::toDto)
+                .map(e -> {
+                    // Ещё один костыль
+                    LessonDto dto = lessonMapper.toDto(e);
+                    dto.setFrequency(e.getLessonGroup().getFrequency());
+                    dto.setStartDate(e.getLessonGroup().getStartDate().toLocalDate());
+                    dto.setEndDate(e.getLessonGroup().getEndDate().toLocalDate());
+                    return dto;
+                })
                 .toList();
 
         Map<LocalDate, List<LessonDto>> lessonsByDate = getGroupLessonsByDate(lessonDtos);
@@ -145,15 +159,19 @@ public class ScheduleServiceImpl implements ScheduleService {
     private DayScheduleDto dayLessonsToDayScheduleDto(List<LessonDto> dayLessons, LocalDate day) {
         if (dayLessons == null) return new DayScheduleDto(day, day.getDayOfWeek());
 
-        List<LessonShortDto> lessonShortDtos = dayLessons
-                .stream()
-                .map(lessonMapper::toShortDto)
-                .toList();
-
-        return new DayScheduleDto(day, day.getDayOfWeek(), lessonShortDtos);
+        return new DayScheduleDto(day, day.getDayOfWeek(), dayLessons);
     }
 
     private Map<LocalDate, List<LessonDto>> getGroupLessonsByDate(List<LessonDto> lessons) {
         return lessons.stream().collect(Collectors.groupingBy(LessonDto::getDate));
+    }
+
+    // Жесткий костыль Ромы, но у нас 02:00 13.03.2023 - короче, это вынужденная мера
+    private List<ShortDayScheduleDto> toShortDto(List<DayScheduleDto> dtoList) {
+        return dtoList.stream().map(dto -> new ShortDayScheduleDto(
+                dto.getDate(),
+                dto.getDayOfWeek(),
+                dto.getLessons().stream().map(lessonMapper::toShortDto).toList()
+        )).toList();
     }
 }
