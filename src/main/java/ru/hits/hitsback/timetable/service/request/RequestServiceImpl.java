@@ -3,7 +3,7 @@ package ru.hits.hitsback.timetable.service.request;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
-import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.GroupChangingRequestIsNotFoundException;
 import ru.hits.hitsback.timetable.mapper.AccountMapper;
 import ru.hits.hitsback.timetable.mapper.GroupChangingRequestMapper;
 import ru.hits.hitsback.timetable.model.dto.request.*;
@@ -60,7 +60,7 @@ public class RequestServiceImpl implements RequestService {
         GroupChangingRequest groupChangingRequest = groupChangingRequestRepository.findById(groupChangingRequestIdDto.getId()).orElse(null);
 
         if (groupChangingRequest == null) {
-            throw new GroupNotFoundException();
+            throw new GroupChangingRequestIsNotFoundException();
         }
 
         Account account = accountRepository.getAccountById(groupChangingRequest.getAccount().getId());
