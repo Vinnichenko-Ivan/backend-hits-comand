@@ -59,7 +59,6 @@ INSERT INTO lesson_type (id, name) VALUES('5c815a10-b5cc-11ed-afa1-0242ac120093'
 INSERT INTO lesson_type (id, name) VALUES('5c815f7e-b5cc-11ed-afa1-0242ac120014','Практическое занятие');
 INSERT INTO lesson_type (id, name) VALUES('5c814e26-b5cc-11ed-afa1-0242ac120096','Лабораторная');
 INSERT INTO lesson_type (id, name) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac120029','Индивидуальное занятие');
-INSERT INTO lesson_type (id, name) VALUES('5c8167e4-b5cc-11ed-afa1-0242ac120043','Иная контактная работа (сопровождение работы в ЭУК)');
 INSERT INTO lesson_type (id, name) VALUES('5c835c22-b5cc-11ed-afa1-0242ac120046','Контрольная работа');
 INSERT INTO lesson_type (id, name) VALUES('5c815a10-b5cc-11ed-afa1-0242ac120043','Экзамен');
 INSERT INTO lesson_type (id, name) VALUES('5c815f7e-b5cc-11ed-afa1-0242ac120044','Зачёт');
