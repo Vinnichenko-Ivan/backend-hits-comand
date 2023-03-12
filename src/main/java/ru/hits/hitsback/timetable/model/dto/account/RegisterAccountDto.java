@@ -27,4 +27,7 @@ public class RegisterAccountDto {
     @NotNull
     @JsonProperty
     private String email;
+    @NotNull
+    @JsonProperty
+    private String password;
 }

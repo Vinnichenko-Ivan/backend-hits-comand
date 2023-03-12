@@ -2,6 +2,7 @@ package ru.hits.hitsback.timetable.service.account;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.hits.hitsback.timetable.exception.GroupChangingRequestIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.IncorrectPasswordException;
 import ru.hits.hitsback.timetable.exception.SamePasswordsException;
 import ru.hits.hitsback.timetable.exception.UserIsAlreadyInThisGroupException;
@@ -62,10 +63,20 @@ public class AccountServiceImpl implements AccountService {
         if(Objects.equals(groupIdDto.getId(),account.getGroup().getId())){
             throw new UserIsAlreadyInThisGroupException();
         }
-
+        GroupChangingRequest oldGroupChangingRequest= groupChangingRequestRepository.getGroupChangingRequestByAccount_Id(account.getId());
+        if(oldGroupChangingRequest!=null){
+            if(Objects.equals(oldGroupChangingRequest.getGroup().getId(),groupIdDto.getId())){
+                throw new GroupChangingRequestIsAlreadyExistException();
+            }
+            oldGroupChangingRequest.setGroup(group);
+            groupChangingRequestRepository.save(oldGroupChangingRequest);
+        }
+        else{
         groupChangingRequest.setAccount(account);
         groupChangingRequest.setGroup(group);
         groupChangingRequestRepository.save(groupChangingRequest);
+        }
+
 
     }
 
