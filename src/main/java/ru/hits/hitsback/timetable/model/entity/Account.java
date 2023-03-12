@@ -24,7 +24,7 @@ public class Account {
     private Group group;
     @OneToOne (mappedBy = "account", cascade = CascadeType.REMOVE)
     GroupChangingRequest groupChangingRequest;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Teacher teacher;
     private Boolean accepted;
 
