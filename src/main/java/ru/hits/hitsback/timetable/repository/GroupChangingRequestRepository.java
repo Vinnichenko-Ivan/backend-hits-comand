@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface GroupChangingRequestRepository extends CrudRepository<GroupChangingRequest, UUID> {
     List<GroupChangingRequest> findAll();
+    GroupChangingRequest getGroupChangingRequestByAccount_Id (UUID id);
 }
