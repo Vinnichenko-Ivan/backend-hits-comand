@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class LessonGroupCreateDto extends LessonModifyDto {
+public class LessonGroupCreateDto {
     @NotEmpty(message = "group-id.required")
     @JsonProperty private Set<GroupIdDto> groupIds;
     @JsonProperty private StudyRoomIdDto studyRoomId;
