@@ -102,6 +102,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return handleCustomException(HttpStatus.UNAUTHORIZED, "not.accepted");
     }
 
+    @ExceptionHandler(GroupChangingRequestIsNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleGroupChangingRequestIsNotFoundException() {
+        return handleCustomException(HttpStatus.UNAUTHORIZED, "group-changing-request.not-found");
+    }
     private String getErrorMessage(String code) {
         return messageSource.getMessage(code, null, Locale.ENGLISH);
     }
