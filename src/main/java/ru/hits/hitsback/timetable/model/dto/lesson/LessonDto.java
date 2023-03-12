@@ -14,6 +14,7 @@ import ru.hits.hitsback.timetable.model.dto.teacher.TeacherDto;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -29,6 +30,8 @@ public class LessonDto {
     @JsonProperty private TeacherDto teacher;
     @NotNull
     @JsonProperty private SubjectDto subject;
+    @NotNull
+    @JsonProperty private UUID lessonGroupId;
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty private LocalDate date;
