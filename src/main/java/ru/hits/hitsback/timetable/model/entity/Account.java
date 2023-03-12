@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Table(name = "account")
@@ -22,6 +23,8 @@ public class Account {
     private String password;
     @ManyToOne
     private Group group;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE)
+    private List<JWTToken> jwtToken;
     @OneToOne (mappedBy = "account", cascade = CascadeType.REMOVE)
     GroupChangingRequest groupChangingRequest;
     @OneToOne

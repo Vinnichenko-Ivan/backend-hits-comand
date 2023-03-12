@@ -143,7 +143,7 @@ ALTER TABLE lesson_group
     ADD CONSTRAINT FK_LESSON_GROUP_ON_SUBJECT FOREIGN KEY (subject_id) REFERENCES subject (id);
 
 ALTER TABLE lesson
-    ADD CONSTRAINT FK_LESSON_ON_LESSONGROUP FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id);
+    ADD CONSTRAINT FK_LESSON_ON_LESSONGROUP FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id)on delete cascade;
 
 ALTER TABLE lesson
     ADD CONSTRAINT FK_LESSON_ON_LESSONTIME FOREIGN KEY (lessonTime_id) REFERENCES lesson_time (id);
@@ -158,13 +158,13 @@ ALTER TABLE teacher
     ADD CONSTRAINT FK_TEACHER_ON_ACCOUNT FOREIGN KEY (account_id) REFERENCES account (id);
 
 ALTER TABLE lesson_group_groups
-    ADD CONSTRAINT fk_lesgrogro_on_group FOREIGN KEY (groups_id) REFERENCES groups (id) on delete cascade ;
+    ADD CONSTRAINT fk_lesgrogro_on_group FOREIGN KEY (groups_id) REFERENCES groups (id)  ;
 
 ALTER TABLE lesson_group_groups
     ADD CONSTRAINT fk_lesgrogro_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id) on delete cascade ;
 
 ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT fk_lesgroles_on_lesson FOREIGN KEY (lessons_id) REFERENCES lesson (id);
+    ADD CONSTRAINT fk_lesgroles_on_lesson FOREIGN KEY (lessons_id) REFERENCES lesson (id) on delete cascade;
 
 ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT fk_lesgroles_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id);
+    ADD CONSTRAINT fk_lesgroles_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id)on delete cascade;
