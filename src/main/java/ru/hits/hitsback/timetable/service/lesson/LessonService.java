@@ -7,6 +7,8 @@ import java.util.List;
 public interface LessonService {
     void deleteLesson(LessonIdDto lessonIdDto);
 
+    void deleteLessonGroup(LessonIdDto lessonIdDto);
+
     void modifyLessonGroup(LessonGroupModifyDto lessonGroupModifyDto);
 
     void modifyLesson(LessonModifyDto lessonModifyDto);

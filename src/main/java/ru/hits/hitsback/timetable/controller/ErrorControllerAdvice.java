@@ -15,6 +15,7 @@ import ru.hits.hitsback.timetable.exception.*;
 import ru.hits.hitsback.timetable.exception.common.NotAcceptedException;
 import ru.hits.hitsback.timetable.exception.group.GroupIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.lesson.*;
 import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
 import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomIsAlreadyExistsException;
 import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomNotFoundException;
@@ -105,9 +106,46 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
         return handleCustomException(HttpStatus.BAD_REQUEST, "teacher.already-exists");
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
-        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
+//    @ExceptionHandler(RuntimeException.class)
+//    public ResponseEntity<Map<String, Object>> handleRuntimeException() {
+//        return handleCustomException(HttpStatus.INTERNAL_SERVER_ERROR, "internal");
+//    }
+
+    @ExceptionHandler(LessonTypeNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleLessonTypeNotFoundException() {
+        return handleCustomException(HttpStatus.NOT_FOUND, "lesson-type.not-found");
+    }
+
+    @ExceptionHandler(LessonNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleLessonNotFoundException() {
+        return handleCustomException(HttpStatus.NOT_FOUND, "lesson.not-found");
+    }
+
+    @ExceptionHandler(LessonNumberIsNotExistException.class)
+    public ResponseEntity<Map<String, Object>> handleLessonNumberIsNotExistException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "lesson-number.is-not-exist");
+    }
+
+    @ExceptionHandler(LessonsHaveFinishedException.class)
+    public ResponseEntity<Map<String, Object>> handleLessonsHaveFinishedException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "lesson.have-finished");
+    }
+
+    @ExceptionHandler(DateBeforeTodayException.class)
+    public ResponseEntity<Map<String, Object>> handleDateBeforeTodayException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "lesson.date.before-today");
+    }
+
+    @ExceptionHandler(EndDateBeforeStartDateException.class)
+    public ResponseEntity<Map<String, Object>> handleEndDateBeforeStartDateException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "lesson.end-date.before.start-date");
+    }
+
+    @ExceptionHandler(LessonsIntersectException.class)
+    public ResponseEntity<Map<String, Object>> handleLessonsIntersectException(LessonsIntersectException exception) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("message", exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
 
     @ExceptionHandler(WrongCredentialsException.class)

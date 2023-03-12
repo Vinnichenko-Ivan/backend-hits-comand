@@ -111,6 +111,8 @@ CREATE TABLE teacher
     CONSTRAINT pk_teacher PRIMARY KEY (id)
 );
 
+ALTER TABLE lesson
+    ADD CONSTRAINT FK_LESSON_ON_LESSON_GROUP FOREIGN KEY (lessongroup_id) REFERENCES lesson_group (id);
 
 ALTER TABLE account
     ADD CONSTRAINT FK_ACCOUNT_ON_GROUP FOREIGN KEY (group_id) REFERENCES groups (id);
