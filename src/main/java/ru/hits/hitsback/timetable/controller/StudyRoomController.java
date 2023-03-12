@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomCreateDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomDto;
 import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomIdDto;
-import ru.hits.hitsback.timetable.service.StudyRoomService;
+import ru.hits.hitsback.timetable.service.studyroom.StudyRoomService;
 
 import java.util.List;
 

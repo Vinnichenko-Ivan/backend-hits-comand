@@ -2,7 +2,12 @@ package ru.hits.hitsback.timetable.service.account;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.*;
+import ru.hits.hitsback.timetable.exception.IncorrectPasswordException;
+import ru.hits.hitsback.timetable.exception.SamePasswordsException;
+import ru.hits.hitsback.timetable.exception.UserIsAlreadyInThisGroupException;
+import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherNotFoundException;
 import ru.hits.hitsback.timetable.mapper.AccountMapper;
 import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
 import ru.hits.hitsback.timetable.model.dto.account.AccountModifyDto;

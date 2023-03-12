@@ -1,16 +1,15 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.UnauthorizedException;
+import ru.hits.hitsback.timetable.exception.common.UnauthorizedException;
 import ru.hits.hitsback.timetable.model.dto.authorisation.JWTTokenDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.model.entity.JWTToken;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
 import ru.hits.hitsback.timetable.repository.JWTTokenRepository;
-import ru.hits.hitsback.timetable.service.JwtService;
 
 import java.io.StringReader;
 import java.io.StringWriter;

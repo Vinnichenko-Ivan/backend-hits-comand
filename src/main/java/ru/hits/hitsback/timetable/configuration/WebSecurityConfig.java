@@ -14,7 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import ru.hits.hitsback.timetable.service.JwtService;
+import ru.hits.hitsback.timetable.service.jwt.JwtService;
 
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.*;
 
@@ -96,6 +96,7 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/staff").hasAuthority("ScheduleWriter")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/lesson-time").permitAll()
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/group/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + SCHEDULE_URL + "/study-room/{id}").permitAll()
 //                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() //TODO для дебага пока так
 
                 .and()

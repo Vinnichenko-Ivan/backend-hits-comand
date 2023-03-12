@@ -1,15 +1,14 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.teacher;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.TeacherIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherIsAlreadyExistException;
 import ru.hits.hitsback.timetable.mapper.TeacherMapper;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherCreateDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.model.entity.Teacher;
 import ru.hits.hitsback.timetable.repository.TeacherRepository;
-import ru.hits.hitsback.timetable.service.TeacherService;
 
 import java.util.List;
 

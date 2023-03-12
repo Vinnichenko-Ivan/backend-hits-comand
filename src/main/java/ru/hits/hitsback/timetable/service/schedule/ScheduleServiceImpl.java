@@ -3,7 +3,6 @@ package ru.hits.hitsback.timetable.service.schedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
 import ru.hits.hitsback.timetable.mapper.LessonMapper;
 import ru.hits.hitsback.timetable.mapper.LessonTimeMapper;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
@@ -12,6 +11,7 @@ import ru.hits.hitsback.timetable.model.dto.lesson.LessonShortDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.DayScheduleDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.LessonTimeDto;
 import ru.hits.hitsback.timetable.model.dto.schedule.TimeIntervalDto;
+import ru.hits.hitsback.timetable.model.dto.studyroom.StudyRoomIdDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.model.entity.Account;
 import ru.hits.hitsback.timetable.model.entity.Group;
@@ -39,23 +39,26 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<DayScheduleDto> fetchSchedule(TimeIntervalDto timeIntervalDto, Account account) {
-        return fetchGroupSchedule(timeIntervalDto, account.getGroup());
+        return fetchGroupSchedule(timeIntervalDto, new GroupIdDto(account.getGroup().getId().toString()));
     }
 
     @Override
     public List<DayScheduleDto> fetchGroupSchedule(TimeIntervalDto timeIntervalDto, GroupIdDto groupIdDto) {
-        return fetchGroupSchedule(timeIntervalDto, fetchGroupById(groupIdDto));
+        return fetchScheduleWithLessonOptions(timeIntervalDto, null, null, List.of(groupIdDto.getId().toString()));
     }
 
     @Override
     public List<DayScheduleDto> fetchTeacherSchedule(TimeIntervalDto timeIntervalDto, TeacherIdDto teacherIdDto) {
-        List<Lesson> lessons = fetchTeacherLessons(timeIntervalDto, teacherIdDto);
-        return lessonsToDayScheduleDtos(lessons, timeIntervalDto);
+        return fetchScheduleWithLessonOptions(timeIntervalDto, teacherIdDto.getId().toString(), null, null);
+    }
+
+    @Override
+    public List<DayScheduleDto> fetchStudyRoomSchedule(TimeIntervalDto timeIntervalDto, StudyRoomIdDto studyRoomIdDto){
+        return fetchScheduleWithLessonOptions(timeIntervalDto, null, studyRoomIdDto.getId().toString(), null);
     }
 
     @Override
     public List<DayScheduleDto> fetchScheduleWithLessonOptions(TimeIntervalDto timeIntervalDto, String teacherId, String studyRoomId, List<String> groupIds) {
-
         List<Lesson> lessons = fetchLessonsWithLessonOptionsLessons(timeIntervalDto, teacherId, studyRoomId, groupIds);
         return lessonsToDayScheduleDtos(lessons, timeIntervalDto);
     }
@@ -68,27 +71,6 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .stream()
                 .map(lessonTimeMapper::toDto)
                 .toList();
-    }
-
-    private List<DayScheduleDto> fetchGroupSchedule(TimeIntervalDto timeIntervalDto, Group group) {
-        List<Lesson> lessons = fetchGroupLessons(timeIntervalDto, group);
-        return lessonsToDayScheduleDtos(lessons, timeIntervalDto);
-    }
-
-    private List<Lesson> fetchGroupLessons(TimeIntervalDto timeIntervalDto, Group group) {
-        return lessonRepository
-                .findAllByDateBetweenAndLessonGroupGroupsIsContaining(
-                        Date.valueOf(timeIntervalDto.getStartDate()),
-                        Date.valueOf(timeIntervalDto.getEndDate()),
-                        group);
-    }
-
-    private List<Lesson> fetchTeacherLessons(TimeIntervalDto timeIntervalDto, TeacherIdDto teacherIdDto) {
-        return lessonRepository
-                .findAllByDateBetweenAndTeacherId(
-                        Date.valueOf(timeIntervalDto.getStartDate()),
-                        Date.valueOf(timeIntervalDto.getEndDate()),
-                        teacherIdDto.getId());
     }
 
     private List<Lesson> fetchLessonsWithLessonOptionsLessons(TimeIntervalDto timeIntervalDto, String teacherId, String studyRoomId, List<String> groupIds) {
@@ -121,12 +103,6 @@ public class ScheduleServiceImpl implements ScheduleService {
                         teacherUUID,
                         studyRoomUUID,
                         groups);
-    }
-
-    private Group fetchGroupById(GroupIdDto groupIdDto) {
-        return groupRepository
-                .findById(groupIdDto.getId())
-                .orElseThrow(GroupNotFoundException::new);
     }
 
     private List<Group> fetchGroupByIdIn(List<GroupIdDto> groupIdDtos) {

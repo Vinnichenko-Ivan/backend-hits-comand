@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.hits.hitsback.timetable.exception.*;
+import ru.hits.hitsback.timetable.exception.common.NotAcceptedException;
+import ru.hits.hitsback.timetable.exception.group.GroupIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
+import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomIsAlreadyExistsException;
+import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomNotFoundException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherNotFoundException;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -50,6 +58,7 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleTeacherNotFoundException() {
         return handleCustomException(HttpStatus.NOT_FOUND, "teacher.not-found");
     }
+
     @ExceptionHandler(GroupIsAlreadyExistException.class)
     public ResponseEntity<Map<String, Object>> handleGroupIsAlreadyExistException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "group.used-number");
@@ -58,9 +67,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleGroupNotFoundException() {
         return handleCustomException(HttpStatus.NOT_FOUND, "group.not-found");
     }
-    @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
-    public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
-        return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
+
+    @ExceptionHandler(StudyRoomNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleStudyRoomNotFoundException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.not-found");
     }
     @ExceptionHandler(IncorrectPasswordException.class)
     public ResponseEntity<Map<String, Object>> handleIncorrectPasswordException() {
@@ -70,6 +80,11 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserIsAlreadyInThisGroupException.class)
     public ResponseEntity<Map<String, Object>> handleIUserIsAlreadyInThisGroupException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "user.already-in-group");
+    }
+
+    @ExceptionHandler(StudyRoomIsAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleStudyRoomAlreadyExistsException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "study-room.already-exists");
     }
 
     @ExceptionHandler(SamePasswordsException.class)

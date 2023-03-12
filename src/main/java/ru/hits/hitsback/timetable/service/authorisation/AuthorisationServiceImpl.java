@@ -1,12 +1,12 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.authorisation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ru.hits.hitsback.timetable.configuration.JwtAuthentication;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
-import ru.hits.hitsback.timetable.exception.NotAcceptedException;
-import ru.hits.hitsback.timetable.exception.TeacherNotFoundException;
+import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.common.NotAcceptedException;
+import ru.hits.hitsback.timetable.exception.teacher.TeacherNotFoundException;
 import ru.hits.hitsback.timetable.exception.WrongCredentialsException;
 import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
@@ -19,8 +19,8 @@ import ru.hits.hitsback.timetable.model.enums.Roles;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
 import ru.hits.hitsback.timetable.repository.GroupRepository;
 import ru.hits.hitsback.timetable.repository.TeacherRepository;
-import ru.hits.hitsback.timetable.service.AuthorisationService;
-import ru.hits.hitsback.timetable.service.JwtService;
+import ru.hits.hitsback.timetable.service.authorisation.AuthorisationService;
+import ru.hits.hitsback.timetable.service.jwt.JwtService;
 
 @Service
 @RequiredArgsConstructor

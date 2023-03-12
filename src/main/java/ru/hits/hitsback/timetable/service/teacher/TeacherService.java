@@ -1,4 +1,4 @@
-package ru.hits.hitsback.timetable.service;
+package ru.hits.hitsback.timetable.service.teacher;
 
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherCreateDto;
 import ru.hits.hitsback.timetable.model.dto.teacher.TeacherDto;

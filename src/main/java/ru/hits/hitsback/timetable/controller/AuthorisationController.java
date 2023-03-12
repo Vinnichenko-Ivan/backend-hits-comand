@@ -16,7 +16,7 @@ import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.TokenDto;
-import ru.hits.hitsback.timetable.service.AuthorisationService;
+import ru.hits.hitsback.timetable.service.authorisation.AuthorisationService;
 
 import static org.springframework.http.ResponseEntity.ok;
 import static ru.hits.hitsback.timetable.configuration.UrlConstant.AUTHORISATION_URL;

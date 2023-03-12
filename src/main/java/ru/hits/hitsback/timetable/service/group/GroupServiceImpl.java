@@ -1,15 +1,14 @@
-package ru.hits.hitsback.timetable.service.impl;
+package ru.hits.hitsback.timetable.service.group;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.hits.hitsback.timetable.exception.GroupIsAlreadyExistException;
-import ru.hits.hitsback.timetable.exception.GroupNotFoundException;
+import ru.hits.hitsback.timetable.exception.group.GroupIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
 import ru.hits.hitsback.timetable.model.dto.group.GroupCreateDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupDto;
 import ru.hits.hitsback.timetable.model.dto.group.GroupIdDto;
 import ru.hits.hitsback.timetable.model.entity.Group;
 import ru.hits.hitsback.timetable.repository.GroupRepository;
-import ru.hits.hitsback.timetable.service.GroupService;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
