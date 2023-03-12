@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
             throw new GroupNotFoundException();
         }
 
-        if(!Objects.equals(groupIdDto.getId(),account.getGroup().getId())){
+        if(Objects.equals(groupIdDto.getId(),account.getGroup().getId())){
             throw new UserIsAlreadyInThisGroupException();
         }
 
