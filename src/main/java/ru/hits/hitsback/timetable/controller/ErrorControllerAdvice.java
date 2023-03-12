@@ -134,6 +134,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleSubjectCopyException() {
         return handleCustomException(HttpStatus.BAD_REQUEST, "subject.copy");
     }
+    @ExceptionHandler(GroupChangingRequestIsAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleGroupChangingRequestIsAlreadyExistException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "group-changing-request.already-exists");
+    }
 
     @ExceptionHandler(SubjectIsAlreadyExistException.class)
     public ResponseEntity<Map<String, Object>> handleSubjectIsAlreadyExistException() {
