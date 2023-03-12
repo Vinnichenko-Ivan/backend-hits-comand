@@ -3,10 +3,9 @@ package ru.hits.hitsback.timetable.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.hits.hitsback.timetable.model.dto.account.AccountDto;
-import ru.hits.hitsback.timetable.model.dto.teacher.TeacherIdDto;
 import ru.hits.hitsback.timetable.model.enums.Roles;
 
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Table(name = "account")
@@ -24,26 +23,15 @@ public class Account {
     private String password;
     @ManyToOne
     private Group group;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE)
+    private List<JWTToken> jwtToken;
     @OneToOne (mappedBy = "account", cascade = CascadeType.REMOVE)
     GroupChangingRequest groupChangingRequest;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Teacher teacher;
     private Boolean accepted;
 
     public Account() {
 
-    }
-
-    public AccountDto toDto() {
-        AccountDto accountDto = new AccountDto();
-        accountDto.setEmail(email);
-        accountDto.setFirstName(firstName);
-        accountDto.setLastName(lastName);
-        accountDto.setPatronymicName(patronymicName);
-        accountDto.setGroup(group == null ? null : group.getDto());
-        accountDto.setTeacherId(teacher != null ? new TeacherIdDto(teacher.getId().toString()) : null);
-        accountDto.setId(id);
-        accountDto.setRole(role);
-        return accountDto;
     }
 }

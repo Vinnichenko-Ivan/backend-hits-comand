@@ -66,15 +66,19 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + LESSON_URL + "/{id}").hasAuthority("ScheduleWriter")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + LESSON_URL + "/type").permitAll()
 
-                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/registration/{id}").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/group/{id}").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + REQUEST_URL + "/registration").hasAuthority("ScheduleWriter")
-                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + REQUEST_URL + "/group").hasAuthority("ScheduleWriter")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/registration/{id}").hasAuthority("Admin")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + REQUEST_URL + "/group/{id}").hasAuthority("Admin")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + REQUEST_URL + "/registration").hasAuthority("Admin")
+                .requestMatchers(HttpMethod.GET, "/" + BASE_URL + REQUEST_URL + "/group").hasAuthority("Admin")
 
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/security/password").authenticated()
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL + "/group").hasAuthority("Student")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "").hasAuthority("Admin")
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + PROFILE_URL + "/me").hasAnyAuthority("Student", "Teacher")
+                .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + PROFILE_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.POST, "/" + BASE_URL + PROFILE_URL).hasAuthority("Admin")
+                .requestMatchers(HttpMethod.DELETE, "/" + BASE_URL + PROFILE_URL).hasAuthority("Admin")
+
 
                 .requestMatchers(HttpMethod.GET, "/" + BASE_URL + GROUP_URL).permitAll()
                 .requestMatchers(HttpMethod.PUT, "/" + BASE_URL + GROUP_URL).hasAuthority("Admin")

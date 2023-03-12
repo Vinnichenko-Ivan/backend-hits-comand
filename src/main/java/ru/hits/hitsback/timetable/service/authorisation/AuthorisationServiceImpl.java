@@ -7,7 +7,7 @@ import ru.hits.hitsback.timetable.configuration.JwtAuthentication;
 import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.common.NotAcceptedException;
 import ru.hits.hitsback.timetable.exception.teacher.TeacherNotFoundException;
-import ru.hits.hitsback.timetable.exception.common.UnauthorizedException;
+import ru.hits.hitsback.timetable.exception.WrongCredentialsException;
 import ru.hits.hitsback.timetable.model.dto.authorisation.CredentialsDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.StudentRegisterDto;
 import ru.hits.hitsback.timetable.model.dto.authorisation.TeacherRegisterDto;
@@ -19,6 +19,7 @@ import ru.hits.hitsback.timetable.model.enums.Roles;
 import ru.hits.hitsback.timetable.repository.AccountRepository;
 import ru.hits.hitsback.timetable.repository.GroupRepository;
 import ru.hits.hitsback.timetable.repository.TeacherRepository;
+import ru.hits.hitsback.timetable.service.authorisation.AuthorisationService;
 import ru.hits.hitsback.timetable.service.jwt.JwtService;
 
 @Service
@@ -34,10 +35,10 @@ public class AuthorisationServiceImpl implements AuthorisationService {
     private final JwtService jwtService;
 
     @Override
-    public TokenDto singIn(CredentialsDto credentialsDto) throws UnauthorizedException {
+    public TokenDto singIn(CredentialsDto credentialsDto) {
         Account account = accountRepository.getAccountByEmail(credentialsDto.getEmail());
         if (account == null || !credentialsDto.getPassword().equals(account.getPassword())) {
-            throw new UnauthorizedException();
+            throw new WrongCredentialsException();
         } else if (!account.getAccepted()) {
             throw new NotAcceptedException();
         }
