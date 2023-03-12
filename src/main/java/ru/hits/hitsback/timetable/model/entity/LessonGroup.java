@@ -18,7 +18,7 @@ public class LessonGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "lessonGroup",cascade = CascadeType.REMOVE)
     private Set<Lesson> lessons;
     private Date startDate;
     private Date endDate;

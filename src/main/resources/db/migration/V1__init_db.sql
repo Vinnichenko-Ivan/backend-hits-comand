@@ -68,13 +68,6 @@ CREATE TABLE lesson_group_groups
     CONSTRAINT pk_lesson_group_group PRIMARY KEY (lessonGroup_id, groups_id)
 );
 
-CREATE TABLE lesson_group_lesson
-(
-    lessonGroup_id UUID NOT NULL,
-    lessons_id      UUID NOT NULL,
-    CONSTRAINT pk_lesson_group_lessons PRIMARY KEY (lessonGroup_id, lessons_id)
-);
-
 CREATE TABLE lesson_time
 (
     id            UUID NOT NULL,
@@ -118,8 +111,6 @@ CREATE TABLE teacher
     CONSTRAINT pk_teacher PRIMARY KEY (id)
 );
 
-ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT uc_lesson_group_lessons_lessons UNIQUE (lessons_id);
 
 ALTER TABLE account
     ADD CONSTRAINT FK_ACCOUNT_ON_GROUP FOREIGN KEY (group_id) REFERENCES groups (id);
@@ -143,7 +134,7 @@ ALTER TABLE lesson_group
     ADD CONSTRAINT FK_LESSON_GROUP_ON_SUBJECT FOREIGN KEY (subject_id) REFERENCES subject (id);
 
 ALTER TABLE lesson
-    ADD CONSTRAINT FK_LESSON_ON_LESSONGROUP FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id)on delete cascade;
+    ADD CONSTRAINT FK_LESSON_ON_LESSONGROUP FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id)on delete SET NULL ;
 
 ALTER TABLE lesson
     ADD CONSTRAINT FK_LESSON_ON_LESSONTIME FOREIGN KEY (lessonTime_id) REFERENCES lesson_time (id);
@@ -162,9 +153,3 @@ ALTER TABLE lesson_group_groups
 
 ALTER TABLE lesson_group_groups
     ADD CONSTRAINT fk_lesgrogro_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id) on delete cascade ;
-
-ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT fk_lesgroles_on_lesson FOREIGN KEY (lessons_id) REFERENCES lesson (id) on delete cascade;
-
-ALTER TABLE lesson_group_lesson
-    ADD CONSTRAINT fk_lesgroles_on_lesson_group FOREIGN KEY (lessonGroup_id) REFERENCES lesson_group (id)on delete cascade;

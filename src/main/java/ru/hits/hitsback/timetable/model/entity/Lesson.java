@@ -21,7 +21,7 @@ public class Lesson {
     private Teacher teacher;
     private Date date;
     private DayOfWeek dayOfWeek;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private LessonGroup lessonGroup;
     @ManyToOne
     private LessonTime lessonTime;
