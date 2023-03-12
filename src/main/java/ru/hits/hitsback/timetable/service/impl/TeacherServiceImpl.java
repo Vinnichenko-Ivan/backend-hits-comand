@@ -42,6 +42,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void modifyTeacher(TeacherDto teacherDto) {
+        Teacher teacher = teacherRepository.findById(teacherDto.getTeacherIdDto().getId()).orElse(null);
         if (teacherRepository.existsTeacherByFirstNameAndLastNameAndPatronymicName(
                 teacherDto.getFirstName(),
                 teacherDto.getLastName(),
@@ -49,7 +50,9 @@ public class TeacherServiceImpl implements TeacherService {
         )) {
             throw new TeacherIsAlreadyExistException();
         }
-        Teacher teacher = teacherMapper.toEntity(teacherDto);
+        teacher.setFirstName(teacherDto.getFirstName());
+        teacher.setLastName(teacherDto.getLastName());
+        teacher.setPatronymicName(teacherDto.getPatronymicName());
         teacherRepository.save(teacher);
     }
 
