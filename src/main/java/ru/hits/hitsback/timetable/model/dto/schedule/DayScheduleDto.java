@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.model.dto.schedule;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DayScheduleDto {
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty private LocalDate date;
     @NotNull
     @JsonProperty private DayOfWeek dayOfWeek;
