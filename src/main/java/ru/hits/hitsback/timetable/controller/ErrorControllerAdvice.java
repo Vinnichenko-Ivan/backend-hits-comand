@@ -18,6 +18,9 @@ import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.request.AccountNotFoundException;
 import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomIsAlreadyExistsException;
 import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomNotFoundException;
+import ru.hits.hitsback.timetable.exception.subject.SubjectCopyException;
+import ru.hits.hitsback.timetable.exception.subject.SubjectIsAlreadyExistException;
+import ru.hits.hitsback.timetable.exception.subject.SubjectNotFoundException;
 import ru.hits.hitsback.timetable.exception.teacher.TeacherIsAlreadyExistException;
 import ru.hits.hitsback.timetable.exception.teacher.TeacherNotFoundException;
 
@@ -121,6 +124,22 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleGroupChangingRequestIsNotFoundException() {
         return handleCustomException(HttpStatus.UNAUTHORIZED, "group-changing-request.not-found");
     }
+
+    @ExceptionHandler(SubjectNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleSubjectNotFoundException() {
+        return handleCustomException(HttpStatus.NOT_FOUND, "subject.not-found");
+    }
+
+    @ExceptionHandler(SubjectCopyException.class)
+    public ResponseEntity<Map<String, Object>> handleSubjectCopyException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "subject.copy");
+    }
+
+    @ExceptionHandler(SubjectIsAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleSubjectIsAlreadyExistException() {
+        return handleCustomException(HttpStatus.BAD_REQUEST, "subject.copy");
+    }
+
     private String getErrorMessage(String code) {
         return messageSource.getMessage(code, null, Locale.ENGLISH);
     }
