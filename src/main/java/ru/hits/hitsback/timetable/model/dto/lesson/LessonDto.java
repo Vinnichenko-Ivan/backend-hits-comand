@@ -1,5 +1,6 @@
 package ru.hits.hitsback.timetable.model.dto.lesson;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -29,10 +30,13 @@ public class LessonDto {
     @NotNull
     @JsonProperty private SubjectDto subject;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty private LocalDate date;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty private LocalDate startDate;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty private LocalDate endDate;
     @NotNull
     @JsonProperty private Integer frequency;
