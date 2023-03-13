@@ -2,6 +2,7 @@ package ru.hits.hitsback.timetable.service.lesson;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.hits.hitsback.timetable.exception.group.GroupNotFoundException;
 import ru.hits.hitsback.timetable.exception.lesson.*;
 import ru.hits.hitsback.timetable.exception.studyroom.StudyRoomNotFoundException;
@@ -50,6 +51,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    @Transactional
     public void deleteLessonGroup(LessonIdDto lessonIdDto) {
         Lesson lesson = lessonRepository
                 .findById(lessonIdDto.getId())
@@ -70,31 +72,32 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    @Transactional
     public void modifyLessonGroup(LessonGroupModifyDto lessonGroupModifyDto) {
-//        LessonGroup lessonGroup = lessonRepository
-//                .findById(lessonGroupModifyDto.getLessonIdDto().getId())
-//                .orElseThrow(LessonNotFoundException::new)
-//                .getLessonGroup();
-        Lesson lesson = lessonRepository
+        LessonGroup lessonGroup = lessonRepository
                 .findById(lessonGroupModifyDto.getLessonIdDto().getId())
-                .orElseThrow(LessonNotFoundException::new);
-//        lessonGroupRepository.findBy
-        LessonGroup lessonGroup = lesson.getLessonGroup();
+                .orElseThrow(LessonNotFoundException::new)
+                .getLessonGroup();
 
         LessonsBeforeAndAfterToday lessonsBeforeAndAfterToday = divideLessonsByBeforeAndAfterToday(lessonGroup.getLessons().stream().toList());
         lessonGroup.setLessons(new HashSet<>(lessonsBeforeAndAfterToday.getLessonsBeforeToday()));
 
+        List<LessonIdDto> lessonIds = new ArrayList<>();
+        lessonsBeforeAndAfterToday.getLessonsAfterToday().forEach(it -> lessonIds.add(new LessonIdDto(it.getId().toString())));
+        lessonIds.forEach(this::deleteLesson);
+
         lessonGroupModifyDto.setStartDate(LocalDate.now());
         createLesson(lessonGroupModifyDto);
-        lessonsBeforeAndAfterToday.getLessonsAfterToday().forEach(it -> deleteLesson(new LessonIdDto(it.getId().toString())));
     }
 
     @Override
+    @Transactional
     public void modifyLesson(LessonModifyDto lessonModifyDto) {
         Lesson lesson = lessonRepository.findById(lessonModifyDto.getLessonIdDto().getId()).orElseThrow(LessonNotFoundException::new);
 
         checkDateNotBeforeToday(lesson.getDate().toLocalDate());
         checkDateNotBeforeToday(lessonModifyDto.getStartDate());
+        lessonRepository.deleteById(lesson.getId());
 
         checkIntersects(lessonModifyDto.getStartDate(),
                 lessonModifyDto.getStartDate(),
@@ -116,6 +119,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    @Transactional
     public List<LessonIdDto> createLesson(LessonGroupCreateDto lessonGroupCreateDto) {
         validateDates(lessonGroupCreateDto.getStartDate(), lessonGroupCreateDto.getEndDate());
 
