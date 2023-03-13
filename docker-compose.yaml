@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: hits
+      POSTGRES_USER: hits
+      POSTGRES_PASSWORD: hits
+    ports:
+      - "5432:5432"
