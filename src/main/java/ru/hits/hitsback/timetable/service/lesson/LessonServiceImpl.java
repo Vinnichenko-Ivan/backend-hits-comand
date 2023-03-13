@@ -42,11 +42,6 @@ public class LessonServiceImpl implements LessonService {
                 .orElseThrow(LessonNotFoundException::new);
 
         checkDateNotBeforeToday(lesson.getDate().toLocalDate());
-
-        if (lesson.getLessonGroup().getLessons().size() == 0) {
-            lessonGroupRepository.deleteById(lesson.getLessonGroup().getId());
-        }
-
         lessonRepository.deleteById(lessonIdDto.getId());
     }
 
@@ -86,7 +81,10 @@ public class LessonServiceImpl implements LessonService {
         lessonsBeforeAndAfterToday.getLessonsAfterToday().forEach(it -> lessonIds.add(new LessonIdDto(it.getId().toString())));
         lessonIds.forEach(this::deleteLesson);
 
-        lessonGroupModifyDto.setStartDate(LocalDate.now());
+        if (lessonGroupModifyDto.getStartDate().isBefore(LocalDate.now())) {
+            lessonGroupModifyDto.setStartDate(LocalDate.now());
+        }
+
         createLesson(lessonGroupModifyDto);
     }
 
