@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.hits.hitsback.timetable.model.dto.lesson.LessonDto;
 import ru.hits.hitsback.timetable.model.dto.lesson.LessonShortDto;
 
 import java.time.DayOfWeek;
@@ -19,16 +18,16 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DayScheduleDto {
+public class ShortDayScheduleDto {
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonProperty private LocalDate date;
     @NotNull
     @JsonProperty private DayOfWeek dayOfWeek;
     @NotNull
-    @JsonProperty private List<LessonDto> lessons;
+    @JsonProperty private List<LessonShortDto> lessons;
 
-    public DayScheduleDto(LocalDate date, DayOfWeek dayOfWeek) {
+    public ShortDayScheduleDto(LocalDate date, DayOfWeek dayOfWeek) {
         this.date = date;
         this.dayOfWeek = dayOfWeek;
         this.lessons = new ArrayList<>();
