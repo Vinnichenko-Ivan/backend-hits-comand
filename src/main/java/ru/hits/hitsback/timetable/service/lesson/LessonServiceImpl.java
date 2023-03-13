@@ -91,7 +91,7 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public void modifyLesson(LessonModifyDto lessonModifyDto) {
-        Lesson lesson = lessonRepository.findById(lessonModifyDto.getTeacherId().getId()).orElseThrow(LessonNotFoundException::new);
+        Lesson lesson = lessonRepository.findById(lessonModifyDto.getLessonIdDto().getId()).orElseThrow(LessonNotFoundException::new);
 
         checkDateNotBeforeToday(lesson.getDate().toLocalDate());
         checkDateNotBeforeToday(lessonModifyDto.getStartDate());
@@ -255,7 +255,7 @@ public class LessonServiceImpl implements LessonService {
                 .findById(lessonGroupCreateDto.getSubjectId().getId())
                 .orElseThrow(SubjectNotFoundException::new);
 
-        return new LessonGroup(UUID.randomUUID(),
+        return new LessonGroup(
                 new HashSet<>(lessons),
                 Date.valueOf(lessonGroupCreateDto.getStartDate()),
                 Date.valueOf(lessonGroupCreateDto.getEndDate()),
@@ -294,7 +294,6 @@ public class LessonServiceImpl implements LessonService {
                 .orElseThrow(LessonNumberIsNotExistException::new);
 
         return new Lesson(
-                UUID.randomUUID(),
                 studyRoom,
                 teacher,
                 Date.valueOf(lessonModifyDto.getStartDate()),

@@ -29,8 +29,7 @@ public class Lesson {
     @ManyToOne
     private LessonTime lessonTime;
 
-    public Lesson(UUID id, StudyRoom studyRoom, Teacher teacher, Date date, DayOfWeek dayOfWeek, LessonTime lessonTime) {
-        this.id = id;
+    public Lesson(StudyRoom studyRoom, Teacher teacher, Date date, DayOfWeek dayOfWeek, LessonTime lessonTime) {
         this.studyRoom = studyRoom;
         this.teacher = teacher;
         this.date = date;

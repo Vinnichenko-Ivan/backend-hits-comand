@@ -20,6 +20,7 @@ import java.util.UUID;
 public class LessonGroup {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @OneToMany(mappedBy = "lessonGroup",cascade = CascadeType.REMOVE)
     private Set<Lesson> lessons;
@@ -32,4 +33,14 @@ public class LessonGroup {
     private LessonType lessonType;
     @ManyToMany
     private List<Group> groups;
+
+    public LessonGroup(Set<Lesson> lessons, Date startDate, Date endDate, Integer frequency, Subject subject, LessonType lessonType, List<Group> groups) {
+        this.lessons = lessons;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.frequency = frequency;
+        this.subject = subject;
+        this.lessonType = lessonType;
+        this.groups = groups;
+    }
 }
